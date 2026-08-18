@@ -44,7 +44,7 @@ wrangler secret put BOT_TOKEN
 wrangler secret put CHAT_ID
 ```
 
-`BOT_TOKEN` — токен из BotFather. `CHAT_ID` — куда слать: личный id Евгения `126514562` (он же используется ботом-скаутом). Если заявки нужны в общий чат — id группы, начинается с минуса.
+`BOT_TOKEN` — токен из BotFather. `CHAT_ID` — куда слать: ваш личный id в Telegram (узнать можно у @userinfobot). Если заявки нужны в общий чат — id группы, начинается с минуса.
 
 После `wrangler deploy` в выводе будет адрес вида `https://ilab-form.<ваш-поддомен>.workers.dev`. Его нужно вписать в `index.html` сайта:
 
