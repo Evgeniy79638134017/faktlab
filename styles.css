@@ -2598,3 +2598,37 @@ section { position: relative; }
 
 /* плашка «как обычно» на тёмном фоне была слишком бледной (v5.0.1) */
 .tl__cap .tl__badge--bad { color: #FFD8CE; background: rgba(180,87,74,.5); border-color: rgba(214,120,105,.75); }
+
+/* v5.1 — значения-триггеры в кейсах.
+   «4 → 0», «±40 → ±10», «1 блокер» на кегле 40–42px переносятся и ломают
+   двухколоночную сетку, поэтому такие значения сбавляют размер и не переносятся. */
+.case__kpi div span.k--long,
+.case2__kpi b.k--long,
+.case3__kpi b.k--long { font-size: 29px; white-space: nowrap; letter-spacing: -0.01em; }
+
+@media (max-width: 700px) {
+  .case__kpi div span.k--long,
+  .case2__kpi b.k--long,
+  .case3__kpi b.k--long { font-size: 24px; }
+}
+
+/* Главная цифра в карточке кейса на витрине: покупатель видит суть до перехода.
+   Цифра моноширинным, пояснение — обычным, обе части в одну строку с переносом. */
+.ccard__fig {
+  display: block;
+  margin: -1px 26px 12px;   /* боковые 26px — как у .ccard b и .ccard small, иначе прилипнет к краю */
+  font-size: 14.4px;
+  line-height: 1.42;
+  color: var(--muted);
+}
+.ccard__fig i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--accent);
+  display: inline-block;
+  margin-right: 9px;
+  vertical-align: -1px;
+  white-space: nowrap;
+}
