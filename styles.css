@@ -2677,3 +2677,38 @@ section { position: relative; }
 /* Портрет снят так, что автор смотрит влево — от текста и края страницы.
    Отражаем по горизонтали: взгляд уходит в разворот, к тексту справа. */
 .author__ph img { transform: scaleX(-1); }
+
+/* v5.3 — «Было / Стало» внутри кейса. Показывает не объём выданных документов,
+   а смену состояния дела: что было на входе и что стало понятно на выходе. */
+.ba {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 26px 0 30px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.ba > div { padding: 20px 22px 22px; }
+.ba > div:first-child { background: rgba(0,0,0,.018); border-right: 1px solid var(--rule); }
+.ba > div:last-child { border-left: 2px solid var(--accent); margin-left: -1px; }
+.ba i {
+  display: block;
+  margin-bottom: 9px;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ba > div:last-child i { color: var(--accent); }
+.ba span { display: block; font-size: 16px; line-height: 1.52; color: var(--ink-2); }
+.ba > div:last-child span { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .ba { grid-template-columns: 1fr; }
+  .ba > div:first-child { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .ba > div:last-child { margin-left: 0; border-left-width: 2px; }
+  .ba span { font-size: 15.4px; }
+}
