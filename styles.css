@@ -2632,3 +2632,48 @@ section { position: relative; }
   vertical-align: -1px;
   white-space: nowrap;
 }
+
+/* v5.2 — карточка кейса: пара «было — стало».
+   Одна цифра без пары не читалась: непонятно, много это или мало и что изменила работа. */
+.ccard__ba {
+  display: grid;
+  gap: 7px;
+  margin: 2px 26px 16px;
+}
+.ccard__ba > span {
+  display: block;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  padding-left: 62px;
+  position: relative;
+}
+.ccard__ba > span i {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* «Стало» — акцентной линией слева, чтобы взгляд отделял результат от исходной точки */
+.ccard__ba > span:last-child {
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  margin-left: -12px;
+  padding-left: 72px;
+}
+.ccard__ba > span:last-child i { left: 12px; color: var(--accent); }
+
+@media (max-width: 620px) {
+  .ccard__ba { margin: 2px 20px 14px; }
+  .ccard__ba > span { padding-left: 54px; font-size: 14.4px; }
+  .ccard__ba > span:last-child { padding-left: 64px; }
+}
+
+/* Портрет снят так, что автор смотрит влево — от текста и края страницы.
+   Отражаем по горизонтали: взгляд уходит в разворот, к тексту справа. */
+.author__ph img { transform: scaleX(-1); }
