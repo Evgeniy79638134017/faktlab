@@ -10,7 +10,7 @@
   --sheet-warm: #FAF8F4;
   --ink:        #17202B;
   --ink-2:      #3D4753;
-  --muted:      #6B7480;
+  --muted:      #666F7B;   /* 4.56:1 на бумаге — было #6B7480 с 4.24:1, ниже нормы */
   --rule:       #E3DCD0;
   --rule-soft:  #EEE9E0;
 
@@ -2712,3 +2712,13 @@ section { position: relative; }
   .sba > div:last-child { margin-left: 0; border-left-width: 2px; }
   .sba span { font-size: 15.4px; }
 }
+
+/* Кейс 01 идёт тёмной секцией, а .sba собран под светлый фон — там его цвета
+   давали 1.0–1.8:1, текст пропадал. Внутри .case берём палитру тёмного контекста. */
+.case .sba { border-color: var(--deep-rule, rgba(255,255,255,.14)); }
+.case .sba > div:first-child { background: rgba(255,255,255,.035); border-right-color: var(--deep-rule, rgba(255,255,255,.14)); }
+.case .sba > div:last-child { border-left-color: #9CD46A; }
+.case .sba i { color: var(--deep-muted); }
+.case .sba > div:last-child i { color: #9CD46A; }
+.case .sba span { color: var(--deep-muted); }
+.case .sba > div:last-child span { color: var(--deep-ink); }
