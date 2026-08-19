@@ -2751,3 +2751,35 @@ section { position: relative; }
   /* длинным значениям в кейсах нужен запас: «±40 → ±10» вставало впритык к колонке */
   .case__kpi div span.k--long, .case2__kpi b.k--long, .case3__kpi b.k--long { font-size: 21px; }
 }
+
+/* «подробнее» у позиций пакета было серым моношрифтом почти в фон — читатель
+   не понимал, что под позицией лежит описание. Даём акцентный цвет, рамку
+   и явный знак раскрытия: строка читается как управляющий элемент. */
+.reg__fold > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 13px;
+  background: var(--sheet);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.reg__fold > summary::after {
+  content: "+";
+  font-size: 14px;
+  line-height: 1;
+  color: var(--accent);
+  transition: transform .25s ease;
+}
+.reg__fold[open] > summary::after { content: "–"; }
+.reg__fold > summary:hover {
+  border-color: var(--accent);
+  background: rgba(26,35,126,.05);
+}
+.reg__fold[open] > summary { border-color: var(--accent); background: rgba(26,35,126,.05); }
+
+@media (max-width: 760px) {
+  .reg__fold > summary { padding: 9px 15px; }
+}
