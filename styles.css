@@ -2722,3 +2722,18 @@ section { position: relative; }
 .case .sba > div:last-child i { color: #9CD46A; }
 .case .sba span { color: var(--deep-muted); }
 .case .sba > div:last-child span { color: var(--deep-ink); }
+
+/* v5.4 — мобильная вёрстка.
+   Таймлайн: подписи в сегментах стоят nowrap, поэтому трек как элемент сетки
+   требовал 567px минимума и растягивал колонку шире экрана (375). Хвост уходил
+   под overflow:hidden и был недоступен — прокрутить нечем. Разрешаем сжатие:
+   проценты сегментов сохраняются, длинная подпись обрезается многоточием. */
+.tl__track, .tl__cap { min-width: 0; }
+
+@media (max-width: 620px) {
+  /* на узком экране подпись внутри полосы всё равно нечитаема — оставляем
+     цветную полосу и подпись под дорожкой, которая уже есть в .tl__cap */
+  .tl__seg { padding: 0 7px; }
+  .tl__seg i { font-size: 10.5px; }
+  .tl__seg--stop i, .tl__seg--wait i { display: none; }
+}
