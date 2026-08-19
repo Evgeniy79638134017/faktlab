@@ -233,3 +233,46 @@
     });
   }
 })();
+
+/* Свёрнутые секции.
+   На телефоне главная разрослась до сорока экранов — вторичные секции убраны
+   под «Подробнее». На широком экране места хватает, поэтому там они открыты
+   сразу: свёрнутый блок на десктопе читался бы как потеря содержания. */
+(function () {
+  var folds = document.querySelectorAll('.fold--sec');
+  if (!folds.length) return;
+
+  function sync() {
+    var wide = window.innerWidth > 760;
+    for (var i = 0; i < folds.length; i++) {
+      // не трогаем то, что посетитель открыл сам на узком экране
+      if (folds[i].dataset.touched === '1') continue;
+      if (wide) folds[i].setAttribute('open', '');
+      else folds[i].removeAttribute('open');
+    }
+  }
+  for (var i = 0; i < folds.length; i++) {
+    folds[i].addEventListener('toggle', function () {
+      if (window.innerWidth <= 760) this.dataset.touched = '1';
+    });
+  }
+  sync();
+
+  var t;
+  window.addEventListener('resize', function () {
+    clearTimeout(t); t = setTimeout(sync, 150);
+  });
+
+  /* переход по якорю из меню обязан раскрывать секцию, иначе человек попадает
+     на заголовок с кнопкой и думает, что раздел пуст */
+  function openByHash() {
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    var f = sec.querySelector('.fold--sec');
+    if (f && !f.hasAttribute('open')) { f.setAttribute('open', ''); f.dataset.touched = '1'; }
+  }
+  window.addEventListener('hashchange', openByHash);
+  openByHash();
+})();

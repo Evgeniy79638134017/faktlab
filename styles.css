@@ -2783,3 +2783,48 @@ section { position: relative; }
 @media (max-width: 760px) {
   .reg__fold > summary { padding: 9px 15px; }
 }
+
+/* v5.5 — свёрнутая секция целиком. На телефоне у вторичных разделов видна
+   только шапка и кнопка; на широком экране скрипт раскрывает их сразу. */
+.fold--sec { margin-top: 4px; }
+.fold--sec > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  list-style: none;
+  padding: 11px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--sheet);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: border-color .2s ease, background .2s ease;
+}
+.fold--sec > summary::-webkit-details-marker { display: none; }
+.fold--sec > summary::after { content: "+"; font-size: 15px; line-height: 1; }
+.fold--sec[open] > summary::after { content: "–"; }
+.fold--sec > summary:hover { border-color: var(--accent); background: rgba(26,35,126,.05); }
+.fold--sec[open] > summary { margin-bottom: 22px; }
+.fold__in { animation: foldIn .32s ease both; }
+@keyframes foldIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+
+/* внутри тёмной секции кнопка светлая */
+.engine .fold--sec > summary,
+.case .fold--sec > summary {
+  background: transparent;
+  color: var(--deep-ink);
+  border-color: var(--deep-rule);
+}
+.engine .fold--sec > summary:hover,
+.case .fold--sec > summary:hover { border-color: #9CD46A; color: #9CD46A; background: rgba(156,212,106,.07); }
+
+/* на широком экране кнопка не нужна — секции раскрыты скриптом */
+@media (min-width: 761px) {
+  .fold--sec > summary { display: none; }
+  .fold--sec[open] > summary { margin-bottom: 0; }
+  .fold__in { animation: none; }
+}
