@@ -2871,3 +2871,8 @@ section { position: relative; }
   .fold--sec:not([open]) > .fold__in { display: block; }
   .fold--sec::details-content { content-visibility: visible; block-size: auto; }
 }
+
+@media (max-width: 760px) {
+  /* мелкие раскрывашки давали 33px высоты — добираем до пальцевой нормы */
+  .fold--mini > summary { padding: 11px 0; }
+}
