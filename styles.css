@@ -2737,3 +2737,17 @@ section { position: relative; }
   .tl__seg i { font-size: 10.5px; }
   .tl__seg--stop i, .tl__seg--wait i { display: none; }
 }
+
+/* Пальцевые цели на телефоне. Раскрывашки «подробнее» в пакете имели высоту 23px —
+   мимо такой полосы промахиваешься, а под ней лежит описание позиции.
+   Рекомендованный минимум — около 44px, добираем отступами, а не кеглем. */
+@media (max-width: 760px) {
+  .reg__fold > summary { padding: 11px 0; }
+  .fold > summary { padding-top: 14px; padding-bottom: 14px; }
+  .foot a { display: inline-block; padding: 5px 0; }
+  .brand { padding: 4px 0; }
+  /* метки моноширинным ниже 12px на телефоне читаются с трудом */
+  .label, .fork__n, .flow__n, .fold__n, .part__n, .num, .engine__tag, .tier__tag, .meet__n, .ccard__n { font-size: 12px; }
+  /* длинным значениям в кейсах нужен запас: «±40 → ±10» вставало впритык к колонке */
+  .case__kpi div span.k--long, .case2__kpi b.k--long, .case3__kpi b.k--long { font-size: 21px; }
+}
