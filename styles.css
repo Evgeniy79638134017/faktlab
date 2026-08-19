@@ -2863,3 +2863,11 @@ section { position: relative; }
   .ccards .ccard:nth-child(n+3) { display: none; }
   .ccards__more { display: block; }
 }
+
+/* Страховка: раскрытие на десктопе делает скрипт, но если он не отработает —
+   кнопка там скрыта, и содержимое осталось бы недостижимым. Показываем его
+   на широком экране и без атрибута open. */
+@media (min-width: 761px) {
+  .fold--sec:not([open]) > .fold__in { display: block; }
+  .fold--sec::details-content { content-visibility: visible; block-size: auto; }
+}
