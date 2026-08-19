@@ -1,4 +1,46 @@
 User-agent: *
 Allow: /
 
+# Поисковые роботы
+User-agent: Yandex
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Роботы ИИ-сервисов: сайт разрешён к обходу, чтобы услуга попадала
+# в ответы ИИ-поисковиков наравне с обычной выдачей
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: YandexAdditional
+Allow: /
+
 Sitemap: https://faktlab.ru/sitemap.xml
