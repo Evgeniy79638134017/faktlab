@@ -2828,3 +2828,38 @@ section { position: relative; }
   .fold--sec[open] > summary { margin-bottom: 0; }
   .fold__in { animation: none; }
 }
+
+/* Мелкая раскрывашка внутри блока: списки форматов, биография автора. */
+.fold--mini { margin-top: 10px; }
+.fold--mini > summary {
+  display: inline-flex; align-items: center; gap: 7px;
+  cursor: pointer; list-style: none;
+  font-family: var(--mono); font-size: 11.6px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent);
+  padding: 7px 0; transition: opacity .2s ease;
+}
+.fold--mini > summary::-webkit-details-marker { display: none; }
+.fold--mini > summary::after { content: "+"; font-size: 13px; line-height: 1; }
+.fold--mini[open] > summary::after { content: "–"; }
+.fold--mini > summary:hover { opacity: .72; }
+.fold--mini[open] > summary { margin-bottom: 6px; }
+
+/* На телефоне витрина показывает два кейса из четырёх: четыре обложки подряд
+   съедали почти пять экранов. Остальные — по ссылке на страницу кейсов. */
+.ccards__more {
+  display: none;
+  margin-top: 4px;
+  padding: 15px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--sheet);
+  font-size: 15.4px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.ccards__more::after { content: " →"; }
+
+@media (max-width: 760px) {
+  .ccards .ccard:nth-child(n+3) { display: none; }
+  .ccards__more { display: block; }
+}
