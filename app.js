@@ -126,13 +126,29 @@
       status.className = 'form__status' + (kind ? ' is-' + kind : '');
     };
 
-    /* согласие на обработку данных: без отметки отправка недоступна */
+    /* Отправка открывается, только когда заполнено обязательное: имя, телефон,
+       описание задачи — и отмечено согласие. Заявка без описания и без телефона
+       не даёт понять, о чём разговор, и требует лишнего круга переписки. */
     var agree = document.getElementById('f-agree');
-    if (agree && btn) {
-      var syncAgree = function () { btn.disabled = !agree.checked; };
-      syncAgree();
-      agree.addEventListener('change', syncAgree);
-    }
+    var fName = document.getElementById('f-name');
+    var fPhone = document.getElementById('f-contact');
+    var fMsg = document.getElementById('f-msg');
+
+    var filled = function (el) { return el && el.value.trim().length > 0; };
+    var phoneOk = function () {
+      if (!fPhone) return false;
+      var digits = (fPhone.value.match(/\d/g) || []).length;
+      return digits >= 10;                  // российский номер в любом написании
+    };
+    var syncBtn = function () {
+      if (!btn) return;
+      btn.disabled = !(filled(fName) && phoneOk() && filled(fMsg) && (!agree || agree.checked));
+    };
+    [fName, fPhone, fMsg].forEach(function (el) {
+      if (el) { el.addEventListener('input', syncBtn); el.addEventListener('blur', syncBtn); }
+    });
+    if (agree) agree.addEventListener('change', syncBtn);
+    syncBtn();
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -142,16 +158,20 @@
         say('Форма не подключена. Телефон для связи: +7 914 538-90-45', 'err');
         return;
       }
-      if (btn && btn.disabled) return;
+      if (!filled(fName)) { say('Укажите имя', 'err'); fName.focus(); return; }
+      if (!phoneOk())      { say('Укажите телефон для связи', 'err'); fPhone.focus(); return; }
+      if (!filled(fMsg))   { say('Опишите задачу хотя бы в двух словах', 'err'); fMsg.focus(); return; }
       if (agree && !agree.checked) {
         say('Отметьте согласие на обработку персональных данных', 'err');
         return;
       }
+      if (btn && btn.disabled) return;
 
       var d = new FormData(form);
       var payload = {
         name: d.get('name') || '',
         contact: d.get('contact') || '',
+        tg: d.get('tg') || '',
         type: d.get('type') || '',
         msg: d.get('msg') || '',
         company: d.get('company') || '',   // ловушка для ботов, у людей пустая
@@ -175,10 +195,10 @@
           say('Заявка отправлена. Ответ — в течение рабочего дня.', 'ok');
         })
         .catch(function () {
-          say('Отправить не удалось. Почта 549945@mail.ru, телефон +7 914 538-90-45', 'err');
+          say('Отправить не удалось. Позвоните: +7 914 538-90-45', 'err');
         })
         .then(function () {
-          if (btn) { btn.style.opacity = ''; btn.disabled = agree ? !agree.checked : false; }
+          if (btn) { btn.style.opacity = ''; syncBtn(); }
           if (btnText) btnText.textContent = btnLabel;
         });
     });

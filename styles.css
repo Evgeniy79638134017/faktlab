@@ -2927,3 +2927,17 @@ section { position: relative; }
   .case3 > div:not([class]),
   .case3__main > div:not([class]) { display: contents; }
 }
+
+/* Пометка обязательного поля в форме заявки. */
+.field label i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #9CD46A;
+  margin-left: 8px;
+  opacity: .85;
+}
+/* неактивная кнопка отправки: видно, что чего-то не хватает */
+.form button[type="submit"]:disabled { opacity: .45; cursor: not-allowed; }

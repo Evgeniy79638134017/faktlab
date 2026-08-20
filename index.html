@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&amp;family=Golos+Text:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=82">
+<link rel="stylesheet" href="styles.css?v=83">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -1250,12 +1250,16 @@
         <h3>Короткая заявка</h3>
         <p>Ответим в течение рабочего дня.</p>
         <div class="field">
-          <label for="f-name">Имя</label>
+          <label for="f-name">Имя <i>обязательно</i></label>
           <input id="f-name" name="name" type="text" required="">
         </div>
         <div class="field">
-          <label for="f-contact">Телефон или почта</label>
-          <input id="f-contact" name="contact" type="text" required="">
+          <label for="f-contact">Телефон <i>обязательно</i></label>
+          <input id="f-contact" name="contact" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required="">
+        </div>
+        <div class="field">
+          <label for="f-tg">Аккаунт в Telegram</label>
+          <input id="f-tg" name="tg" type="text" autocomplete="off" placeholder="@username">
         </div>
         <div class="field">
           <label for="f-type">Тип задачи</label>
@@ -1268,8 +1272,8 @@
           </select>
         </div>
         <div class="field">
-          <label for="f-msg">Что важно сообщить сразу</label>
-          <textarea id="f-msg" name="msg" placeholder="Регион, суть проекта, срок принятия решения"></textarea>
+          <label for="f-msg">Что важно сообщить сразу <i>обязательно</i></label>
+          <textarea id="f-msg" name="msg" placeholder="Регион, суть проекта, срок принятия решения" required=""></textarea>
         </div>
         <div class="hp" aria-hidden="true">
           <label for="f-company">Компания</label>
@@ -1342,7 +1346,7 @@
   window.SITE_CONFIG = { formEndpoint: "https://ilab-form.79638134017z.workers.dev" };
 </script>
 <script src="neuro.js?v=3" defer=""></script>
-<script src="app.js?v=6"></script>
+<script src="app.js?v=7"></script>
 
 
 </body></html>
