@@ -2918,4 +2918,10 @@ section { position: relative; }
   .case__disc,
   .case2__disc,
   .case3__honest { order: 7; }
+
+  /* безымянные обёртки вокруг блоков разбора: своего порядка у них нет,
+     поэтому они уходили выше заголовка и утаскивали содержимое с собой */
+  .case__grid > div:not([class]),
+  .case2 > div:not([class]),
+  .case3 > div:not([class]) { order: 6; }
 }
