@@ -8,12 +8,18 @@
  *   CHAT_ID   — куда слать заявку (личный id Евгения или id группы)
  */
 
-const ALLOWED = [
-  'https://faktlab.ru',
-  'https://www.faktlab.ru',
-  'http://localhost:8143',
-  'http://127.0.0.1:8143',
-];
+const SITES = {
+  'https://faktlab.ru':        'упаковка активов',
+  'https://www.faktlab.ru':    'упаковка активов',
+  'https://visitblg.ru':       'Амур Атлас · гид по Благовещенску',
+  'https://www.visitblg.ru':   'Амур Атлас · гид по Благовещенску',
+  'http://localhost:8143':     'локальная проверка (faktlab)',
+  'http://127.0.0.1:8143':     'локальная проверка (faktlab)',
+  'http://localhost:8765':     'локальная проверка (Амур Атлас)',
+  'http://127.0.0.1:8765':     'локальная проверка (Амур Атлас)',
+};
+
+const ALLOWED = Object.keys(SITES);
 
 const LIMITS = { name: 120, contact: 160, type: 80, msg: 2000 };
 
@@ -85,7 +91,7 @@ export default {
 
     const when = new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Yakutsk' });
     const text = [
-      '<b>Заявка с сайта</b> — упаковка активов',
+      `<b>Заявка с сайта</b> — ${SITES[origin] || 'сайт'}`,
       '',
       `<b>Имя:</b> ${esc(name)}`,
       `<b>Связь:</b> ${esc(contact)}`,

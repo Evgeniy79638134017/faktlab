@@ -2901,13 +2901,20 @@ section { position: relative; }
   /* обложка и цифры — сразу под заголовком */
   .case__panel,
   .case2__side,
-  .case3__side  { order: 4; margin-bottom: 26px; }
+  .case3__side,
+  .cover        { order: 4; margin-bottom: 26px; }
 
-  /* следом весь текст разбора */
-  .sba          { order: 5; }
+  /* следом весь текст разбора. Порядок задан всем блокам поимённо:
+     элемент без своего order получает нулевой и всплывает выше заголовка —
+     на этом сломался кейс 02, где сравнение и схема ушли в самый верх. */
+  .sba,
+  .ba           { order: 5; }
   .case__main,
   .case2__main,
-  .case3__main  { order: 6; }
+  .case3__main,
+  .scheme,
+  .fold,
+  .works        { order: 6; }
   .case__disc,
   .case2__disc,
   .case3__honest { order: 7; }
