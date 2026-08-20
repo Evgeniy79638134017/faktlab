@@ -2876,3 +2876,39 @@ section { position: relative; }
   /* мелкие раскрывашки давали 33px высоты — добираем до пальцевой нормы */
   .fold--mini > summary { padding: 11px 0; }
 }
+
+/* v5.6 — на телефоне обложка кейса поднимается под заголовок.
+   Была в самом низу: читатель проходил весь разбор и только потом видел,
+   что именно он получает. Секция и её сетка распускаются в один поток
+   (display: contents), после чего порядком управляет order. */
+@media (max-width: 760px) {
+  .case .wrap,
+  .sec .wrap { display: flex; flex-direction: column; }
+
+  .sec__head,
+  .case__head { display: contents; }
+
+  .case__grid,
+  .case2,
+  .case3 { display: contents; }
+
+  .ckick        { order: 1; }
+  .sec__head h2,
+  .case h2      { order: 2; }
+  .sec__head > .lead,
+  .lead         { order: 3; }
+
+  /* обложка и цифры — сразу под заголовком */
+  .case__panel,
+  .case2__side,
+  .case3__side  { order: 4; margin-bottom: 26px; }
+
+  /* следом весь текст разбора */
+  .sba          { order: 5; }
+  .case__main,
+  .case2__main,
+  .case3__main  { order: 6; }
+  .case__disc,
+  .case2__disc,
+  .case3__honest { order: 7; }
+}
