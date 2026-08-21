@@ -2859,8 +2859,20 @@ section { position: relative; }
 }
 .ccards__more::after { content: " →"; }
 
+/* На телефоне показываем все кейсы: прятать половину витрины неправильно —
+   читатель не догадывается, что работ больше. Вместо скрытия ужимаем карточку:
+   обложка становится широкой полосой вместо полного разворота. */
 @media (max-width: 760px) {
-  .ccards .ccard:nth-child(n+3) { display: none; }
+  .ccards .ccard picture,
+  .ccards .ccard img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center 42%;
+  }
+  .ccard b { font-size: clamp(19px, 5.2vw, 23px); margin-bottom: 6px; }
+  .ccard small { margin-bottom: 14px; }
   .ccards__more { display: block; }
 }
 
