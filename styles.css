@@ -2953,3 +2953,18 @@ section { position: relative; }
 }
 /* неактивная кнопка отправки: видно, что чего-то не хватает */
 .form button[type="submit"]:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Нечётная последняя карточка на широком экране висела одна в ряду и ряд
+   выглядел оборванным. Растягиваем её на обе колонки, обложку кадрируем
+   полосой — иначе при двойной ширине она заняла бы пол-экрана. */
+@media (min-width: 761px) {
+  .ccards .ccard:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .ccards .ccard:last-child:nth-child(odd) picture,
+  .ccards .ccard:last-child:nth-child(odd) img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 24 / 9;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+}
