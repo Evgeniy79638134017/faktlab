@@ -3022,3 +3022,23 @@ section { position: relative; }
    третий элемент падал в колонку номера шириной 76px — текст сжимался
    в вертикальную ленту по одному слову. */
 .reg__i > .reg__d { grid-column: 2; }
+
+/* Иллюстрация в статье-разборе. */
+.artfig { margin: 30px 0 8px; }
+.artfig picture, .artfig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+.artfig figcaption {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 68ch;
+}
+@media (max-width: 760px) { .artfig { margin: 22px 0 6px; } .artfig figcaption { font-size: 14.4px; } }
