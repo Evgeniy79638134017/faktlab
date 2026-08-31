@@ -22,3 +22,8 @@ worker/
 DEPLOY.md
 _faq_extracted.json
 _preview_case5.png
+
+# сборщики страниц — служебное
+_mk_page.py
+_page*.py
+_parts.json
