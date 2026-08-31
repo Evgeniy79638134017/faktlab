@@ -3100,3 +3100,15 @@ section { position: relative; }
   border-radius: 3px;
 }
 @media (max-width: 900px) { .painpic { margin-bottom: 14px; } }
+
+/* Картинка внутри карточки ситуации занимает всю её ширину.
+   Широкая карточка — двухколоночная сетка, и без этого правила картинка
+   вставала в первую колонку, выдавливая заголовок и текст. */
+.trouble__i .painpic,
+.trouble__i--wide .painpic {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 18px;
+}
+.trouble__i .painpic img { width: 100%; height: auto; }
