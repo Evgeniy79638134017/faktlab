@@ -3042,3 +3042,7 @@ section { position: relative; }
   max-width: 68ch;
 }
 @media (max-width: 760px) { .artfig { margin: 22px 0 6px; } .artfig figcaption { font-size: 14.4px; } }
+
+/* Две карточки в блоке «Другие разборы» — иначе третья колонка пустует. */
+.reads--two { grid-template-columns: 1fr 1fr; }
+@media (max-width: 700px) { .reads--two { grid-template-columns: 1fr; } }
