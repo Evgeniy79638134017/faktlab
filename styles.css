@@ -3087,3 +3087,16 @@ section { position: relative; }
 }
 .reads__i > :not(picture) { padding-left: 24px; padding-right: 24px; }
 @media (max-width: 700px) { .reads__i > :not(picture) { padding-left: 20px; padding-right: 20px; } }
+
+/* Картинка в карточке ситуации. Блок болей — самое читаемое место сайта,
+   и до сих пор он был сплошным текстом. */
+.painpic { margin: 0 0 16px; }
+.painpic picture, .painpic img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+@media (max-width: 900px) { .painpic { margin-bottom: 14px; } }
