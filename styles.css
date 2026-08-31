@@ -3046,3 +3046,32 @@ section { position: relative; }
 /* Две карточки в блоке «Другие разборы» — иначе третья колонка пустует. */
 .reads--two { grid-template-columns: 1fr 1fr; }
 @media (max-width: 700px) { .reads--two { grid-template-columns: 1fr; } }
+
+/* Первый экран: длинный лид утапливал кнопку за нижний край телефона —
+   человек не видел, что делать. Второстепенная часть текста ушла в отдельную
+   строку помельче, на узком экране она скрыта совсем. */
+.hero__more { display: block; margin-top: 10px; font-size: .88em; color: var(--muted); }
+.hero__note b { color: var(--ink); font-weight: 600; }
+@media (max-width: 760px) {
+  .hero__more { display: none; }
+}
+
+/* Призыв в середине страницы: между кейсами и остальным шло семь экранов
+   без единой кнопки — дочитавший до сюда не имел способа откликнуться. */
+.midcta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  padding: 26px 30px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 3px;
+  background: var(--sheet);
+}
+.midcta p { font-size: 17.5px; line-height: 1.5; color: var(--ink-2); max-width: 62ch; margin: 0; }
+.midcta .btn { flex: none; }
+@media (max-width: 760px) {
+  .midcta { flex-direction: column; align-items: flex-start; padding: 22px 20px; gap: 18px; }
+  .midcta p { font-size: 16.4px; }
+}
