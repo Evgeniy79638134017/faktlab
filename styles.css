@@ -3016,3 +3016,9 @@ section { position: relative; }
 
 @media (max-width: 1000px) { .reads { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 700px)  { .reads { grid-template-columns: 1fr; } .reads__i { padding: 22px 20px 20px; } }
+
+/* Описание строки, лежащее прямо в .reg__i, а не внутри .reg__fold.
+   Сетка здесь из двух колонок (номер и содержание), и без явного указания
+   третий элемент падал в колонку номера шириной 76px — текст сжимался
+   в вертикальную ленту по одному слову. */
+.reg__i > .reg__d { grid-column: 2; }
