@@ -3075,3 +3075,15 @@ section { position: relative; }
   .midcta { flex-direction: column; align-items: flex-start; padding: 22px 20px; gap: 18px; }
   .midcta p { font-size: 16.4px; }
 }
+
+/* Картинка в карточке разбора: главная была почти сплошным текстом. */
+.reads__i { padding: 0 0 22px; overflow: hidden; }
+.reads__i picture, .reads__i img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-bottom: 18px;
+}
+.reads__i > :not(picture) { padding-left: 24px; padding-right: 24px; }
+@media (max-width: 700px) { .reads__i > :not(picture) { padding-left: 20px; padding-right: 20px; } }
