@@ -133,6 +133,7 @@ h1 .em{color:var(--brand)}
 .dim-v{
   font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
   font-weight:700;font-size:20px;color:var(--brand);white-space:nowrap;flex:none;
+  word-spacing:-.3em;
 }
 .dim-hint{margin:5px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
 
@@ -224,7 +225,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 .path-line{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--ink-soft);padding:3px 0}
 .path-line span:last-child{
   font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
-  color:var(--ink);font-weight:700;white-space:nowrap;
+  color:var(--ink);font-weight:700;white-space:nowrap;word-spacing:-.3em;
 }
 .path-fee{
   margin-top:9px;padding-top:9px;border-top:1px dashed var(--rule);
@@ -233,7 +234,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 .path-fee .lab{font-size:13.5px;font-weight:700}
 .path-fee .val{
   font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
-  font-weight:700;font-size:26px;color:var(--brand);white-space:nowrap;
+  font-weight:700;font-size:26px;color:var(--brand);white-space:nowrap;word-spacing:-.3em;
 }
 .path.alt .path-fee .val{color:var(--sum)}
 .path-when{margin:8px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
@@ -242,15 +243,22 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 .total{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);color:#fff;border-top:1.5px solid var(--ink);box-shadow:0 -6px 24px var(--shadow)}
 .total-in{max-width:620px;margin:0 auto;padding:12px 18px 14px}
 .total-lab{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72)}
-.total-num{
-  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
-  font-weight:700;font-size:clamp(28px,8.4vw,44px);line-height:1.06;letter-spacing:-.02em;
-  margin:3px 0 0;color:#fff;white-space:nowrap;
+.total-rows{margin:7px 0 0}
+.trow{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.16);
 }
-.total-num .dash{color:rgba(255,255,255,.55);margin:0 4px}
-.total-num .cur{font-size:.52em;margin-left:4px;color:rgba(255,255,255,.8)}
-.total-sub{margin:4px 0 0;font-size:13px;color:rgba(255,255,255,.9);line-height:1.35}
-.total-sub b{color:#FFD98A;font-weight:700}
+.trow:last-child{border-bottom:0}
+.trow .tk{font-size:13px;color:rgba(255,255,255,.88);line-height:1.25}
+.trow .tk i{
+  font-style:normal;font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;color:#FFD98A;margin-left:6px;
+}
+.trow b{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:clamp(23px,6.6vw,32px);line-height:1.1;letter-spacing:-.02em;
+  color:#fff;white-space:nowrap;flex:none;word-spacing:-.3em;
+}
 .total-acts{display:flex;gap:8px;margin-top:11px}
 .total-acts .total-btn{margin-top:0}
 .total-acts .total-btn:last-child{flex:1}
@@ -280,7 +288,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 }
 .more-out b{
   font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
-  color:var(--sum);font-size:17px;
+  color:var(--sum);font-size:17px;word-spacing:-.3em;white-space:nowrap;
 }
 
 /* забрать бонус */
@@ -316,7 +324,16 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 .card{width:100%;max-width:400px;background:var(--surface);color:#fff;border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(0,0,0,.35);padding:24px 22px 18px}
 .card-eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72)}
 .card-obj{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:22px;line-height:1.1;margin:10px 0 0;min-height:24px}
-.card-num{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-weight:700;font-size:clamp(30px,9.5vw,42px);line-height:1.05;letter-spacing:-.03em;margin:14px 0 0;color:#FFD98A}
+.card-rows{margin:14px 0 0}
+.crow{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.crow:last-child{border-bottom:0}
+.crow span{font-size:13px;color:rgba(255,255,255,.88);line-height:1.25}
+.crow span i{font-style:normal;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;color:#FFD98A;margin-left:6px}
+.crow b{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:clamp(24px,7.2vw,32px);line-height:1.1;letter-spacing:-.03em;
+  color:#FFD98A;white-space:nowrap;flex:none;word-spacing:-.3em;
+}
 .card-cap{margin:8px 0 0;font-size:14px;color:rgba(255,255,255,.92);line-height:1.4}
 .card-eq{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.3);font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.95)}
 .card-eq b{color:#FFD98A}
@@ -485,8 +502,10 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 <div class="total">
   <div class="total-in">
     <div class="total-lab">Ваш бонус с этой квартиры</div>
-    <p class="total-num"><span id="tLow">0</span><span class="dash">—</span><span id="tHigh">0</span><span class="cur">₽</span></p>
-    <p class="total-sub" id="tSub">в зависимости от того, какой ремонт выберет клиент</p>
+    <div class="total-rows">
+      <div class="trow"><span class="tk">Ремонт за 2 месяца<i>2,5%</i></span><b id="tLow">0 ₽</b></div>
+      <div class="trow"><span class="tk">Индивидуальный<i>4%</i></span><b id="tHigh">0 ₽</b></div>
+    </div>
     <div class="total-acts">
       <button class="total-btn t-ghost" id="openCard">Моя карточка</button>
       <button class="total-btn" id="goTake">Забрать мой бонус</button>
@@ -499,8 +518,11 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
     <div class="card-eyebrow">Партнёр «Бери ремонт» · 2026</div>
     <input class="name-in" id="nameIn" placeholder="Ваше имя" maxlength="24" autocomplete="off">
     <p class="card-obj" id="cObj"></p>
-    <p class="card-num" id="cNum">0 ₽</p>
-    <p class="card-cap" id="cCap">ваш бонус с одной квартиры</p>
+    <div class="card-rows">
+      <div class="crow"><span>Ремонт за 2 месяца<i>2,5%</i></span><b id="cPkg">0 ₽</b></div>
+      <div class="crow"><span>Индивидуальный<i>4%</i></span><b id="cInd">0 ₽</b></div>
+    </div>
+    <p class="card-cap">ваш бонус с одной этой квартиры</p>
     <p class="card-eq" id="cEq"></p>
     <div class="card-brand">
       <img src="logo-beri-remont-belyy.png" alt="Бери ремонт">
@@ -542,7 +564,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 
   var elArea = $("area"), elCnt = $("cnt");
   var pkg = 55;
-  var state = { low:0, high:0, area:55 };
+  var state = { low:0, high:0, pFee:0, iFee:0, area:55 };
 
   function calc(){
     var area = +elArea.value;
@@ -563,8 +585,8 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
   function tween(tl, th){
     if (reduce){
       shownLow = tl; shownHigh = th;
-      $("tLow").textContent = nf.format(Math.round(tl));
-      $("tHigh").textContent = nf.format(Math.round(th));
+      $("tLow").textContent = rub(tl);
+      $("tHigh").textContent = rub(th);
       return;
     }
     if (raf) cancelAnimationFrame(raf);
@@ -574,8 +596,8 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
       k = 1 - Math.pow(1 - k, 3);
       shownLow = fl + (tl - fl) * k;
       shownHigh = fh + (th - fh) * k;
-      $("tLow").textContent = nf.format(Math.round(shownLow));
-      $("tHigh").textContent = nf.format(Math.round(shownHigh));
+      $("tLow").textContent = rub(shownLow);
+      $("tHigh").textContent = rub(shownHigh);
       if (k < 1) raf = requestAnimationFrame(step);
     }
     raf = requestAnimationFrame(step);
@@ -591,6 +613,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
   function render(){
     var d = calc();
     state.low = d.low; state.high = d.high; state.area = d.area;
+    state.pFee = d.pFee; state.iFee = d.iFee;
 
     $("vArea").textContent = d.area + " м²";
     $("pPrice").textContent = rub(d.pPrice);
@@ -599,13 +622,13 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
     $("iSum").textContent   = rub(d.iSum);
     $("iFee").textContent   = rub(d.iFee);
 
-    tween(d.low, d.high);
+    tween(d.pFee, d.iFee);
 
     syncChips();
 
     var n = +elCnt.value;
     $("vCnt").textContent = n;
-    $("moreOut").innerHTML = "За год это <b>" + rub(d.low * n) + " — " + rub(d.high * n) +
+    $("moreOut").innerHTML = "За год это от <b>" + rub(d.low * n) + "</b> до <b>" + rub(d.high * n) +
       "</b><br>с " + n + " " + plural(n,"квартиры","квартир","квартир") + ", которые вы и так продаёте.";
   }
 
@@ -653,7 +676,8 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
     return "Здравствуйте! Считал(а) партнёрский калькулятор «Бери ремонт».\n" +
       (name ? "Меня зовут " + name + ".\n" : "") +
       "Объект: " + (obj ? obj + ", " : "") + state.area + " м².\n" +
-      "Мой бонус по расчёту: " + rub(state.low) + " — " + rub(state.high) + ".\n" +
+      "Мой бонус по расчёту: " + rub(state.pFee) + " за ремонт под ключ за 2 месяца " +
+      "или " + rub(state.iFee) + " за индивидуальный.\n" +
       "Хочу забрать бонус и обсудить сотрудничество.";
   }
   function wireContacts(){
@@ -697,10 +721,11 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
   $("openCard").addEventListener("click", function(){
     var obj = $("objIn").value.trim();
     $("cObj").textContent = obj ? obj + " · " + state.area + " м²" : state.area + " м²";
-    $("cNum").textContent = rub(state.low) + " — " + rub(state.high);
+    $("cPkg").textContent = rub(state.pFee);
+    $("cInd").textContent = rub(state.iFee);
     var n = +elCnt.value;
-    $("cEq").innerHTML = "Если таких квартир за год <b>" + n + "</b>, это <b>" +
-      rub(state.low*n) + " — " + rub(state.high*n) + "</b> без единой лишней сделки.";
+    $("cEq").innerHTML = "Если таких квартир за год <b>" + n + "</b>, это от <b>" +
+      rub(state.low*n) + "</b> до <b>" + rub(state.high*n) + "</b> без единой лишней сделки.";
     $("cUrl").textContent = SHARE_URL;
     sheet.classList.add("on");
   });
