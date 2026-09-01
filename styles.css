@@ -3739,3 +3739,8 @@ section { position: relative; }
 @media (min-width: 861px) {
   .tools2 { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* В строке оглавления три элемента (номер через ::before, заголовок, пояснение),
+   а колонки две — без явного указания пояснение падало в колонку номера. */
+.dm__list li b,
+.dm__list li span { grid-column: 2; }
