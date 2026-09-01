@@ -3405,3 +3405,129 @@ section { position: relative; }
   .tool__r { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 22px; }
   .tool__big { font-size: 54px; }
 }
+
+/* ============================================================
+   СЧЁТ ПОТЕРЬ ОТ ПРОСТОЯ (v6.1)
+   Не «калькулятор с ползунками»: слева форма как в бланке, справа
+   результат как в справке. Крупная цифра одна — остальное разбор.
+   ============================================================ */
+
+.calc { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 44px; margin-top: 32px; }
+
+.calc__form { display: grid; gap: 20px; align-content: start; }
+.calc__f label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.calc__f label i {
+  display: block;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.calc__inp { display: flex; align-items: stretch; border: 1px solid var(--rule); background: var(--sheet); }
+.calc__inp input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  padding: 14px 16px;
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.calc__inp input:focus { outline: 0; }
+.calc__inp:focus-within { border-color: var(--accent); box-shadow: inset 2px 0 0 var(--accent); }
+.calc__inp span {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  border-left: 1px solid var(--rule);
+}
+.calc__f select {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid var(--rule);
+  background: var(--sheet);
+  font: inherit;
+  font-size: 17px;
+  color: var(--ink);
+  border-radius: 0;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 22px, calc(100% - 14px) 22px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+.calc__f select:focus { outline: 0; border-color: var(--accent); }
+
+/* результат */
+.calc__out {
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule);
+  background: var(--sheet);
+  padding: 30px 32px;
+  align-self: start;
+  transition: border-left-color .3s ease;
+}
+.calc__out.is-on { border-left-color: #B4574A; }
+.calc__hint { font-size: 16.4px; line-height: 1.5; color: var(--muted); margin: 0; }
+
+.calc__lead { font-family: var(--mono); font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.calc__big {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5.4vw, 62px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.035em;
+  color: #B4574A;
+  margin: 10px 0 26px;
+}
+
+.calc__split { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.calc__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.calc__rowT { font-size: 16.4px; line-height: 1.4; color: var(--ink); }
+.calc__rowT span { display: block; margin-top: 5px; font-size: 13.6px; line-height: 1.45; color: var(--muted); }
+.calc__row b { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -.02em; white-space: nowrap; }
+
+.calc__next { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.calc__nextT {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.calc__next p { font-size: 16.4px; line-height: 1.55; color: var(--ink-2); margin: 0 0 10px; }
+.calc__next b { color: var(--ink); }
+.calc__month { padding: 12px 14px; background: var(--paper); border-left: 2px solid var(--accent); }
+.calc__disc { margin-top: 22px; font-size: 13.8px; line-height: 1.5; color: var(--muted); }
+
+@media (max-width: 960px) {
+  .calc { grid-template-columns: 1fr; gap: 28px; }
+  .calc__out { padding: 24px 22px; }
+  .calc__row { grid-template-columns: 1fr; gap: 6px; }
+  .calc__row b { font-size: 24px; }
+}
