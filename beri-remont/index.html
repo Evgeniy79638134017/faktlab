@@ -360,6 +360,39 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
 .b-close{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
 .card-acts button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
+.way{max-width:380px;padding:22px 20px 18px}
+.way-h{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:clamp(20px,5.8vw,26px);line-height:1.08;margin:0;color:#fff}
+.way-p{margin:9px 0 0;font-size:14px;line-height:1.45;color:rgba(255,255,255,.9)}
+.way-sum{
+  margin:12px 0 0;padding:10px 12px;background:rgba(0,0,0,.18);
+  font-size:13px;line-height:1.5;color:rgba(255,255,255,.92);
+}
+.way-sum b{font-family:"JetBrains Mono",ui-monospace,monospace;color:#FFD98A;word-spacing:-.3em;white-space:nowrap}
+.way-acts{display:flex;flex-direction:column;gap:8px;margin-top:15px}
+.w-btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+  font-family:"Oswald",sans-serif;font-size:16px;letter-spacing:.05em;text-transform:uppercase;
+  padding:14px 10px;border:1.5px solid rgba(0,0,0,.35);cursor:pointer;
+  transition:filter .16s ease,transform .12s ease;
+}
+.w-btn:hover{filter:brightness(1.07)}
+.w-btn:active{transform:translateY(1px)}
+.w-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.w-btn svg{width:19px;height:19px;flex:none}
+.w-wa{background:#25D366;color:#07301A}
+.w-tg{background:#37AEE2;color:#052A38}
+.w-max{background:#FFD98A;color:#2C1D06}
+.w-copy{
+  background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);
+  font-family:"Oswald",sans-serif;font-size:14px;letter-spacing:.05em;text-transform:uppercase;
+  padding:12px 10px;cursor:pointer;
+}
+.w-close{
+  background:none;border:0;color:rgba(255,255,255,.75);font-family:"Manrope",sans-serif;
+  font-size:13.5px;text-decoration:underline;cursor:pointer;padding:10px;margin-top:2px;
+}
+.w-close:focus-visible,.w-copy:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
 .toast{position:fixed;left:50%;bottom:210px;transform:translateX(-50%) translateY(10px);z-index:80;background:var(--ink);color:var(--paper);padding:11px 17px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;max-width:88vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -485,9 +518,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
       как будем считать и переводить бонус.</p>
     <p class="claim-who"><span id="mgrName">Лена</span> · менеджер по партнёрам «Бери ремонт»</p>
     <div class="claim-acts">
-      <a class="c-btn c-wa" id="aWa" href="#take">Написать в WhatsApp</a>
-      <a class="c-btn c-tg" id="aTg" href="#take">Написать в Telegram</a>
-      <a class="c-btn c-call" id="aCall" href="#take">Позвонить</a>
+      <button class="c-btn c-wa" type="button" id="aWay">Выбрать мессенджер</button>
     </div>
     <p class="claim-addr">г. Благовещенск, ул. 50 лет Октября, 50</p>
   </div>
@@ -536,6 +567,28 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
   </div>
 </div>
 
+<div class="sheet" id="waySheet" role="dialog" aria-modal="true" aria-label="Куда написать">
+  <div class="card way">
+    <p class="way-h">Куда вам удобнее написать?</p>
+    <p class="way-p">Расскажем условия, пришлём флаеры для клиентов и договоримся,
+      как считаем и переводим бонус.</p>
+    <p class="way-sum" id="waySum"></p>
+    <div class="way-acts">
+      <a class="w-btn w-wa" id="wWa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1s-.6.8-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5s-.6-1.4-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.7.7-.9 1.6-.6 2.6a9.3 9.3 0 0 0 4.6 4.9c1.6.7 2.3.8 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+        WhatsApp</a>
+      <a class="w-btn w-tg" id="wTg" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.4 2.9 10.7c-1 .4-1 1.7 0 2l4.8 1.6 1.8 5.5c.3.8 1.3 1 1.9.4l2.6-2.5 4.7 3.5c.7.5 1.7.1 1.9-.7l3.1-15c.2-.9-.7-1.6-1.5-1.3zM8.7 13.9l9.3-5.7-7.6 6.9-.3 3.4-1.4-4.6z"/></svg>
+        Telegram</a>
+      <a class="w-btn w-max" id="wMax" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-4.6 14V8h1.9l2.7 4.4L14.7 8h1.9v8h-1.8v-5l-2.3 3.7h-.5L9.7 11v5H7.4z"/></svg>
+        MAX</a>
+      <button class="w-copy" type="button" id="wCopy">Скопировать мой расчёт</button>
+      <button class="w-close" type="button" id="wClose">Закрыть</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -547,9 +600,10 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
      WA и телефон — только цифры. TG — ник без собаки.
      Что оставлено пустым — та кнопка скрывается. */
   var MANAGER_NAME  = "Лена";
-  var MANAGER_WA    = "";          // "79141234567"
-  var MANAGER_PHONE = "";          // "79141234567"
-  var MANAGER_TG    = "";          // "biznes_remont"
+  var MANAGER_WA    = "79245818616";              // номер даёт wa.me/79245818616
+  var MANAGER_TG    = "beri_remont";              // https://t.me/beri_remont
+  var MANAGER_MAX   = "https://clck.ru/3RLSyr";   // ссылка-приглашение в MAX
+  var MANAGER_PHONE = "";                         // кнопку «Позвонить» пока не показываем
   /* ──────────────────────────────────────────── */
 
   var SHARE_URL = "faktlab.ru/beri-remont";
@@ -682,38 +736,34 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
   }
   function wireContacts(){
     $("mgrName").textContent = MANAGER_NAME;
-    var wa = $("aWa"), tg = $("aTg"), call = $("aCall");
-    if (MANAGER_WA){
-      wa.addEventListener("click", function(e){
-        e.preventDefault();
-        window.open("https://wa.me/" + MANAGER_WA + "?text=" + encodeURIComponent(pitch()), "_blank", "noopener");
-      });
-    } else { wa.style.display = "none"; }
-    if (MANAGER_TG){ tg.href = "https://t.me/" + MANAGER_TG; tg.target = "_blank"; tg.rel = "noopener"; }
-    else { tg.style.display = "none"; }
-    if (MANAGER_PHONE){ call.href = "tel:+" + MANAGER_PHONE; }
-    else { call.style.display = "none"; }
-
-    if (!MANAGER_WA && !MANAGER_TG && !MANAGER_PHONE){
-      var b = document.createElement("button");
-      b.className = "c-btn c-wa";
-      b.type = "button";
-      b.textContent = "Скопировать мой расчёт";
-      b.addEventListener("click", function(){
-        if (navigator.clipboard && navigator.clipboard.writeText){
-          navigator.clipboard.writeText(pitch()).then(
-            function(){ toast("Расчёт скопирован — отправьте менеджеру"); },
-            function(){ toast("Сфотографируйте карточку и пришлите менеджеру"); }
-          );
-        } else { toast("Сфотографируйте карточку и пришлите менеджеру"); }
-      });
-      document.querySelector(".claim-acts").appendChild(b);
-    }
+    $("aWay").addEventListener("click", openWay);
   }
 
-  $("goTake").addEventListener("click", function(){
-    var t = $("take");
-    t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  /* окно «куда написать» */
+  var waySheet = $("waySheet");
+  function openWay(){
+    var obj = $("objIn").value.trim();
+    $("waySum").innerHTML = "Ваш расчёт: " + (obj ? obj + ", " : "") + state.area + " м² · бонус <b>" +
+      rub(state.pFee) + "</b> или <b>" + rub(state.iFee) + "</b>";
+    if (MANAGER_WA) $("wWa").href = "https://wa.me/" + MANAGER_WA + "?text=" + encodeURIComponent(pitch());
+    else $("wWa").style.display = "none";
+    if (MANAGER_TG) $("wTg").href = "https://t.me/" + MANAGER_TG; else $("wTg").style.display = "none";
+    if (MANAGER_MAX) $("wMax").href = MANAGER_MAX; else $("wMax").style.display = "none";
+    sheet.classList.remove("on");
+    waySheet.classList.add("on");
+  }
+  function closeWay(){ waySheet.classList.remove("on"); }
+
+  $("goTake").addEventListener("click", openWay);
+  $("wClose").addEventListener("click", closeWay);
+  waySheet.addEventListener("click", function(e){ if(e.target===waySheet) closeWay(); });
+  $("wCopy").addEventListener("click", function(){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(pitch()).then(
+        function(){ toast("Расчёт скопирован — вставьте в переписку"); },
+        function(){ toast("Скопировать не вышло — сфотографируйте карточку"); }
+      );
+    } else { toast("Скопируйте расчёт с карточки и пришлите менеджеру"); }
   });
 
   /* карточка */
@@ -731,7 +781,11 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
   });
   $("bClose").addEventListener("click", function(){ sheet.classList.remove("on"); });
   sheet.addEventListener("click", function(e){ if(e.target===sheet) sheet.classList.remove("on"); });
-  document.addEventListener("keydown", function(e){ if(e.key==="Escape") sheet.classList.remove("on"); });
+  document.addEventListener("keydown", function(e){
+    if(e.key!=="Escape") return;
+    sheet.classList.remove("on");
+    document.getElementById("waySheet").classList.remove("on");
+  });
 
   function toast(msg){
     var t = $("toast");
@@ -740,14 +794,7 @@ input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix
     setTimeout(function(){ t.classList.remove("on"); }, 2600);
   }
 
-  $("bSend").addEventListener("click", function(){
-    if (MANAGER_WA){
-      window.open("https://wa.me/" + MANAGER_WA + "?text=" + encodeURIComponent(pitch()), "_blank", "noopener");
-      return;
-    }
-    sheet.classList.remove("on");
-    $("take").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-  });
+  $("bSend").addEventListener("click", openWay);
 
   wireContacts();
   render();
