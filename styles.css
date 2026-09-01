@@ -2863,13 +2863,13 @@ section { position: relative; }
    читатель не догадывается, что работ больше. Вместо скрытия ужимаем карточку:
    обложка становится широкой полосой вместо полного разворота. */
 @media (max-width: 760px) {
+  /* Обложки кейсов показываются целиком: на «томах» напечатаны заголовки
+     и логотип — кадрирование полосой срезало именно их. */
   .ccards .ccard picture,
   .ccards .ccard img {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: center 42%;
+    height: auto;
   }
   .ccard b { font-size: clamp(19px, 5.2vw, 23px); margin-bottom: 6px; }
   .ccard small { margin-bottom: 14px; }
@@ -2963,9 +2963,7 @@ section { position: relative; }
   .ccards .ccard:last-child:nth-child(odd) img {
     display: block;
     width: 100%;
-    aspect-ratio: 24 / 9;
-    object-fit: cover;
-    object-position: center 40%;
+    height: auto;
   }
 }
 
