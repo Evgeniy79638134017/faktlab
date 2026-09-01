@@ -3081,8 +3081,7 @@ section { position: relative; }
 .reads__i picture, .reads__i img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  height: auto;
   margin-bottom: 18px;
 }
 .reads__i > :not(picture) { padding-left: 24px; padding-right: 24px; }
@@ -3113,7 +3112,5 @@ section { position: relative; }
 }
 .trouble__i .painpic img { width: 100%; height: auto; }
 
-/* У картинок проставлены атрибуты width/height — без height:auto браузер
-   берёт высоту из атрибута, и заданное соотношение сторон не срабатывает:
-   в карточках разборов картинка шла во всю высоту вместо полосы. */
-.reads__i img { height: auto; }
+/* Картинки в карточках разборов показываются целиком, без кадрирования:
+   в них важны детали по краям, и обрезка полосой съедала смысл. */
