@@ -3531,3 +3531,126 @@ section { position: relative; }
   .calc__row { grid-template-columns: 1fr; gap: 6px; }
   .calc__row b { font-size: 24px; }
 }
+
+/* ============================================================
+   ДИАГНОСТИКА ГОТОВНОСТИ (v6.2)
+   Список утверждений с тремя ответами в строке — не карточки,
+   не радиокнопки столбиком. Разбор пробелов идёт под результатом.
+   ============================================================ */
+
+.dg { margin-top: 32px; }
+.dg__list { border-top: 1px solid var(--rule); }
+.dg__i {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  border-left: 3px solid transparent;
+  padding-left: 12px;
+  transition: border-left-color .25s ease, background .25s ease;
+}
+.dg__i.is-yes { border-left-color: #7CAF3A; }
+.dg__i.is-no,
+.dg__i.is-idk { border-left-color: #B4574A; }
+.dg__i.is-yes .dg__t { color: var(--muted); }
+.dg__n { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.dg__t { font-size: 17px; line-height: 1.45; color: var(--ink); }
+.dg__a { display: flex; gap: 6px; }
+.dg__b {
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  background: var(--sheet);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .05em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.dg__b:hover { border-color: var(--accent); color: var(--accent); }
+.dg__b.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.dg__i.is-yes .dg__b.is-on { background: #7CAF3A; border-color: #7CAF3A; }
+.dg__i.is-no .dg__b.is-on,
+.dg__i.is-idk .dg__b.is-on { background: #B4574A; border-color: #B4574A; }
+
+.dg__out { margin-top: 26px; }
+.dg__hint { font-size: 15.6px; color: var(--muted); }
+
+.dg__score {
+  padding: 26px 28px;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+}
+.dg__pct { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.dg__pct b {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 58px);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -.03em;
+}
+.dg__pct span {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dg__track { height: 5px; background: var(--rule); overflow: hidden; }
+.dg__track i { display: block; height: 100%; background: var(--accent); transition: width .5s cubic-bezier(.4,0,.2,1); }
+.dg__verdict { margin-top: 16px; font-size: 17.4px; line-height: 1.5; color: var(--ink); }
+.dg__hot { margin-top: 8px; font-size: 15.6px; color: #B4574A; }
+.dg__hot b { font-weight: 700; }
+
+.dg__gaps { margin-top: 32px; }
+.dg__gaps h3 {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4px;
+}
+.dg__g { padding: 18px 0 18px 14px; border-bottom: 1px solid var(--rule); border-left: 3px solid var(--rule); }
+.dg__g.is-hot { border-left-color: #B4574A; }
+.dg__g b { display: block; font-size: 17.4px; line-height: 1.4; margin-bottom: 7px; }
+.dg__g p { font-size: 16px; line-height: 1.5; color: var(--ink-2); margin: 0 0 8px; }
+.dg__fix {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--second);
+  padding: 4px 10px;
+  border: 1px solid rgba(22,119,110,.3);
+}
+
+.dg__cta { margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.dg__cta p { font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 66ch; margin-bottom: 20px; }
+.dg__cta .btn { margin-right: 10px; }
+
+@media (max-width: 760px) {
+  .dg__i { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding-left: 10px; }
+  .dg__a { grid-column: 2; margin-top: 4px; }
+  .dg__t { font-size: 16.4px; }
+  .dg__b { flex: 1; text-align: center; padding: 10px 8px; }
+  .dg__score { padding: 22px 20px; }
+  .dg__cta .btn { width: 100%; justify-content: center; margin: 0 0 10px; }
+}
+
+/* Два инструмента помельче под главным: не равные плитки, а пара
+   с укороченным содержанием. */
+.tools2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.tool--sm { grid-template-columns: 1fr; gap: 18px; padding: 26px 28px; }
+.tool--sm b { font-size: clamp(18px, 1.7vw, 21px); margin: 10px 0 10px; }
+.tool--sm .tool__d { font-size: 15.6px; }
+.tool--sm .tool__go { margin-top: 0; padding-top: 0; }
+@media (max-width: 860px) {
+  .tools2 { grid-template-columns: 1fr; }
+  .tool--sm { padding: 22px 20px; }
+}
