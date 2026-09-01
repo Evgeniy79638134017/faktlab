@@ -3112,3 +3112,8 @@ section { position: relative; }
   margin: 0 0 18px;
 }
 .trouble__i .painpic img { width: 100%; height: auto; }
+
+/* У картинок проставлены атрибуты width/height — без height:auto браузер
+   берёт высоту из атрибута, и заданное соотношение сторон не срабатывает:
+   в карточках разборов картинка шла во всю высоту вместо полосы. */
+.reads__i img { height: auto; }
