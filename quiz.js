@@ -249,16 +249,39 @@
       '.w{width:26mm;font:8.5pt Arial,sans-serif;color:#666F7B;text-align:right}' +
       '.foot{margin-top:9mm;padding-top:4mm;border-top:1px solid #E3DCD0;font-size:9.5pt;color:#666F7B}' +
       '.foot b{color:#17202B}' +
+      '.offer{margin-top:7mm;padding:5mm 6mm;border:1px solid #E3DCD0;border-left:3px solid #1A237E;' +
+      'page-break-inside:avoid;font-size:10pt;color:#17202B}' +
+      '.offer h2{margin:0 0 2mm;font-size:13pt;line-height:1.25}' +
+      '.offer p{margin:0 0 3mm;color:#3D4753}' +
+      '.offer ul{margin:0 0 4mm;padding-left:5mm}' +
+      '.offer li{margin-bottom:1.5mm}' +
+      '.offer .cta{margin-top:4mm;padding-top:3mm;border-top:1px solid #EFEAE1;font-size:11pt}' +
+      '.offer .cta b{font-size:12.5pt}' +
+      '.offer .small{font-size:9pt;color:#666F7B;margin-top:2mm}' +
       '</style></head><body>' +
       '<h1>Что спросит покупатель: ' + d.title.toLowerCase() + '</h1>' +
       '<p class="sub">Список собран ' + when + ' на faktlab.ru — по реестрам реальных работ ИИщенко LAB</p>' +
       '<div class="score"><b>' + pct + '&thinsp;%</b> готовности · закрыто ' + done +
       ' из ' + qs.length + ' позиций</div>' +
       '<table>' + rows + '</table>' +
-      '<div class="foot"><b>Что делать дальше.</b> Всё неотмеченное покупатель выяснит сам, ' +
-      'и каждый такой пункт станет поводом для скидки. Ответы собираются за две–три недели ' +
-      'и превращаются в материалы, которые покупатель читает до встречи.<br><br>' +
-      'ИИщенко LAB · faktlab.ru · +7 914 538-90-45</div>' +
+      '<div class="offer">' +
+      '<h2>Соберём ответы за вас</h2>' +
+      '<p>Всё неотмеченное покупатель выяснит сам — и каждый такой пункт станет поводом ' +
+      'сбить цену. Мы закрываем эти вопросы за две–три недели и складываем ответы ' +
+      'в материалы, которые покупатель читает до встречи:</p>' +
+      '<ul>' +
+      '<li>разбор объекта по восьми частям: право, состав, экономика, покупатели</li>' +
+      '<li>цена, посчитанная двумя независимыми способами, с обоснованием</li>' +
+      '<li>пакет для покупателя: меморандум, презентация, финансовая модель</li>' +
+      '<li>каталог адресатов и готовые тексты обращений</li>' +
+      '</ul>' +
+      '<p>Обязательств по сделке не берём: переговоры и условия остаются за вами. ' +
+      'Работа идёт под соглашением о неразглашении.</p>' +
+      '<div class="cta"><b>Первый разговор — 20–30 минут, бесплатно.</b><br>' +
+      'На нём станет понятно, есть ли здесь работа и сколько она стоит.<br>' +
+      '+7 914 538-90-45 · 549945@mail.ru · faktlab.ru</div>' +
+      '<div class="small">ИИщенко LAB · аналитика и упаковка активов · Благовещенск, работаем по всей России</div>' +
+      '</div>' +
       '</body></html>');
     w.document.close();
     w.focus();
