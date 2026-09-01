@@ -168,12 +168,16 @@
       'в материалы, которые он читает до встречи.'));
     var cta = el('div', 'qz__cta');
     cta.innerHTML =
-      '<a class="btn" href="index.html#contact"><span>Обсудить свой объект</span></a>' +
+      '<button class="btn" type="button" id="qz-pdf"><span>Скачать список в PDF</span></button>' +
+      '<a class="btn btn--ghost" href="index.html#contact"><span>Обсудить свой объект</span></a>' +
       '<button class="btn btn--ghost" type="button" id="qz-restart"><span>Другой объект</span></button>';
     foot.appendChild(cta);
     root.appendChild(foot);
 
     document.getElementById('qz-restart').addEventListener('click', renderTypes);
+    document.getElementById('qz-pdf').addEventListener('click', function () {
+      printList(qs);
+    });
     root.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -193,6 +197,72 @@
       '<div class="qz__track"><i style="width:' + pct + '%"></i></div>' +
       '<p>' + done + ' из ' + total + '. ' + verdict + '.</p>';
     box.classList.toggle('is-strong', pct >= 70);
+  }
+
+
+  /* Выгрузка: собираем чистый документ и отдаём его на печать — браузер
+     сам предлагает «Сохранить как PDF». Так не нужна внешняя библиотека,
+     и политика безопасности страницы остаётся строгой. */
+  function printList(qs) {
+    var d = DB[state.type];
+    var done = 0;
+    var rows = '', n = 0, lastBlock = '';
+    qs.slice().sort(function (a, b) {
+      return a.b === b.b ? b.w - a.w : 0;
+    }).forEach(function (q) {
+      n++;
+      var id = 'q' + n;
+      var closed = !!state.closed[id];
+      if (closed) done++;
+      if (q.b !== lastBlock) {
+        rows += '<tr class="b"><td colspan="4">' + q.b + '</td></tr>';
+        lastBlock = q.b;
+      }
+      rows += '<tr' + (closed ? ' class="c"' : '') + '>' +
+        '<td class="chk">' + (closed ? '✓' : '') + '</td>' +
+        '<td class="num">В-' + String(n).padStart(2, '0') + '</td>' +
+        '<td>' + q.t + '</td>' +
+        '<td class="w">' + WEIGHT[q.w].label + '</td></tr>';
+    });
+
+    var pct = Math.round(done / qs.length * 100);
+    var when = new Date().toLocaleDateString('ru-RU');
+    var w = window.open('', '_blank');
+    if (!w) { alert('Разрешите всплывающие окна, чтобы сохранить список.'); return; }
+
+    w.document.write(
+      '<!doctype html><html lang="ru"><head><meta charset="utf-8">' +
+      '<title>Вопросы покупателя — ' + d.title + '</title><style>' +
+      '@page{margin:18mm 16mm}' +
+      'body{font:11pt/1.45 Georgia,serif;color:#17202B;margin:0}' +
+      'h1{font-size:19pt;line-height:1.2;margin:0 0 4mm}' +
+      '.sub{color:#666F7B;font-size:10pt;margin:0 0 8mm}' +
+      '.score{border:1px solid #E3DCD0;border-left:3px solid #1A237E;padding:4mm 5mm;margin:0 0 8mm}' +
+      '.score b{font-size:16pt}' +
+      'table{width:100%;border-collapse:collapse}' +
+      'td{padding:2.4mm 2mm;border-bottom:1px solid #EFEAE1;vertical-align:top}' +
+      'tr.b td{padding-top:6mm;border:0;font:9pt/1 Arial,sans-serif;letter-spacing:.12em;' +
+      'text-transform:uppercase;color:#1A237E}' +
+      'tr.c td{color:#9AA0A8;text-decoration:line-through}' +
+      '.chk{width:6mm;color:#7CAF3A;font-weight:700;text-decoration:none}' +
+      '.num{width:14mm;font:9.5pt Arial,sans-serif;color:#666F7B}' +
+      '.w{width:26mm;font:8.5pt Arial,sans-serif;color:#666F7B;text-align:right}' +
+      '.foot{margin-top:9mm;padding-top:4mm;border-top:1px solid #E3DCD0;font-size:9.5pt;color:#666F7B}' +
+      '.foot b{color:#17202B}' +
+      '</style></head><body>' +
+      '<h1>Что спросит покупатель: ' + d.title.toLowerCase() + '</h1>' +
+      '<p class="sub">Список собран ' + when + ' на faktlab.ru — по реестрам реальных работ ИИщенко LAB</p>' +
+      '<div class="score"><b>' + pct + '&thinsp;%</b> готовности · закрыто ' + done +
+      ' из ' + qs.length + ' позиций</div>' +
+      '<table>' + rows + '</table>' +
+      '<div class="foot"><b>Что делать дальше.</b> Всё неотмеченное покупатель выяснит сам, ' +
+      'и каждый такой пункт станет поводом для скидки. Ответы собираются за две–три недели ' +
+      'и превращаются в материалы, которые покупатель читает до встречи.<br><br>' +
+      'ИИщенко LAB · faktlab.ru · +7 914 538-90-45</div>' +
+      '</body></html>');
+    w.document.close();
+    w.focus();
+    setTimeout(function () { w.print(); }, 400);
   }
 
   function tail(x) {

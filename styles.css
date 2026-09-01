@@ -3352,3 +3352,56 @@ section { position: relative; }
   .sec__head--tight { max-width: none; }
   .sec__head--tight h1 br { display: none; }
 }
+
+/* Тизер инструмента на главной: асимметричная пара — слева обещание,
+   справа цифра-доказательство. Не карточка в ряд с другими. */
+.tool {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 34px 36px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  background: var(--sheet);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .25s ease, transform .25s ease;
+}
+.tool:hover { border-color: var(--accent); transform: translateY(-2px); }
+.tool__l b {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(21px, 2.1vw, 27px);
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: -.015em;
+  margin: 12px 0 12px;
+}
+.tool__d { display: block; font-size: 16.4px; line-height: 1.5; color: var(--ink-2); max-width: 56ch; }
+.tool__r { border-left: 1px solid var(--rule); padding-left: 34px; display: flex; flex-direction: column; }
+.tool__big {
+  font-family: var(--serif);
+  font-size: clamp(52px, 6vw, 76px);
+  font-weight: 700;
+  line-height: .85;
+  letter-spacing: -.035em;
+  color: var(--accent);
+}
+.tool__cap { margin-top: 12px; font-size: 14.8px; line-height: 1.45; color: var(--muted); }
+.tool__go {
+  margin-top: auto;
+  padding-top: 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tool__go::after { content: " →"; transition: margin-left .25s ease; }
+.tool:hover .tool__go::after { margin-left: 5px; }
+
+@media (max-width: 860px) {
+  .tool { grid-template-columns: 1fr; gap: 24px; padding: 26px 22px; }
+  .tool__r { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 22px; }
+  .tool__big { font-size: 54px; }
+}
