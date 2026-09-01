@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="Партнёрский калькулятор «Бери ремонт»: введите площадь квартиры, которая у вас в работе, — увидите свой бонус 2,5% или 4%.">
+<meta name="theme-color" content="#046850">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Бери ремонт">
+<meta property="og:title" content="Бонус риэлтора: 2,5% и 4% с каждой квартиры">
+<meta property="og:description" content="Возьмите квартиру, которая у вас сейчас в работе. Введите площадь — увидите свой бонус.">
+<meta property="og:url" content="https://faktlab.ru/beri-remont/">
+<meta property="og:image" content="https://faktlab.ru/beri-remont/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
+<title>Партнёрский калькулятор Бери ремонт</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --paper:#EEF2EF;
+  --paper-2:#E4EAE6;
+  --ink:#10201B;
+  --ink-soft:#4A5C55;
+  --grid:#D3DED8;
+  --rule:#B9C8C1;
+  --brand:#046850;
+  --brand-soft:#0B8467;
+  --sum:#C9761A;
+  --sum-soft:#E08A1E;
+  --live:#3E9E4C;
+  --shadow:rgba(16,32,27,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1512; --paper-2:#131E1A; --ink:#E7EEE9; --ink-soft:#93A79E;
+    --grid:#1C2A24; --rule:#2A3B34; --brand:#4FBE9C; --brand-soft:#67D3B1;
+    --sum:#F2A63C; --sum-soft:#FFBB5C; --live:#5FCB6D; --shadow:rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1512; --paper-2:#131E1A; --ink:#E7EEE9; --ink-soft:#93A79E;
+  --grid:#1C2A24; --rule:#2A3B34; --brand:#4FBE9C; --brand-soft:#67D3B1;
+  --sum:#F2A63C; --sum-soft:#FFBB5C; --live:#5FCB6D; --shadow:rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:28px 28px;
+  color:var(--ink);
+  font-family:"Manrope","Segoe UI",system-ui,sans-serif;
+  font-size:16px;line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:620px;margin:0 auto;padding:0 18px 210px}
+
+/* логотип */
+.brand{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:12px 14px;border-bottom:1px solid var(--rule);background:var(--paper-2);
+}
+.brand img{display:block;height:38px;width:auto}
+.brand .lg-dark{display:none}
+.brand-cap{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:9.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:right;line-height:1.5;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .brand .lg-light{display:none}
+  :root:not([data-theme="light"]) .brand .lg-dark{display:block}
+}
+:root[data-theme="dark"] .brand .lg-light{display:none}
+:root[data-theme="dark"] .brand .lg-dark{display:block}
+@media (max-width:380px){ .brand img{height:32px} .brand-cap{font-size:9px} }
+
+/* штамп чертежа */
+.stamp{border:1.5px solid var(--ink);background:var(--paper);margin-top:18px;box-shadow:4px 4px 0 var(--shadow)}
+.stamp-row{display:flex;border-bottom:1px solid var(--rule)}
+.stamp-cell{
+  padding:9px 12px;font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);border-right:1px solid var(--rule);flex:1;
+}
+.stamp-cell:last-child{border-right:0}
+.stamp-cell b{display:block;color:var(--ink);font-weight:700;letter-spacing:.06em;margin-top:3px;font-size:11px}
+.stamp-title{padding:16px 14px 14px}
+h1{
+  font-family:"Oswald","Arial Narrow",sans-serif;font-weight:600;
+  font-size:clamp(26px,7.2vw,38px);line-height:1.04;
+  text-transform:uppercase;margin:0;text-wrap:balance;
+}
+h1 .em{color:var(--brand)}
+.sub{margin:9px 0 0;font-size:14.5px;color:var(--ink-soft);max-width:46ch}
+
+/* лента зала */
+.hall{
+  display:none;align-items:center;gap:9px;margin-top:10px;padding:9px 12px;
+  border:1px dashed var(--rule);background:var(--paper-2);
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;
+  color:var(--ink-soft);letter-spacing:.02em;
+}
+.hall.on{display:flex}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--live);flex:none;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 55%,transparent)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+.hall b{color:var(--ink);font-weight:700}
+
+.section-label{
+  display:flex;align-items:center;gap:10px;margin:26px 0 4px;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+}
+.section-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+.dim{padding:15px 0 8px;border-bottom:1px solid var(--rule)}
+.dim-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.dim-q{font-size:15px;font-weight:500;line-height:1.3}
+.dim-v{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:20px;color:var(--brand);white-space:nowrap;flex:none;
+}
+.dim-hint{margin:5px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+
+.obj-in{
+  width:100%;margin-top:10px;padding:11px 12px;
+  font-family:"Manrope",sans-serif;font-size:15px;
+  background:var(--paper-2);color:var(--ink);
+  border:1px solid var(--rule);
+}
+.obj-in::placeholder{color:var(--ink-soft)}
+.obj-in:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+
+/* ползунок */
+.rail{padding:10px 0 2px}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;background:transparent;
+  margin:0;display:block;height:34px;cursor:pointer;touch-action:pan-y;
+}
+input[type=range]:focus{outline:none}
+input[type=range]::-webkit-slider-runnable-track{
+  height:10px;border-radius:5px;border:1px solid var(--rule);
+  background:linear-gradient(to right,var(--brand) 0%,var(--brand) var(--p,50%),var(--paper-2) var(--p,50%),var(--paper-2) 100%);
+}
+input[type=range]::-moz-range-track{
+  height:10px;border-radius:5px;border:1px solid var(--rule);
+  background:linear-gradient(to right,var(--brand) 0%,var(--brand) var(--p,50%),var(--paper-2) var(--p,50%),var(--paper-2) 100%);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:32px;height:32px;margin-top:-12px;
+  background:var(--brand);border:4px solid var(--paper);border-radius:50%;cursor:grab;
+  box-shadow:0 2px 7px var(--shadow),0 0 0 1px var(--rule);
+}
+input[type=range]::-moz-range-thumb{
+  width:28px;height:28px;background:var(--brand);border:4px solid var(--paper);
+  border-radius:50%;cursor:grab;box-shadow:0 2px 7px var(--shadow),0 0 0 1px var(--rule);
+}
+input[type=range]:active::-webkit-slider-thumb{cursor:grabbing;background:var(--brand-soft)}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px color-mix(in srgb,var(--sum) 45%,transparent)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px color-mix(in srgb,var(--sum) 45%,transparent)}
+.ends{
+  display:flex;justify-content:space-between;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10.5px;letter-spacing:.06em;color:var(--ink-soft);margin-top:-2px;
+}
+
+/* сегмент пакетов */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);margin:12px 0 4px;border:1.5px solid var(--ink)}
+.seg button{
+  font-family:"Manrope",sans-serif;appearance:none;border:0;border-right:1px solid var(--rule);
+  background:transparent;color:var(--ink);padding:11px 6px 10px;cursor:pointer;text-align:center;
+  transition:background .16s ease,color .16s ease;
+}
+.seg button:last-child{border-right:0}
+.seg button .n{display:block;font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:700;font-size:17px;line-height:1.1}
+.seg button .l{display:block;font-size:11px;margin-top:3px;color:var(--ink-soft);line-height:1.2}
+.seg button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.seg button[aria-pressed="true"] .l{color:rgba(255,255,255,.85)}
+.seg button:focus-visible{outline:2px solid var(--sum);outline-offset:-3px}
+
+/* два сценария */
+.paths{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+.path{border:1.5px solid var(--ink);background:var(--paper)}
+.path-top{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding:11px 13px 9px;border-bottom:1px solid var(--rule);
+}
+.path-name{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:16px;letter-spacing:.02em}
+.path-rate{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:700;font-size:13px;
+  color:#fff;background:var(--brand);padding:3px 8px;flex:none;
+}
+.path.alt .path-rate{background:var(--sum)}
+.path-body{padding:11px 13px 13px}
+.path-line{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--ink-soft);padding:3px 0}
+.path-line span:last-child{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  color:var(--ink);font-weight:700;white-space:nowrap;
+}
+.path-fee{
+  margin-top:9px;padding-top:9px;border-top:1px dashed var(--rule);
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+}
+.path-fee .lab{font-size:13.5px;font-weight:700}
+.path-fee .val{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:26px;color:var(--brand);white-space:nowrap;
+}
+.path.alt .path-fee .val{color:var(--sum)}
+.path-when{margin:8px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+
+/* липкий итог */
+.total{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--brand);color:#fff;border-top:1.5px solid var(--ink);box-shadow:0 -6px 24px var(--shadow)}
+.total-in{max-width:620px;margin:0 auto;padding:12px 18px 14px}
+.total-lab{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.total-num{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  font-weight:700;font-size:clamp(28px,8.4vw,44px);line-height:1.06;letter-spacing:-.02em;
+  margin:3px 0 0;color:#fff;white-space:nowrap;
+}
+.total-num .dash{color:rgba(255,255,255,.55);margin:0 4px}
+.total-num .cur{font-size:.52em;margin-left:4px;color:rgba(255,255,255,.8)}
+.total-sub{margin:4px 0 0;font-size:13px;color:rgba(255,255,255,.9);line-height:1.35}
+.total-sub b{color:#FFD98A;font-weight:700}
+.total-acts{display:flex;gap:8px;margin-top:11px}
+.total-acts .total-btn{margin-top:0}
+.t-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55);flex:0 0 40%}
+.total-acts .total-btn:last-child{flex:1}
+.total-btn{
+  margin-top:11px;width:100%;font-family:"Oswald",sans-serif;font-size:16px;
+  letter-spacing:.06em;text-transform:uppercase;background:var(--sum-soft);color:#20140A;
+  border:1.5px solid rgba(0,0,0,.35);padding:12px;cursor:pointer;
+  transition:transform .12s ease,filter .16s ease;
+}
+.total-btn:hover{filter:brightness(1.06)}
+.total-btn:active{transform:translateY(1px)}
+.total-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+.note{margin:12px 0 0;padding:11px 13px;border-left:3px solid var(--sum);background:var(--paper-2);font-size:13px;color:var(--ink-soft);line-height:1.45}
+.note b{color:var(--ink)}
+
+.more{
+  margin-top:14px;padding:13px;border:1px dashed var(--rule);background:var(--paper-2);
+}
+.more-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.more-q{font-size:14px;font-weight:500}
+.more-v{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:700;font-size:18px;color:var(--brand)}
+.more-out{
+  margin:10px 0 0;font-size:14px;line-height:1.45;
+}
+.more-out b{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;
+  color:var(--sum);font-size:17px;
+}
+
+/* забрать бонус */
+.claim{border:2px solid var(--ink);background:var(--brand);color:#fff;padding:20px 18px 18px;margin-top:10px;box-shadow:5px 5px 0 var(--shadow)}
+.claim-h{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:clamp(22px,6.4vw,30px);line-height:1.05;margin:0;letter-spacing:.01em}
+.claim-p{margin:9px 0 0;font-size:14px;line-height:1.45;color:rgba(255,255,255,.92)}
+.claim-who{margin:12px 0 0;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#FFD98A}
+.claim-acts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.c-btn{
+  display:block;text-align:center;text-decoration:none;
+  font-family:"Oswald",sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;
+  padding:13px 10px;border:1.5px solid rgba(0,0,0,.35);
+  transition:filter .16s ease,transform .12s ease;
+}
+.c-btn:hover{filter:brightness(1.07)}
+.c-btn:active{transform:translateY(1px)}
+.c-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.c-wa{background:var(--sum-soft);color:#20140A}
+.c-tg{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5)}
+.c-call{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5)}
+.claim-logo{display:block;height:34px;width:auto;margin:0 0 14px}
+.claim-addr{margin:13px 0 0;font-size:12.5px;color:rgba(255,255,255,.75)}
+
+.foot{
+  margin-top:26px;padding-top:14px;border-top:1px solid var(--rule);
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;
+  letter-spacing:.05em;color:var(--ink-soft);line-height:1.7;
+}
+
+/* карточка */
+.sheet{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--ink) 78%,transparent);display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.sheet.on{display:flex}
+.card{width:100%;max-width:400px;background:var(--brand);color:#fff;border:2px solid var(--ink);box-shadow:8px 8px 0 rgba(0,0,0,.35);padding:24px 22px 18px}
+.card-eyebrow{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.card-obj{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:22px;line-height:1.1;margin:10px 0 0;min-height:24px}
+.card-num{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-weight:700;font-size:clamp(30px,9.5vw,42px);line-height:1.05;letter-spacing:-.03em;margin:14px 0 0;color:#FFD98A}
+.card-cap{margin:8px 0 0;font-size:14px;color:rgba(255,255,255,.92);line-height:1.4}
+.card-eq{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.3);font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.95)}
+.card-eq b{color:#FFD98A}
+.card-brand{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:18px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.3);
+}
+.card-brand img{display:block;height:30px;width:auto;flex:none}
+.card-brand span{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:right;line-height:1.5;
+}
+.card-url{margin:10px 0 0;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:9px;color:rgba(255,255,255,.6);word-break:break-all;line-height:1.4}
+.name-in{
+  width:100%;margin-top:12px;padding:10px 12px;font-family:"Oswald",sans-serif;
+  font-size:16px;text-transform:uppercase;letter-spacing:.02em;
+  background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);
+}
+.name-in::placeholder{color:rgba(255,255,255,.55)}
+.name-in:focus-visible{outline:2px solid #FFD98A;outline-offset:1px}
+.card-acts{display:flex;gap:8px;margin-top:14px}
+.card-acts button{flex:1;font-family:"Oswald",sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:11px 8px;cursor:pointer;border:1.5px solid rgba(0,0,0,.35)}
+.b-send{background:var(--sum-soft);color:#20140A}
+.b-close{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.card-acts button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+.toast{position:fixed;left:50%;bottom:210px;transform:translateX(-50%) translateY(10px);z-index:80;background:var(--ink);color:var(--paper);padding:11px 17px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;max-width:88vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="stamp">
+    <div class="brand">
+      <img class="lg-light" src="logo-beri-remont.png" alt="Бери ремонт" width="478" height="240">
+      <img class="lg-dark" src="logo-beri-remont-belyy.png" alt="" width="478" height="240" aria-hidden="true">
+      <div class="brand-cap">Партнёрская<br>программа</div>
+    </div>
+    <div class="stamp-row">
+      <div class="stamp-cell">Партнёр<b>Союз риэлторов</b></div>
+      <div class="stamp-cell">Объект<b>Бери ремонт</b></div>
+      <div class="stamp-cell">Расчёт<b>1 квартира</b></div>
+    </div>
+    <div class="stamp-title">
+      <h1>Сколько вы получите<br><span class="em">с этой квартиры</span></h1>
+      <p class="sub">Возьмите квартиру, которая у вас сейчас в работе. Введите площадь — увидите свой бонус, если клиент уйдёт к нам на ремонт.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Квартира</div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-q">Как назовём объект</div>
+    </div>
+    <input class="obj-in" id="objIn" placeholder="Например: ЖК Северный, 3 этаж" maxlength="40" autocomplete="off">
+    <p class="dim-hint">Необязательно. Нужно только для вашей карточки с расчётом.</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-q">Площадь квартиры</div>
+      <div class="dim-v" id="vArea">55 м²</div>
+    </div>
+    <p class="dim-hint">Потяните ползунок пальцем.</p>
+    <div class="rail"><input type="range" id="area" min="25" max="150" step="1" value="55" aria-label="Площадь квартиры"></div>
+    <div class="ends"><span>25 м²</span><span>150 м²</span></div>
+  </div>
+
+  <div class="dim" style="border-bottom:0">
+    <div class="dim-head"><div class="dim-q">Какой пакет ремонта выберет клиент</div></div>
+    <div class="seg" id="seg" role="group" aria-label="Выбор пакета">
+      <button type="button" data-p="50" aria-pressed="false"><span class="n">50</span><span class="l">Дома хорошо</span></button>
+      <button type="button" data-p="55" aria-pressed="true"><span class="n">55</span><span class="l">Дома отлично</span></button>
+      <button type="button" data-p="60" aria-pressed="false"><span class="n">60</span><span class="l">Дома супер</span></button>
+    </div>
+    <p class="dim-hint">Тысяч ₽ за м². Не знаете — оставьте средний, «Дома отлично».</p>
+  </div>
+
+  <div class="section-label">Два пути клиента</div>
+
+  <div class="paths">
+    <div class="path">
+      <div class="path-top">
+        <div class="path-name">Ремонт за 2 месяца</div>
+        <div class="path-rate">2,5%</div>
+      </div>
+      <div class="path-body">
+        <div class="path-line"><span>Цена за м²</span><span id="pPrice">55 000 ₽</span></div>
+        <div class="path-line"><span>Сумма сделки</span><span id="pSum">3 025 000 ₽</span></div>
+        <div class="path-fee">
+          <span class="lab">Ваш бонус</span>
+          <span class="val" id="pFee">75 625 ₽</span>
+        </div>
+        <p class="path-when">Выплата сразу при заключении договора. 2,5% считаются со всей суммы: материалы, работы, электрика, сантехника.</p>
+      </div>
+    </div>
+
+    <div class="path alt">
+      <div class="path-top">
+        <div class="path-name">Индивидуальный ремонт</div>
+        <div class="path-rate">4%</div>
+      </div>
+      <div class="path-body">
+        <div class="path-line"><span>Цена за м²</span><span>43 000 ₽</span></div>
+        <div class="path-line"><span>Сумма договора</span><span id="iSum">2 365 000 ₽</span></div>
+        <div class="path-fee">
+          <span class="lab">Ваш бонус</span>
+          <span class="val" id="iFee">94 600 ₽</span>
+        </div>
+        <p class="path-when">Выплата помесячно, по мере того как клиент вносит части оплаты. Срок ремонта 4–6 месяцев.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    <b>Вложений с вашей стороны — ноль.</b> Вы не платите за вход, не покупаете материалы
+    и не ведёте объект. Клиент остаётся вашим — вы просто отдали ему контакт.
+  </p>
+
+  <div class="section-label">А если не одна</div>
+
+  <div class="more">
+    <div class="more-head">
+      <div class="more-q">Таких квартир у вас за год</div>
+      <div class="more-v" id="vCnt">6</div>
+    </div>
+    <div class="rail"><input type="range" id="cnt" min="1" max="40" step="1" value="6" aria-label="Сколько таких квартир за год"></div>
+    <div class="ends"><span>1</span><span>40</span></div>
+    <p class="more-out" id="moreOut"></p>
+  </div>
+
+  <div class="section-label" id="take">Следующий шаг</div>
+
+  <div class="claim">
+    <img class="claim-logo" src="logo-beri-remont-belyy.png" alt="Бери ремонт">
+    <p class="claim-h">Забрать мой бонус</p>
+    <p class="claim-p">Напишите — расскажем условия, пришлём флаеры для клиентов и договоримся,
+      как будем считать и переводить бонус.</p>
+    <p class="claim-who"><span id="mgrName">Лена</span> · менеджер по партнёрам «Бери ремонт»</p>
+    <div class="claim-acts">
+      <a class="c-btn c-wa" id="aWa" href="#take">Написать в WhatsApp</a>
+      <a class="c-btn c-tg" id="aTg" href="#take">Написать в Telegram</a>
+      <a class="c-btn c-call" id="aCall" href="#take">Позвонить</a>
+    </div>
+    <p class="claim-addr">г. Благовещенск, ул. 50 лет Октября, 50</p>
+  </div>
+
+  <div class="foot">
+    Расчёт по тарифам «Бери ремонт» · Благовещенск<br>
+    Ремонт за 2 месяца: 50/55/60 тыс ₽ за м² · Индивидуальный: около 43 000 ₽ за м², 4–6 месяцев<br>
+    Бонус партнёра 2,5% и 4% · Гарантия 2 года по договору, электромонтаж 3 года
+  </div>
+</div>
+
+<div class="total">
+  <div class="total-in">
+    <div class="total-lab">Ваш бонус с этой квартиры</div>
+    <p class="total-num"><span id="tLow">0</span><span class="dash">—</span><span id="tHigh">0</span><span class="cur">₽</span></p>
+    <p class="total-sub" id="tSub">в зависимости от того, какой ремонт выберет клиент</p>
+    <div class="total-acts">
+      <button class="total-btn t-ghost" id="openCard">Моя карточка</button>
+      <button class="total-btn" id="goTake">Забрать мой бонус</button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Ваш расчёт">
+  <div class="card">
+    <div class="card-eyebrow">Партнёр «Бери ремонт» · 2026</div>
+    <input class="name-in" id="nameIn" placeholder="Ваше имя" maxlength="24" autocomplete="off">
+    <p class="card-obj" id="cObj"></p>
+    <p class="card-num" id="cNum">0 ₽</p>
+    <p class="card-cap" id="cCap">ваш бонус с одной квартиры</p>
+    <p class="card-eq" id="cEq"></p>
+    <div class="card-brand">
+      <img src="logo-beri-remont-belyy.png" alt="Бери ремонт">
+      <span>Бонус партнёра<br>2,5% и 4%</span>
+    </div>
+    <p class="card-url" id="cUrl"></p>
+    <div class="card-acts">
+      <button class="b-send" id="bSend">Забрать бонус</button>
+      <button class="b-close" id="bClose">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ───────── ЗАМЕНИТЬ ПЕРЕД ВСТРЕЧЕЙ ─────────
+     Контакты представителя «Бери ремонт».
+     WA и телефон — только цифры. TG — ник без собаки.
+     Что оставлено пустым — та кнопка скрывается. */
+  var MANAGER_NAME  = "Лена";
+  var MANAGER_WA    = "";          // "79141234567"
+  var MANAGER_PHONE = "";          // "79141234567"
+  var MANAGER_TG    = "";          // "biznes_remont"
+  /* ──────────────────────────────────────────── */
+
+  var SHARE_URL = "faktlab.ru/beri-remont";
+
+  var PKG_RATE = 0.025;     // 2,5% со всей суммы сделки
+  var IND_PER_M2 = 43000;   // сумма договора ≈ площадь × 43 000 ₽
+  var IND_RATE = 0.04;      // 4% от суммы договора
+
+  var $ = function(id){ return document.getElementById(id); };
+  var nf = new Intl.NumberFormat("ru-RU");
+  var rub = function(n){ return nf.format(Math.round(n)) + " ₽"; };
+
+  var elArea = $("area"), elCnt = $("cnt");
+  var pkg = 55;
+  var state = { low:0, high:0, area:55 };
+
+  function calc(){
+    var area = +elArea.value;
+    var pSum = area * pkg * 1000;
+    var pFee = pSum * PKG_RATE;
+    var iSum = area * IND_PER_M2;
+    var iFee = iSum * IND_RATE;
+    return {
+      area:area, pPrice:pkg*1000, pSum:pSum, pFee:pFee,
+      iSum:iSum, iFee:iFee,
+      low:Math.min(pFee,iFee), high:Math.max(pFee,iFee)
+    };
+  }
+
+  /* плавные счётчики */
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var shownLow = 0, shownHigh = 0, raf = null;
+  function tween(tl, th){
+    if (reduce){
+      shownLow = tl; shownHigh = th;
+      $("tLow").textContent = nf.format(Math.round(tl));
+      $("tHigh").textContent = nf.format(Math.round(th));
+      return;
+    }
+    if (raf) cancelAnimationFrame(raf);
+    var fl = shownLow, fh = shownHigh, t0 = performance.now(), dur = 380;
+    function step(t){
+      var k = Math.min(1, (t - t0) / dur);
+      k = 1 - Math.pow(1 - k, 3);
+      shownLow = fl + (tl - fl) * k;
+      shownHigh = fh + (th - fh) * k;
+      $("tLow").textContent = nf.format(Math.round(shownLow));
+      $("tHigh").textContent = nf.format(Math.round(shownHigh));
+      if (k < 1) raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  function plural(n,a,b,c){
+    var n10=n%10, n100=n%100;
+    if(n10===1&&n100!==11) return a;
+    if(n10>=2&&n10<=4&&(n100<10||n100>=20)) return b;
+    return c;
+  }
+
+  function render(){
+    var d = calc();
+    state.low = d.low; state.high = d.high; state.area = d.area;
+
+    $("vArea").textContent = d.area + " м²";
+    $("pPrice").textContent = rub(d.pPrice);
+    $("pSum").textContent   = rub(d.pSum);
+    $("pFee").textContent   = rub(d.pFee);
+    $("iSum").textContent   = rub(d.iSum);
+    $("iFee").textContent   = rub(d.iFee);
+
+    tween(d.low, d.high);
+
+    var n = +elCnt.value;
+    $("vCnt").textContent = n;
+    $("moreOut").innerHTML = "За год это <b>" + rub(d.low * n) + " — " + rub(d.high * n) +
+      "</b><br>с " + n + " " + plural(n,"квартиры","квартир","квартир") + ", которые вы и так продаёте.";
+  }
+
+  function paintFill(el){
+    var min=+el.min, max=+el.max, v=+el.value;
+    var pct = max>min ? ((v-min)/(max-min))*100 : 0;
+    el.style.setProperty("--p", pct.toFixed(2)+"%");
+  }
+
+  [elArea, elCnt].forEach(function(el){
+    el.addEventListener("input", function(){ paintFill(this); render(); });
+    paintFill(el);
+  });
+
+  var seg = $("seg");
+  seg.addEventListener("click", function(e){
+    var b = e.target.closest("button");
+    if(!b) return;
+    pkg = +b.dataset.p;
+    Array.prototype.forEach.call(seg.querySelectorAll("button"), function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    render();
+  });
+
+  /* контакты представителя */
+  function pitch(){
+    var name = $("nameIn").value.trim();
+    var obj = $("objIn").value.trim();
+    return "Здравствуйте! Считал(а) партнёрский калькулятор «Бери ремонт».\n" +
+      (name ? "Меня зовут " + name + ".\n" : "") +
+      "Объект: " + (obj ? obj + ", " : "") + state.area + " м².\n" +
+      "Мой бонус по расчёту: " + rub(state.low) + " — " + rub(state.high) + ".\n" +
+      "Хочу забрать бонус и обсудить сотрудничество.";
+  }
+  function wireContacts(){
+    $("mgrName").textContent = MANAGER_NAME;
+    var wa = $("aWa"), tg = $("aTg"), call = $("aCall");
+    if (MANAGER_WA){
+      wa.addEventListener("click", function(e){
+        e.preventDefault();
+        window.open("https://wa.me/" + MANAGER_WA + "?text=" + encodeURIComponent(pitch()), "_blank", "noopener");
+      });
+    } else { wa.style.display = "none"; }
+    if (MANAGER_TG){ tg.href = "https://t.me/" + MANAGER_TG; tg.target = "_blank"; tg.rel = "noopener"; }
+    else { tg.style.display = "none"; }
+    if (MANAGER_PHONE){ call.href = "tel:+" + MANAGER_PHONE; }
+    else { call.style.display = "none"; }
+
+    if (!MANAGER_WA && !MANAGER_TG && !MANAGER_PHONE){
+      var b = document.createElement("button");
+      b.className = "c-btn c-wa";
+      b.type = "button";
+      b.textContent = "Скопировать мой расчёт";
+      b.addEventListener("click", function(){
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(pitch()).then(
+            function(){ toast("Расчёт скопирован — отправьте менеджеру"); },
+            function(){ toast("Сфотографируйте карточку и пришлите менеджеру"); }
+          );
+        } else { toast("Сфотографируйте карточку и пришлите менеджеру"); }
+      });
+      document.querySelector(".claim-acts").appendChild(b);
+    }
+  }
+
+  $("goTake").addEventListener("click", function(){
+    var t = $("take");
+    t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  });
+
+  /* карточка */
+  var sheet = $("sheet");
+  $("openCard").addEventListener("click", function(){
+    var obj = $("objIn").value.trim();
+    $("cObj").textContent = obj ? obj + " · " + state.area + " м²" : state.area + " м²";
+    $("cNum").textContent = rub(state.low) + " — " + rub(state.high);
+    var n = +elCnt.value;
+    $("cEq").innerHTML = "Если таких квартир за год <b>" + n + "</b>, это <b>" +
+      rub(state.low*n) + " — " + rub(state.high*n) + "</b> без единой лишней сделки.";
+    $("cUrl").textContent = SHARE_URL;
+    sheet.classList.add("on");
+  });
+  $("bClose").addEventListener("click", function(){ sheet.classList.remove("on"); });
+  sheet.addEventListener("click", function(e){ if(e.target===sheet) sheet.classList.remove("on"); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") sheet.classList.remove("on"); });
+
+  function toast(msg){
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("on");
+    setTimeout(function(){ t.classList.remove("on"); }, 2600);
+  }
+
+  $("bSend").addEventListener("click", function(){
+    if (MANAGER_WA){
+      window.open("https://wa.me/" + MANAGER_WA + "?text=" + encodeURIComponent(pitch()), "_blank", "noopener");
+      return;
+    }
+    sheet.classList.remove("on");
+    $("take").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  });
+
+  wireContacts();
+  render();
+})();
+</script>
+
+</body>
+</html>
