@@ -3339,3 +3339,15 @@ section { position: relative; }
   .qi__t { font-size: 16.4px; }
   .qz__cta .btn { width: 100%; justify-content: center; }
 }
+
+/* Шапка инструмента: удар первой строкой, объяснение — ниже по странице.
+   Вторая строка заголовка выделена цветом, а не размером: два разных кегля
+   в одном заголовке читаются как сбой вёрстки. */
+.sec__head--tight { max-width: 22ch; }
+.sec__head--tight h1 { margin-bottom: 18px; }
+.sec__head--tight h1 em { font-style: normal; color: var(--accent); }
+.lead--big { font-size: clamp(18px, 1.9vw, 21px); line-height: 1.5; max-width: 52ch; }
+@media (max-width: 760px) {
+  .sec__head--tight { max-width: none; }
+  .sec__head--tight h1 br { display: none; }
+}
