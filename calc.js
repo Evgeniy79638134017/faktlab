@@ -45,6 +45,7 @@
         '<div class="calc__f">' +
           '<label for="c-price">Цена, которую рассчитываете получить</label>' +
           '<div class="calc__inp"><input id="c-price" type="text" inputmode="numeric" placeholder="25"><span>млн ₽</span></div>' +
+          '<span class="calc__fix" id="c-price-fix"></span>' +
         '</div>' +
         '<div class="calc__f">' +
           '<label for="c-months">Сколько месяцев объект уже в продаже</label>' +
@@ -53,6 +54,7 @@
         '<div class="calc__f">' +
           '<label for="c-upkeep">Содержание в месяц <i>если не знаете — оставьте пустым, посчитаем по типу объекта</i></label>' +
           '<div class="calc__inp"><input id="c-upkeep" type="text" inputmode="numeric" placeholder="—"><span>тыс. ₽</span></div>' +
+          '<span class="calc__fix" id="c-upkeep-fix"></span>' +
         '</div>' +
       '</div>' +
       '<div class="calc__out" id="calc-out"></div>';
@@ -65,17 +67,33 @@
     read();
   }
 
-  function num(id) {
+  /* Поля подписаны «млн ₽» и «тыс. ₽», но человек часто вписывает всю сумму
+     рублями: «25 000 000» вместо «25». Буквальный счёт такого ввода даёт
+     бессмыслицу в миллионы раз больше — поэтому слишком крупное число
+     трактуем как рубли, пересчитываем и пишем под полем, как поняли. */
+  function num(id, guard, div) {
     var v = (document.getElementById(id).value || '').replace(/[^\d.,]/g, '').replace(',', '.');
     var n = parseFloat(v);
-    return isFinite(n) ? n : null;
+    if (!isFinite(n)) { note(id, null, div); return null; }
+    var fixed = null;
+    if (guard && n >= guard) { n = n / div; fixed = n; }
+    note(id, fixed, div);
+    return n;
+  }
+
+  function note(id, val, div) {
+    var box = document.getElementById(id + '-fix');
+    if (!box) return;
+    box.className = 'calc__fix' + (val == null ? '' : ' is-on');
+    box.innerHTML = val == null ? '' :
+      'Похоже, сумма введена рублями — считаем как <b>' + money(val * div) + '</b>.';
   }
 
   function read() {
     f.kind = document.getElementById('c-kind').value;
-    f.price = num('c-price');
+    f.price = num('c-price', 1e4, 1e6);
     f.months = num('c-months');
-    f.upkeep = num('c-upkeep');
+    f.upkeep = num('c-upkeep', 1e4, 1e3);
     render();
   }
 

@@ -3485,6 +3485,12 @@ section { position: relative; }
   transition: border-left-color .3s ease;
 }
 .calc__out.is-on { border-left-color: #B4574A; }
+/* Подпись под полем, когда сумму ввели рублями вместо миллионов:
+   человек должен видеть, как его поняли, а не гадать по результату. */
+.calc__fix { display: none; margin-top: 8px; font-size: 15.2px; line-height: 1.45; color: var(--second); }
+.calc__fix.is-on { display: block; }
+.calc__fix b { color: var(--ink); font-weight: 600; white-space: nowrap; }
+
 .calc__hint { font-size: 16.4px; line-height: 1.5; color: var(--muted); margin: 0; }
 
 .calc__lead { font-family: var(--mono); font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
