@@ -29,3 +29,6 @@ _page*.py
 _parts.json
 
 _fix_pdf.py
+
+# кэш питона от служебных сборщиков
+__pycache__/
