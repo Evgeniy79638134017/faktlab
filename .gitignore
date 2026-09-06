@@ -1,5 +1,6 @@
 # резервные копии и рабочие черновики
 _backup_*.html
+_backup_*.json
 _restore_*.html
 *.tmp
 
