@@ -150,6 +150,15 @@
     if (agree) agree.addEventListener('change', syncBtn);
     syncBtn();
 
+    /* Первое касание формы — отдельная цель: показывает, сколько людей
+       начали заполнять и ушли, не отправив. Считается один раз за визит. */
+    var touched = false;
+    form.addEventListener('input', function () {
+      if (touched) return;
+      touched = true;
+      if (window.goal) window.goal('form_start');
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -192,6 +201,7 @@
         .then(function (res) {
           if (!res || !res.ok) throw new Error((res && res.error) || 'send');
           form.reset();
+          if (window.goal) window.goal('form_lead');
           say('Заявка отправлена. Ответ — в течение рабочего дня.', 'ok');
         })
         .catch(function () {

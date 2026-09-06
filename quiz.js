@@ -50,6 +50,7 @@
                     '<span class="qz__go" aria-hidden="true">→</span>';
       b.addEventListener('click', function () {
         state.type = key; state.answers = {}; state.step = 0; state.closed = {};
+        if (window.goal) window.goal('quiz_start');
         renderStep();
       });
       list.appendChild(b);
@@ -108,6 +109,8 @@
 
     root.innerHTML = '';
     root.appendChild(progress(2));
+
+    if (window.goal) window.goal('quiz_result');
 
     var head = el('div', 'qz__resHead');
     head.innerHTML =
@@ -176,6 +179,7 @@
 
     document.getElementById('qz-restart').addEventListener('click', renderTypes);
     document.getElementById('qz-pdf').addEventListener('click', function () {
+      if (window.goal) window.goal('quiz_pdf');
       printList(qs);
     });
     root.scrollIntoView({ behavior: 'smooth', block: 'start' });

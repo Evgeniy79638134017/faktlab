@@ -112,6 +112,7 @@
     var disc = price * DISCOUNT;
     var perMonth = price * RATE / 12 + upkeepM;
 
+    if (!render.sent) { render.sent = true; if (window.goal) window.goal('calc_result'); }
     out.classList.add('is-on');
     out.innerHTML =
       '<div class="calc__lead">За ' + f.months + ' мес. простоя объект уже стоил вам</div>' +

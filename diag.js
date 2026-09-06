@@ -138,6 +138,7 @@
         '<button class="btn btn--ghost" type="button" id="dg-reset"><span>Пройти заново</span></button>' +
       '</div>';
 
+    if (!result.sent) { result.sent = true; if (window.goal) window.goal('diag_result'); }
     out.className = 'dg__out is-on';
     out.innerHTML = html;
     var r = document.getElementById('dg-reset');

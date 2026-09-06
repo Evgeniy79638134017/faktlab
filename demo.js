@@ -68,6 +68,7 @@
     /* Документ открываем независимо от того, дошла ли заявка: человек
        выполнил свою часть, держать его в заложниках нашей связи нечестно. */
     function give() {
+      if (window.goal) window.goal('demo_lead');
       status.textContent = 'Готово. Если окно печати не открылось — разрешите всплывающие окна и нажмите ещё раз.';
       status.className = 'dm__status is-ok';
       btn.disabled = false;
