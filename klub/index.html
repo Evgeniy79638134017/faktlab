@@ -34,22 +34,21 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;color:var(--graphite);font:400 17px/1.6 var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;text-size-adjust:100%;margin:0;color:var(--graphite);font:400 17px/1.6 var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;
   background-color:var(--steel-2);
-  /* металл: мягкий блик + тонкая «шлифовка» + зерно */
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;/* металл: мягкий блик + тонкая «шлифовка» + зерно */
   background-image:
     radial-gradient(120% 60% at 20% 0%,rgba(255,255,255,.75),rgba(255,255,255,0) 60%),
     repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 1px,rgba(0,0,0,0) 1px 3px,rgba(20,24,29,.025) 3px 4px),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    linear-gradient(180deg,var(--steel-1),var(--steel-2) 40%,var(--steel-3));
-  background-attachment:fixed,fixed,fixed,fixed;
-}
+    linear-gradient(180deg,var(--steel-1),var(--steel-2) 40%,var(--steel-3));}
 a{color:inherit}
 .mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
 
 /* ---------- кнопки ---------- */
-.btn{display:inline-flex;align-items:center;gap:14px;padding:17px 26px 17px 28px;border-radius:999px;background:var(--graphite);color:#fff;text-decoration:none;font:500 16px var(--text);transition:transform .25s,background .25s}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;gap:14px;padding:17px 26px 17px 28px;border-radius:999px;background:var(--graphite);color:#fff;text-decoration:none;font:500 16px var(--text);transition:transform .25s,background .25s}
 .btn:hover{background:#000;transform:translateY(-1px)}
 .btn i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);transition:transform .25s}
 .btn:hover i{transform:translateX(3px)}
@@ -57,14 +56,14 @@ a{color:inherit}
 
 /* ---------- шапка ---------- */
 .bar{position:fixed;inset:0 0 auto;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:16px 28px;transition:background .3s}
-.bar.solid{background:rgba(226,229,233,.82);backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 1px 0 var(--hair)}
+.bar.solid{background:rgba(226,229,233,.82);-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 1px 0 var(--hair)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 14px var(--display);letter-spacing:.04em}
 .brand img{width:30px;height:30px}
 .bar .btn{padding:10px 12px 10px 18px;font-size:14px}.bar .btn i{width:22px;height:22px;font-size:12px}
 
 /* ---------- HERO + СБОРКА (scroll-scrub) ---------- */
 .scrub{position:relative;height:420vh}
-.sticky{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,.62fr);gap:clamp(24px,3vw,56px);align-items:center;padding:84px clamp(20px,4vw,64px) 32px;max-width:1440px;margin:0 auto}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,.62fr);gap:clamp(24px,3vw,56px);align-items:center;padding:84px clamp(20px,4vw,64px) 32px;max-width:1440px;margin:0 auto}
 .intro .eyebrow{display:flex;align-items:center;gap:10px;color:var(--graphite-2)}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 3px rgba(139,195,74,.25)}
 h1{font:700 clamp(30px,3.3vw,52px)/1.08 var(--display);letter-spacing:-.02em;margin:22px 0 22px}
@@ -201,6 +200,22 @@ h2{font:700 clamp(28px,3vw,44px)/1.1 var(--display);letter-spacing:-.015em;margi
   .who div{border:0;margin:0;padding:20px 14px 20px 0;border-bottom:1px solid var(--hair)}
   section.block{padding:84px 0}
 }
+
+/* --- мобильная доводка --- */
+.who{grid-template-columns:repeat(4,minmax(0,1fr))}
+.passport{grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) minmax(0,1fr) auto}
+h1,h2,h3,.who b{overflow-wrap:break-word;-webkit-hyphens:auto;hyphens:auto}
+.passport small a,.foot a{display:inline-block;padding:10px 0;margin:-10px 0}
+@media (max-width:1100px){
+  .passport{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .passport > div{margin-right:0;padding-right:20px;border-right:0;border-bottom:1px solid var(--hair)}
+  .passport .go{grid-column:1/-1;border-bottom:0;padding:22px 0}
+  .who{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .who div{border-right:0;margin-right:0;padding:22px 18px 22px 0;border-bottom:1px solid var(--hair)}
+}
+@media (max-width:760px){ .passport{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:400px){ .who{grid-template-columns:minmax(0,1fr)} .facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none}
   .scrub{height:auto}.sticky{position:relative}
@@ -355,7 +370,7 @@ h2{font:700 clamp(28px,3vw,44px)/1.1 var(--display);letter-spacing:-.015em;margi
       <span class="screw s1"></span><span class="screw s2"></span><span class="screw s3"></span><span class="screw s4"></span>
       <div>
         <div class="mono" style="color:var(--muted)">29 сентября · 18:30 · Ленина, 142, оф. 402</div>
-        <h2 style="margin-top:16px">Соберите своему бизнесу ИИ-костюм</h2>
+        <h2 style="margin-top:16px">Соберите своему бизнесу <span style="white-space:nowrap">ИИ-костюм</span></h2>
         <p style="color:var(--graphite-2)">Запишитесь через бота — он пришлёт адрес и напомнит о встрече. Вход свободный.</p>
       </div>
       <div class="cta"><a class="btn" href="https://t.me/iishenko_club_events_bot?start=faktlab" target="_blank" rel="noopener" data-goal="klub_reg_final">Записаться на встречу <i>→</i></a></div>
