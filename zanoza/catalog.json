@@ -1,0 +1,404 @@
+{
+  "checked": "2026-10-25",
+  "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+  "source_title": "ZANOZA подростковая одежда",
+  "history_from": "2026-02-13",
+  "history_to": "2026-10-25",
+  "history_elements": 100,
+  "video_posts": 57,
+  "limitations": [
+    "Это каталог сведений из публикаций, не выгрузка складских остатков.",
+    "Семь ценовых позиций из постов 20–25 октября. Исторические образы показаны отдельно.",
+    "Содержимое 57 видеообзоров не расшифровано. Полный SKU-ассортимент канала не подтверждён.",
+    "Коды артикулов и остатки не выдуманы. Цены относятся к датам публикаций."
+  ],
+  "products": [
+    {
+      "id": "coat-school",
+      "name": "Удлинённое зимнее пальто",
+      "category": "Верхняя одежда",
+      "price": 17900,
+      "currency": "RUB",
+      "sizes": [
+        "146",
+        "158",
+        "164",
+        "170",
+        "176"
+      ],
+      "colors": [
+        "иссиня-чёрный",
+        "серо-бежевый"
+      ],
+      "source_index": 93,
+      "source_date": "2026-10-20",
+      "source_time": "15:54",
+      "source_title": "20 октября 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/zanoza-coat.webp"
+      ],
+      "description": "Синтетический утеплитель, водоотталкивающая ткань, высокий воротник, двойная ветрозащитная планка. Температурный режим от −5 до −35 °C указан магазином и отдельно не проверялся.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "jacket-black",
+      "name": "Объёмная чёрная зимняя куртка",
+      "category": "Верхняя одежда",
+      "price": 16970,
+      "currency": "RUB",
+      "sizes": [
+        "140",
+        "152",
+        "158"
+      ],
+      "colors": [
+        "чёрный"
+      ],
+      "source_index": 95,
+      "source_date": "2026-10-22",
+      "source_time": "19:04",
+      "source_title": "22 октября 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/zanoza-jacket.webp"
+      ],
+      "description": "Высокий воротник, капюшон с белой меховой отделкой внутри, синтетический утеплитель. Заявленный магазином режим: до −30 °C.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "hat-textured",
+      "name": "Фактурная шапка ORSO BIANCO",
+      "category": "Шапки",
+      "price": 3950,
+      "currency": "RUB",
+      "sizes": [
+        "52–56 см"
+      ],
+      "colors": [
+        "бежевый меланж",
+        "бордовый",
+        "серый меланж"
+      ],
+      "source_index": 96,
+      "source_date": "2026-10-23",
+      "source_time": "13:12",
+      "source_title": "23 октября 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/zanoza-hat.webp"
+      ],
+      "description": "Шерсть, кашемир и ангора заявлены в публикации без долей. Хлопковая подкладка. Бренд читается на фото ярлыка. 52–56 — обхват головы, не рост.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "jacket-grey",
+      "name": "Серая зимняя куртка с трикотажными манжетами",
+      "category": "Верхняя одежда",
+      "price": 16500,
+      "currency": "RUB",
+      "sizes": [
+        "140",
+        "152",
+        "164"
+      ],
+      "colors": [
+        "серый"
+      ],
+      "source_index": 97,
+      "source_date": "2026-10-24",
+      "source_time": "11:19",
+      "source_title": "Вчера",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/7802e408f354c325ff.webp",
+        "images/95bdcba69a13b47181.webp",
+        "images/71d4013589ccbd4309.webp",
+        "images/f1cdf990fef2d6494a.webp"
+      ],
+      "description": "Высокий воротник, капюшон, трикотажные манжеты. Состав утеплителя и температурный режим в этом посте не указаны.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "jacket-orange",
+      "name": "Оранжевая зимняя куртка",
+      "category": "Верхняя одежда",
+      "price": 20900,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [
+        "оранжевый"
+      ],
+      "source_index": 99,
+      "source_date": "2026-10-25",
+      "source_time": "13:55",
+      "source_title": "Сегодня",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/8353a302df898f3671.webp"
+      ],
+      "description": "Цена до комплектной скидки. Фотография показывает весь зимний образ. Размеры в публикации не перечислены.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "hat-black-outfit",
+      "name": "Чёрная шапка из зимнего комплекта",
+      "category": "Шапки",
+      "price": 3950,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [
+        "чёрный"
+      ],
+      "source_index": 99,
+      "source_date": "2026-10-25",
+      "source_time": "13:55",
+      "source_title": "Сегодня",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/8353a302df898f3671.webp"
+      ],
+      "description": "Цена до комплектной скидки. Отдельная модель, состав и размер не указаны. Не объединена с ORSO BIANCO без подтверждения. На фото — весь комплект.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "boots-winter",
+      "name": "Зимние ботинки из комплекта",
+      "category": "Обувь",
+      "price": 7000,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 99,
+      "source_date": "2026-10-25",
+      "source_time": "13:55",
+      "source_title": "Сегодня",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [
+        "images/8353a302df898f3671.webp"
+      ],
+      "description": "Цена до комплектной скидки. Бренд, материал и размеры не указаны. На фото — весь комплект.",
+      "kind": "product",
+      "availability": "Наличие уточнить",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "transformer",
+      "name": "Многослойная куртка-трансформер",
+      "category": "Образы без цены",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 73,
+      "source_date": "2026-08-23",
+      "source_time": "12:45",
+      "source_title": "23 августа 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "По подписи: верх можно носить как ветровку, лёгкую куртку — отдельно; вместе получается тёплая куртка. Товар показан в видео. Цена и размеры из видео ещё не извлечены.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "coffee-look",
+      "name": "Багги, лёгкий свитшот и кофейный жилет",
+      "category": "Образы без цены",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [
+        "кофейный — жилет"
+      ],
+      "source_index": 79,
+      "source_date": "2026-09-16",
+      "source_time": "16:16",
+      "source_title": "ZANOZA подростковая одежда",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "Описание сочетания из канала, не отдельный подтверждённый SKU. Три компонента: багги, свитшот, объёмный жилет. Цена и размеры не опубликованы в тексте.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "washed-knit-look",
+      "name": "Вываренный трикотаж и многослойная куртка",
+      "category": "Образы без цены",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 81,
+      "source_date": "2026-09-19",
+      "source_time": "15:40",
+      "source_title": "ZANOZA подростковая одежда",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "В подписи: брюки из вываренного трикотажа, свитшот в тон и объёмная куртка с эффектом многослойности. Цена и размеры в тексте отсутствуют.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "beige-look",
+      "name": "Бежевый образ с вельветовыми багги",
+      "category": "Образы без цены",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [
+        "бежевые оттенки"
+      ],
+      "source_index": 82,
+      "source_date": "2026-09-21",
+      "source_time": "18:22",
+      "source_title": "21 сентября 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "Вельветовые багги, лонгслив с капюшоном и акцентная рубашка. Это сочетание из публикации, не товар с единой подтверждённой ценой.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "school-lace",
+      "name": "Школьный жилет и брюки с кружевной отделкой",
+      "category": "Архив школы",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 59,
+      "source_date": "2026-07-22",
+      "source_time": "21:23",
+      "source_title": "22 июля 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "На фото покупательница в комплекте школьной коллекции; кружевные детали, по подписи, можно убрать. Цены и размеры в тексте не указаны.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "school-palazzo",
+      "name": "Свободный пиджак и брюки палаццо",
+      "category": "Архив школы",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 60,
+      "source_date": "2026-07-25",
+      "source_time": "14:08",
+      "source_title": "25 июля 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "Пиджак с необычной шлицей сзади, широкие брюки палаццо с защипами спереди. В посте сказано, что покупательница забрала этот костюм; остатки всей модели из этого не следуют.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "knit-cape",
+      "name": "Трикотажная накидка на плечи",
+      "category": "Архив школы",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 62,
+      "source_date": "2026-08-01",
+      "source_time": "16:31",
+      "source_title": "1 августа 2026",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "Тонкая трикотажная накидка имитирует свитер на плечах. Цена и размеры в тексте не указаны.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "jumpsuit-school",
+      "name": "Подростковый комбинезон",
+      "category": "Архив школы",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [],
+      "colors": [],
+      "source_index": 64,
+      "source_date": "2026-08-04",
+      "source_time": "14:05",
+      "source_title": "Комбинезон многие почему-то считают неудобным и не практичным. Одно бесспорно - он всегда выглядит очень стильно ",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "Комбинезон на фото покупательницы. Цена, состав и размеры в подписи не указаны.",
+      "kind": "look",
+      "availability": "Архив публикаций · наличие не подтверждено",
+      "stock_quantity": null,
+      "sku": null
+    },
+    {
+      "id": "march-shirt-pants",
+      "name": "Рубашка и брюки из мартовской публикации",
+      "category": "Архив распродаж",
+      "price": null,
+      "currency": "RUB",
+      "sizes": [
+        "Рубашка: 146 и 170",
+        "Брюки: диапазон 140–170"
+      ],
+      "colors": [],
+      "source_index": 20,
+      "source_date": "2026-03-17",
+      "source_time": "13:45",
+      "source_title": "Рубашка 146 и 170 см, брюки от 140 до 170",
+      "source_channel": "https://max.ru/join/uqc5_bXD-TU-q5PzrczZ_b9Csvx6jv5WV37GY6wXLko",
+      "images": [],
+      "description": "Размеры перечислены в подписи 17 марта. Диапазон брюк не превращён в список якобы имеющихся ростовок. Актуальность спустя семь месяцев не подтверждена.",
+      "kind": "look",
+      "availability": "Историческая публикация · не текущий остаток",
+      "stock_quantity": null,
+      "sku": null
+    }
+  ],
+  "promotion": {
+    "source_index": 98,
+    "date": "2026-10-24",
+    "valid_until": "2026-10-31",
+    "terms": "Куртка + шапка: скидка 5%; куртка + зимняя обувь: 5%; куртка + шапка + зимняя обувь: 10%. Только товары — участники акции в одном чеке. Комплектные скидки не суммируются; без начисления и списания бонусов.",
+    "example": {
+      "regular_total": 31850,
+      "bundle_total": 28665,
+      "discount": 3185,
+      "source_index": 99
+    }
+  }
+}
