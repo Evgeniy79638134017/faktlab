@@ -1,8 +1,10 @@
 'use strict';
 var live={photo:null,preview:null,photoBusy:false,selected:new Set(['jacket']),consent:false,busy:false,epoch:0,results:[],saved:[],error:'',status:'',active:0,demo:false,started:0,stage:'idle',submission:null};
 var freeClientPromise=null,fitClock=null;
+const FITTING_ENABLED=false;
 const FIT_ORIGIN='https://fashn-ai-fashn-vton-1-5.hf.space';
 function renderFitting(){
+  if(!FITTING_ENABLED){renderFittingUnavailable();return}
   const selected=product([...live.selected][0]);
   $('content').innerHTML=`<section class="hero live-hero"><div class="hero-copy"><span class="hero-tag">ВАШЕ ФОТО · НАСТОЯЩАЯ AI-ПРИМЕРКА</span><h1>Новый образ.<br>На вашем фото.</h1><p>Выберите вещь ZANOZA. Примерочная перенесёт её на фотографию и покажет результат прямо здесь.</p><a class="hero-link" href="#photo-step">Начать примерку ↓</a></div><img class="hero-art" src="assets/zanoza-jacket.webp" alt="Чёрная зимняя куртка ZANOZA"></section>
   <div class="steps"><span><b>1</b>Ваше фото</span><span><b>2</b>Одежда магазина</span><span><b>3</b>Новый образ</span></div>
@@ -51,6 +53,7 @@ function paintFitClock(){if($('fit-time')){const seconds=Math.floor((Date.now()-
 function stageFit(text,stage){live.status=text;live.stage=stage;paintFitClock()}
 function freeError(error){const m=String(error?.message||error||'');if(/quota|exceeded|daily|GPU quota|ZeroGPU.*limit/i.test(m))return 'Бесплатный лимит сервиса исчерпан. Попробуйте позже. Фото и выбранная вещь остаются здесь; платных списаний нет.';if(/queue.*full|too many|429/i.test(m))return 'В бесплатной примерочной сейчас много посетителей. Попробуйте позже.';if(/abort|cancel/i.test(m))return 'Ожидание отменено.';if(/timeout|timed out/i.test(m))return 'Сервис долго не отвечает. Ожидание остановлено; попробуйте позже.';if(/fetch|network|connection/i.test(m))return 'Не удалось связаться с бесплатной примерочной. Проверьте интернет и попробуйте ещё раз.';return 'Примерка не завершилась. Повторите попытку с чётким фото в полный рост.'}
 async function startLiveGeneration(){
+  if(!FITTING_ENABLED)return;
   const item=product([...live.selected][0]);if(live.busy||live.photoBusy||!live.photo||!live.consent||!item?.tryon)return;
   const epoch=++live.epoch;live.busy=true;live.error='';live.started=Date.now();live.stage='connecting';live.status='Подключаем бесплатную примерочную…';renderFitting();$('tryon-panel').scrollIntoView({behavior:'smooth',block:'start'});clearInterval(fitClock);fitClock=setInterval(paintFitClock,1000);
   let watchdog,expired=false;
@@ -84,3 +87,8 @@ function renderLiveResult(){const r=live.results[live.active]||live.results[0];r
 function bindLiveResults(){document.querySelectorAll('[data-live-result]').forEach(b=>b.onclick=()=>{live.active=Number(b.dataset.liveResult);renderFitting()});if($('live-download'))$('live-download').onclick=()=>downloadLiveImage(live.results[live.active]);if($('live-save'))$('live-save').onclick=()=>{const r=live.results[live.active];if(!live.saved.includes(r))live.saved.push(r);toast('Образ сохранён в этой сессии')};bindCards()}
 function downloadLiveImage(r){const a=document.createElement('a');a.href=r.image;a.download='ZANOZA-'+r.productId+(r.blob.type==='image/webp'?'.webp':r.blob.type==='image/png'?'.png':'.jpg');document.body.appendChild(a);a.click();a.remove()}
 function renderLooks(){const saved=products.filter(p=>favs.has(p.id));$('content').innerHTML=`<div class="page-title"><h1>Мои образы</h1><p class="muted">Сохраняются до закрытия или обновления страницы. Скачайте любимые примерки.</p></div><section class="panel"><h2>Примерки по вашему фото</h2><div class="product-grid">${live.saved.length?live.saved.map((r,i)=>`<article><img class="saved-result" src="${r.image}" alt="${esc(product(r.productId).name)}"><h3>${esc(product(r.productId).name)}</h3><button class="secondary" data-live-download="${i}">Скачать</button><button class="quiet" data-live-delete="${i}">Убрать</button></article>`).join(''):'<p class="muted">Нажмите «В мои образы» под готовой примеркой.</p>'}</div></section><h2>Избранные вещи</h2><div class="product-grid">${saved.length?saved.map(card).join(''):'<p class="muted">Нажмите сердечко на карточке товара.</p>'}</div>`;document.querySelectorAll('[data-live-download]').forEach(b=>b.onclick=()=>downloadLiveImage(live.saved[Number(b.dataset.liveDownload)]));document.querySelectorAll('[data-live-delete]').forEach(b=>b.onclick=()=>{live.saved.splice(Number(b.dataset.liveDelete),1);renderLooks()});bindCards()}
+
+function renderFittingUnavailable(){
+ $('content').innerHTML=`<section class="panel"><span class="eyebrow">ZANOZA · СТАТУС ПРИМЕРОЧНОЙ</span><h1>Новая AI-примерка<br>временно недоступна</h1><p>Прежнее бесплатное демо остановлено: его квоты не позволяют надёжно примерять одежду.</p><p class="note">Новая генерация отключена. Приложение не принимает и не отправляет фотографии для этой примерки.</p><button class="primary" id="back-to-catalog">Посмотреть каталог одежды</button></section><section class="panel" style="margin-top:20px"><h2>Ранее полученный пример</h2><p class="muted">Сохранённый результат проверки на AI-демомодели. Это пример, а не новая генерация по вашей фотографии.</p><img src="assets/example-free-tryon.webp" alt="Сохранённая AI-примерка чёрной куртки на демомодели" style="display:block;width:100%;max-width:420px;margin:auto"></section>`;
+ $('back-to-catalog').onclick=()=>navigate('catalog');
+}
