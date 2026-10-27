@@ -31,7 +31,7 @@
   function photo(p, cls = '', lazy = true) {
     const scale = Math.max(1, Math.min(4, Number(p.photoScale) || 1));
     if (p.photo && p.photoCrop) return `<span class="photo-crop ${cls}" role="img" aria-label="${esc(p.name)}" style="background-image:url('${safeUrl(p.photo)}');background-size:${esc(p.photoCrop.size)};background-position:${esc(p.photoCrop.position)}"></span>`;
-    if (p.photo) return `<img class="${cls}" src="${safeUrl(p.photo)}" alt="${esc(p.name)}" ${lazy?'loading="lazy"':''} style="object-position:${esc(p.photoPosition||'center')};--photo-scale:${scale};--photo-hover-scale:${scale*1.045};transform-origin:right center">${p.photoYear&&cls!=='avatar-image'?`<span class="photo-year">Архив · ${esc(p.photoYear)}</span>`:''}`;
+    if (p.photo) return `<img class="${cls}" src="${safeUrl(p.photo)}" alt="${esc(p.name)}" ${lazy?'loading="lazy"':''} style="object-position:${esc(p.photoPosition||'center')};--photo-scale:${scale};--photo-hover-scale:${scale*1.045};transform-origin:right center">`;
     return `<span class="photo-placeholder ${cls}" role="img" aria-label="Фотография ${esc(p.name)} уточняется"><b>${esc(initials(p))}</b><span>Фото уточняется</span></span>`;
   }
   function avatar(p) {return p.photo?`<span class="avatar avatar-image-wrap">${photo(p,'avatar-image')}</span>`:`<span class="avatar avatar-fallback" aria-hidden="true">${esc(initials(p))}</span>`;}
@@ -130,8 +130,8 @@
     $('#speakers-grid').innerHTML=data.speakers.map(p=>{const appearances=events.filter(e=>(e.speakers||[]).includes(p.id));const dates=[...new Set(appearances.map(e=>e.day))];return `<article class="speaker-card reveal" id="speaker-${esc(p.id)}"><button type="button" data-person="${esc(p.id)}" aria-label="Открыть профиль: ${esc(p.name)}"><div class="speaker-photo" style="--photo-position:${esc(p.photoPosition||'center')}">${photo(p)}</div><h3>${esc(p.name)}</h3><p class="speaker-role">${esc(p.role)}</p><p class="speaker-events">${dates.join(', ')} октября · ${appearances.length} ${plural(appearances.length,'встреча','встречи','встреч')} ↗</p></button></article>`;}).join('');
   }
   function renderHero(){
-    const candidates=['ishchenko','bobkov','burmanov','mokronos','gribov'].map(id=>personById.get(id)).filter(p=>p&&p.photo).slice(0,3);
-    $('#hero-portraits').innerHTML=candidates.map((p,i)=>`<div class="hero-photo ${['hero-primary','hero-secondary','hero-third'][i]}">${photo(p,'',false)}<span class="hero-photo-label">${esc(p.name)}<small>${i===0?'ИИщенко LAB':esc(p.role.split(',')[0])}</small></span></div>`).join('');
+    const candidates=['burmanov','ishchenko','bobkov'].map(id=>personById.get(id)).filter(p=>p&&p.photo).slice(0,3);
+    $('#hero-portraits').innerHTML=candidates.map((p,i)=>`<div class="hero-photo ${['hero-primary','hero-secondary','hero-third'][i]}">${photo(p,'',false)}<span class="hero-photo-label">${esc(p.name)}<small>${p.id==='ishchenko'?'ИИщенко LAB':esc(p.role.split(',')[0])}</small></span></div>`).join('');
     if(!candidates.length)$('#hero-portraits').innerHTML='<div class="hero-photo hero-primary"><img src="assets/evgeniy-ishchenko.jpg" alt="Евгений Ищенко"><span class="hero-photo-label">Евгений Ищенко<small>ИИщенко LAB</small></span></div>';
   }
   function motionState(){reduced=reducedQuery.matches||explicitReduced;document.documentElement.classList.toggle('reduce-motion',reduced);$('#motion-toggle').setAttribute('aria-pressed',String(reduced));$('#motion-toggle').textContent=reduced?'Меньше движения: включено':'Меньше движения';if(reduced){document.body.classList.remove('motion-ready');$('.hero-visual').style.removeProperty('--hero-shift');$$('.reveal').forEach(x=>x.classList.add('visible'));}else{document.body.classList.add('motion-ready');}}

@@ -70,10 +70,9 @@ window.SCIENCEON = {
           "url": "https://av55.ru/en/articles/mir-budushchego-i-fotosessii-na-prirode-kak-karantin-izmenil-sferu-foto-i-videosemki-meropriyatiy/"
         }
       ],
-      "evidence": "Сведения и участие указаны организатором в карточках Timepad. Дополнительные сведения — по профессиональным и официальным источникам, ссылки ниже. Портрет — кадр эфира 2020 года. Имя и Brandfilms названы при представлении первого гостя; это архивное изображение.",
-      "photoYear": 2020,
+      "evidence": "Сведения и участие указаны организатором в карточках Timepad. Дополнительные сведения — по профессиональным и официальным источникам, ссылки ниже.",
       "photoSource": {
-        "label": "Кадр эфира Aventura, 2020 · 13:20",
+        "label": "Фото · эфир Aventura",
         "url": "https://www.youtube.com/watch?v=_hk-_Kuw5w8&t=800s"
       }
     },

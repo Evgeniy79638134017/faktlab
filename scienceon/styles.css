@@ -34,3 +34,16 @@
 
 
 .dialog-content .age-note{padding:12px 14px;border-left:3px solid #92add0;background:#eef3f9;color:#43526a;font-size:13px;line-height:1.6}
+
+/* Three equal speaker portraits, with Evgeniy in the centre at every width. */
+.hero-visual{height:340px;max-width:520px;width:100%;margin-inline:auto}
+.hero-portraits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:center;height:265px;padding:10px 5px}
+.hero-photo.hero-primary,.hero-photo.hero-secondary,.hero-photo.hero-third{position:relative;display:block;inset:auto;width:100%;height:auto;aspect-ratio:3/4;border:5px solid white;border-radius:10px;transform:none;z-index:2}
+.hero-visual:hover .hero-primary,.hero-visual:hover .hero-secondary{transform:none}
+.hero-photo img{display:block;position:absolute;inset:0}
+.hero-photo-label{left:4px;right:4px;bottom:5px;padding:6px 4px;font-size:10px}
+.hero-photo-label small{font-size:8px;line-height:1.25}
+.hero-sticker{bottom:8px;left:6px;font-size:14px;padding:12px 38px 12px 12px}
+.hero-caption{left:auto;right:5px;bottom:4px;width:47%;max-width:220px}
+@media(max-width:1120px) and (min-width:901px){.hero-photo-label small{display:none}.hero-photo-label{font-size:9px}.hero-caption b{font-size:11px}}
+@media(max-width:650px){.hero-visual{height:auto;max-width:450px;padding-bottom:90px}.hero-portraits{height:auto;gap:8px;padding:5px 0}.hero-photo.hero-primary,.hero-photo.hero-secondary,.hero-photo.hero-third{width:100%;height:auto;inset:auto;aspect-ratio:3/4;border-width:4px;display:block;transform:none}.hero-photo-label{font-size:9px;left:2px;right:2px;bottom:3px;padding:5px 3px}.hero-photo-label small{display:none}.hero-sticker{bottom:5px;font-size:12px}.hero-caption{bottom:5px;width:45%;right:0}.hero-caption b{font-size:11px}}
