@@ -17,8 +17,8 @@ window.SCIENCEON = {
         "4258551"
       ],
       "photo": "assets/burmanov.jpg",
-      "photoPosition": "100% 50%",
-      "photoScale": 1.5,
+      "photoPosition": "50% 35%",
+      "photoScale": 1,
       "facts": [
         "В 2026 году официальный молодёжный центр приглашал его проводить тренинг самопрезентации.",
         "Тот же официальный анонс подтверждает роли эксперта Росмолодёжь.Гранты, соорганизатора «Я в Деле» и ментора Сбера в проекте «Первое дело»."
@@ -33,6 +33,10 @@ window.SCIENCEON = {
       "photoSource": {
         "label": "Источник фотографии",
         "url": "https://xn--d1abbehaduiscbtac0ae1v.xn--p1ai/2026/04/16/%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D0%BD%D0%B3-%D0%BF%D0%BE-%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8/"
+      },
+      "photoCrop": {
+        "size": "320% auto",
+        "position": "80% 14%"
       }
     },
     {

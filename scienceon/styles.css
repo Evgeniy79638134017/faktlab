@@ -47,3 +47,5 @@
 .hero-caption{left:auto;right:5px;bottom:4px;width:47%;max-width:220px}
 @media(max-width:1120px) and (min-width:901px){.hero-photo-label small{display:none}.hero-photo-label{font-size:9px}.hero-caption b{font-size:11px}}
 @media(max-width:650px){.hero-visual{height:auto;max-width:450px;padding-bottom:90px}.hero-portraits{height:auto;gap:8px;padding:5px 0}.hero-photo.hero-primary,.hero-photo.hero-secondary,.hero-photo.hero-third{width:100%;height:auto;inset:auto;aspect-ratio:3/4;border-width:4px;display:block;transform:none}.hero-photo-label{font-size:9px;left:2px;right:2px;bottom:3px;padding:5px 3px}.hero-photo-label small{display:none}.hero-sticker{bottom:5px;font-size:12px}.hero-caption{bottom:5px;width:45%;right:0}.hero-caption b{font-size:11px}}
+
+.hero-photo > .photo-crop{position:absolute;inset:0}
