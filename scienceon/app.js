@@ -21,7 +21,7 @@
   const storage = {get(key, fallback) {try {return JSON.parse(localStorage.getItem(key)) ?? fallback;}catch{return fallback;}},set(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{}}};
   const rawSaved = storage.get('scienceon-route-v1', []);
   const saved = new Set((Array.isArray(rawSaved)?rawSaved:[]).filter(id=>eventById.has(String(id))).map(String));
-  let selectedDay = '28', selectedTopic = 'all', onlySaved = false, toastTimer, lastFocus, modalMode = '';
+  let selectedDay = 'all', selectedTopic = 'all', onlySaved = false, toastTimer, lastFocus, modalMode = '';
   const dialog = $('#detail-dialog');
   const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
   let explicitReduced = storage.get('scienceon-less-motion', false) === true;
@@ -53,26 +53,41 @@
   function eventCard(e) {
     const people=speakerNames(e);
     const peopleMarkup=people.length?`<div class="event-speaker-line"><div class="avatar-stack">${people.slice(0,3).map(avatar).join('')}</div><div class="event-names">${people.map(p=>`<button type="button" data-person="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`:'<div class="unknown-speaker">Ведущий уточняется</div>';
-    return `<article class="event-card ${saved.has(String(e.id))?'is-saved':''}" id="event-${esc(e.id)}"><div><div class="event-time">${esc(e.time)}<small>${e.day} октября</small></div><span class="event-age">${esc(e.age)}</span></div><div><h3 class="event-title"><button type="button" data-event="${esc(e.id)}">${esc(e.title)}</button></h3><p class="event-result"><strong>С чем уйдёте:</strong> ${esc(e.result)}</p><div class="event-format">${esc(e.format)}</div>${e.warning?'<span class="event-notice">Есть уточнение по времени ↗</span>':''}</div><div class="event-aside">${peopleMarkup}<div class="event-action-row"><button class="event-detail-button" type="button" data-event="${esc(e.id)}">Подробнее <span aria-hidden="true">↗</span></button>${saveButton(e)}</div></div></article>`;
+    return `<article class="event-card ${saved.has(String(e.id))?'is-saved':''}" id="event-${esc(e.id)}"><div><div class="event-time">${esc(e.time)}<small>${e.day} октября</small></div><span class="event-age">${esc(e.age)}</span></div><div><h3 class="event-title"><button type="button" data-event="${esc(e.id)}">${esc(e.title)}</button></h3><p class="event-result"><strong>Ожидаемая польза:</strong> ${esc(e.result)}</p><div class="event-format">${esc(e.format)}</div>${e.warning?'<span class="event-notice">Есть уточнение по времени ↗</span>':''}</div><div class="event-aside">${peopleMarkup}<div class="event-action-row"><button class="event-detail-button" type="button" data-event="${esc(e.id)}">Подробнее <span aria-hidden="true">↗</span></button>${saveButton(e)}</div></div></article>`;
   }
   function matches(e) {
-    const q=$('#event-search').value.toLocaleLowerCase('ru').trim();
-    const text=[e.title,e.for,e.learn,e.result,...speakerNames(e).map(p=>p.name)].join(' ').toLocaleLowerCase('ru');
-    return (selectedDay==='all'||String(e.day)===selectedDay) && (selectedTopic==='all'||topicList(e).includes(selectedTopic)) && (!q||text.includes(q)) && (!onlySaved||saved.has(String(e.id)));
+    const q=$('#event-search').value.toLocaleLowerCase('ru').replace(/ё/g,'е').trim();
+    const text=[e.title,e.for,e.learn,e.result,...speakerNames(e).map(p=>p.name)].join(' ').toLocaleLowerCase('ru').replace(/ё/g,'е');
+    return (selectedDay==='all'||String(e.day)===selectedDay) && (selectedTopic==='all'||topicList(e).includes(selectedTopic)) && (!q||q.split(/\s+/).every(word=>text.includes(word))) && (!onlySaved||saved.has(String(e.id)));
   }
   function renderEvents() {
+    const dayEvents=events.filter(e=>selectedDay==='all'||String(e.day)===selectedDay);
     const filtered=events.filter(matches);
     let previousDay;
     $('#program-list').innerHTML=filtered.map(e=>{let label='';if(selectedDay==='all'&&previousDay!==e.day){label=`<div class="program-day-label">${e.day} октября · ${days[e.day]}</div>`;previousDay=e.day;}return label+eventCard(e);}).join('');
     $('#empty-state').hidden=filtered.length>0;
-    $('#result-count').textContent = `${selectedDay==='all'?'Все дни':selectedDay+' октября · '+days[selectedDay]} · ${filtered.length} ${plural(filtered.length,'встреча','встречи','встреч')}${selectedTopic!=='all'?' · '+topics[selectedTopic]:''}`;
-    $$('.day-tabs button').forEach(b=>{b.classList.toggle('active',b.dataset.day===selectedDay);b.setAttribute('aria-pressed',String(b.dataset.day===selectedDay));});
-    $$('.topic-filters button').forEach(b=>{b.classList.toggle('active',b.dataset.topic===selectedTopic);b.setAttribute('aria-pressed',String(b.dataset.topic===selectedTopic));});
+    const scope=selectedDay==='all'?'Все дни':selectedDay+' октября · '+days[selectedDay];
+    const query=$('#event-search').value.trim();
+    $('#result-count').textContent = `${scope} · показано ${filtered.length} из ${dayEvents.length} ${plural(dayEvents.length,'встречи','встреч','встреч')}`;
+    $$('.day-tabs button').forEach(b=>{const total=events.filter(e=>b.dataset.day==='all'||String(e.day)===b.dataset.day).length;b.querySelector('.day-total').textContent=total;b.setAttribute('aria-label',`${b.dataset.day==='all'?'Все дни':b.dataset.day+' октября'}: ${total} ${plural(total,'встреча','встречи','встреч')}. Показать всю программу ${b.dataset.day==='all'?'за четыре дня':'этого дня'}`);b.classList.toggle('active',b.dataset.day===selectedDay);b.setAttribute('aria-pressed',String(b.dataset.day===selectedDay));});
+    $$('.topic-filters button').forEach(b=>{const count=dayEvents.filter(e=>b.dataset.topic==='all'||topicList(e).includes(b.dataset.topic)).length;const label=b.dataset.topic==='all'?'Все темы':topics[b.dataset.topic];b.innerHTML=`${esc(label)} <span class="topic-count">${count}</span>`;b.disabled=count===0;b.setAttribute('aria-label',`${label}: ${count} ${plural(count,'встреча','встречи','встреч')} ${selectedDay==='all'?'за все дни':'в этот день'}`);b.classList.toggle('active',b.dataset.topic===selectedTopic);b.setAttribute('aria-pressed',String(b.dataset.topic===selectedTopic));});
     $('#filter-saved').setAttribute('aria-pressed',String(onlySaved));
+    const chips=[];
+    if(selectedTopic!=='all')chips.push({key:'topic',label:`Тема: ${topics[selectedTopic]}`});
+    if(query)chips.push({key:'query',label:`Поиск: «${query}»`});
+    if(onlySaved)chips.push({key:'saved',label:'Только выбранные'});
+    $('#active-filters').innerHTML=chips.map(chip=>`<button type="button" class="filter-chip" data-clear-filter="${chip.key}" aria-label="Убрать фильтр: ${esc(chip.label)}">${esc(chip.label)} <span aria-hidden="true">×</span></button>`).join('');
+    $('#active-filters').hidden=chips.length===0;
+    const totalText=selectedDay==='all'?`В полной программе — ${dayEvents.length} ${plural(dayEvents.length,'встреча','встречи','встреч')}.`:`На ${selectedDay} октября в программе — ${dayEvents.length} ${plural(dayEvents.length,'встреча','встречи','встреч')}.`;
+    let emptyText='Измените условия поиска или очистите фильтры — выбранный день сохранится.';
+    if(onlySaved&&!saved.size)emptyText='В вашем маршруте пока нет сохранённых встреч. Очистите фильтры и добавьте интересные события значком закладки.';
+    else if(onlySaved&&!dayEvents.some(e=>saved.has(String(e.id))))emptyText='На этот день в вашем маршруте пока нет сохранённых встреч. Очистите фильтры, чтобы выбрать их из программы дня.';
+    else if(onlySaved)emptyText='Сохранённые встречи есть, но они не подходят под выбранные тему или поиск. Очистите фильтры, чтобы увидеть программу.';
+    $('#empty-description').textContent=`${totalText} ${emptyText}`;
     updateCount();
   }
   function plural(n,a,b,c){return n%10===1&&n%100!==11?a:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?b:c;}
-  function resetFilters(all=true) {selectedDay=all?'all':'28';selectedTopic='all';onlySaved=false;$('#event-search').value='';renderEvents();}
+  function resetFilters() {selectedTopic='all';onlySaved=false;$('#event-search').value='';renderEvents();}
   function updateCount(){$('#saved-count').textContent=saved.size;$('#saved-count').setAttribute('aria-label',`Выбрано ${saved.size} ${plural(saved.size,'встреча','встречи','встреч')}`);}
   function toast(text){clearTimeout(toastTimer);$('#toast').textContent=text;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2800);}
   function toggleSave(id) {
@@ -82,14 +97,15 @@
     else if(dialog.open&&modalMode===`event:${id}`)renderEvent(eventById.get(id));
     toast(added?'Добавлено в маршрут. Не забудьте зарегистрироваться.':'Встреча убрана из маршрута.');
   }
-  function openDialog(mode,kicker){lastFocus=dialog.open?lastFocus:document.activeElement;modalMode=mode;$('#dialog-kicker').textContent=kicker;if(!dialog.open){dialog.showModal();document.body.classList.add('modal-open');}dialog.scrollTop=0;}
+  function openDialog(mode,kicker){lastFocus=dialog.open?lastFocus:document.activeElement;modalMode=mode;dialog.removeAttribute('aria-label');$('#dialog-kicker').textContent=kicker;if(!dialog.open){dialog.showModal();document.body.classList.add('modal-open');}}
   function closeDialog(){dialog.close();document.body.classList.remove('modal-open');modalMode='';lastFocus?.focus?.({preventScroll:true});}
   function sourceLinks(p){return [...(p.links||[]),...(p.extra||[])].filter((x,i,a)=>x?.url&&a.findIndex(y=>y.url===x.url)===i);}
   function normalizeWarning(e){if(String(e.id)==='4258547')return 'Начало — в 11:00. В материалах указаны два времени окончания: 12:30 и 13:00. Точное окончание уточните у организатора.';return e.warning;}
   function renderEvent(e){
     const people=speakerNames(e);
-    $('#dialog-body').innerHTML=`<div class="dialog-content"><div class="dialog-meta"><span>${e.day} октября · ${days[e.day]}</span><span>${esc(e.time)}–${esc(e.end)} по Timepad</span><span>${esc(e.age)}</span><span>${esc(e.format)}</span></div><h2 id="dialog-title">${esc(e.title)}</h2><div class="dialog-result"><b>Ожидаемая польза по программе</b><p>${esc(e.result)}</p></div><h3>Для кого</h3><p>${esc(e.for)}</p><h3>Что разберём</h3><p>${esc(e.learn)}</p><h3>Как проходит встреча</h3><p>${esc(e.practice)}</p>${e.warning?`<div class="dialog-warning"><b>Уточнение по расписанию.</b> ${esc(normalizeWarning(e))}</div>`:''}<h3>${people.length?'Кто ведёт':'Ведущий уточняется'}</h3>${people.length?`<div class="dialog-speaker-list">${people.map(p=>`<button class="dialog-speaker-row" type="button" data-person="${esc(p.id)}">${avatar(p)}<span><b>${esc(p.name)}</b><small>${esc(p.role)}</small></span><span aria-hidden="true">↗</span></button>`).join('')}</div>`:'<p>Имя и профессиональные сведения ведущего пока не опубликованы в карточке организатора. Уточните их перед регистрацией, если это важно для вашего выбора.</p>'}<div class="dialog-actions"><a class="button button-blue" href="${eventUrl(e)}" target="_blank" rel="noopener noreferrer">Бесплатная регистрация <span aria-hidden="true">↗</span></a><button class="button button-outline" type="button" data-save="${esc(e.id)}">${saved.has(String(e.id))?'Убрать из маршрута':'Добавить в маршрут'} ${bookmarkIcon}</button></div><div class="dialog-sources">Источник содержания: <a href="${eventUrl(e)}" target="_blank" rel="noopener noreferrer">карточка организатора на Timepad</a>. Время местное, Благовещенск. Описан ожидаемый результат анонса; программа может уточняться. Сохранение в маршрут не заменяет регистрацию.</div></div>`;
+    $('#dialog-body').innerHTML=`<div class="dialog-content"><div class="dialog-meta"><span>${e.day} октября · ${days[e.day]}</span><span>${esc(e.time)}–${esc(e.end)} по Timepad</span><span>${esc(e.age)}</span><span>${esc(e.format)}</span></div><h2 id="dialog-title">${esc(e.title)}</h2><div class="dialog-result"><b>Ожидаемая польза по программе</b><p>${esc(e.result)}</p></div><h3>Для кого</h3><p>${esc(e.for)}</p>${e.ageNote?`<p class="age-note">${esc(e.ageNote)}</p>`:''}<h3>Что разберём</h3><p>${esc(e.learn)}</p><h3>Как проходит встреча</h3><p>${esc(e.practice)}</p>${e.warning?`<div class="dialog-warning"><b>Уточнение по расписанию.</b> ${esc(normalizeWarning(e))}</div>`:''}<h3>${people.length?'Кто ведёт':'Ведущий уточняется'}</h3>${people.length?`<div class="dialog-speaker-list">${people.map(p=>`<button class="dialog-speaker-row" type="button" data-person="${esc(p.id)}">${avatar(p)}<span><b>${esc(p.name)}</b><small>${esc(p.role)}</small></span><span aria-hidden="true">↗</span></button>`).join('')}</div>`:'<p>Имя и профессиональные сведения ведущего пока не опубликованы в карточке организатора. Уточните их перед регистрацией, если это важно для вашего выбора.</p>'}<div class="dialog-actions"><a class="button button-blue" href="${eventUrl(e)}" target="_blank" rel="noopener noreferrer">Бесплатная регистрация <span aria-hidden="true">↗</span></a><button class="button button-outline" type="button" data-save="${esc(e.id)}">${saved.has(String(e.id))?'Убрать из маршрута':'Добавить в маршрут'} ${bookmarkIcon}</button></div><div class="dialog-sources">Источник содержания: <a href="${eventUrl(e)}" target="_blank" rel="noopener noreferrer">карточка организатора на Timepad</a>. Время местное, Благовещенск. Описан ожидаемый результат анонса; программа может уточняться. Сохранение в маршрут не заменяет регистрацию.</div></div>`;
     dialog.setAttribute('aria-labelledby','dialog-title');
+    dialog.scrollTop=0;
   }
   function showEvent(id){const e=eventById.get(String(id));if(!e)return;openDialog(`event:${id}`,'ПРОГРАММА / SCIENCEON');renderEvent(e);}
   function showPerson(id){
@@ -100,14 +116,16 @@
     const namedSources=(p.sources||[]).map(source=>typeof source==='object'?source:{label:'Карточка встречи',url:`https://fond-podderzhki-tal-org.timepad.ru/event/${source}/`});
     $('#dialog-body').innerHTML=`<div class="dialog-content"><div class="profile-dialog-head"><div class="profile-dialog-photo" style="--photo-position:${esc(p.photoPosition||'center')}">${photo(p,'',false)}</div><div><h2 id="dialog-title">${esc(p.name)}</h2><p class="dialog-role">${esc(p.role)}</p><p class="dialog-city">${esc(p.city)}</p></div></div><h3>Знакомство со спикером</h3><p>${esc(p.bio)}</p>${facts.length?`<ul class="profile-facts">${facts.map(f=>`<li>${esc(typeof f==='string'?f:f.text||f.label||'')}</li>`).join('')}</ul>`:''}<h3>Почему эта тема</h3><p>${esc(p.relevance)}</p>${links.length?`<h3>Проекты и профессиональные страницы</h3><div class="profile-links">${links.map(l=>`<a href="${safeUrl(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)} <span aria-hidden="true">↗</span></a>`).join('')}</div>`:''}<h3>Когда можно послушать</h3><div class="profile-events">${appearances.map(e=>`<button class="profile-event" type="button" data-event="${esc(e.id)}"><small>${e.day} октября · ${esc(e.time)}</small><span>${esc(e.title)} ↗</span></button>`).join('')}</div><details class="dialog-sources"><summary>Источники и уточнения</summary>${p.evidence?`<p>${esc(p.evidence)}</p>`:''}${p.limits?`<p>${esc(p.limits)}</p>`:''}<p>${namedSources.map((l,i)=>`<a href="${safeUrl(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}${namedSources.length>1?' '+(i+1):''}</a>`).join(' · ')}</p>${p.photoSource?`<p>Фотография: <a href="${safeUrl(typeof p.photoSource==='string'?p.photoSource:p.photoSource.url)}" target="_blank" rel="noopener noreferrer">${esc(typeof p.photoSource==='string'?'источник изображения':p.photoSource.label||'источник изображения')}</a>.</p>`:''}</details></div>`;
     dialog.setAttribute('aria-labelledby','dialog-title');
+    dialog.scrollTop=0;
   }
   function renderRoute(){
     const chosen=events.filter(e=>saved.has(String(e.id)));
     $('#dialog-body').innerHTML=`<div class="dialog-content"><h2 id="dialog-title">Мой маршрут</h2>${chosen.length?`<p class="route-intro">${chosen.length} ${plural(chosen.length,'встреча','встречи','встреч')} в вашем списке. Теперь зарегистрируйтесь на каждую: выбор хранится только в этом браузере.</p>${chosen.map((e,i)=>{const earlier=chosen.slice(0,i).find(x=>x.day===e.day&&x.time<=e.time&&x.end>e.time);return `<article class="route-item"><div class="route-item-top"><div><small>${e.day} октября · ${esc(e.time)}</small><h3>${esc(e.title)}</h3></div><button type="button" class="icon-button" data-save="${esc(e.id)}" aria-label="Убрать из маршрута: ${esc(e.title)}">×</button></div><a href="${eventUrl(e)}" target="_blank" rel="noopener noreferrer">Открыть регистрацию ↗</a>${earlier?'<p class="route-overlap">Встречи пересекаются по времени в опубликованной программе. Уточните расписание или выберите одну.</p>':''}</article>`;}).join('')}<div class="dialog-actions"><button class="button button-blue" type="button" id="copy-route">Скопировать мой маршрут ↗</button><button class="button button-outline" type="button" id="continue-route">Вернуться к программе</button></div><p class="route-end-note">Часть времени окончания требует уточнения. Все часы — местные, Благовещенск, UTC+9.</p>`:'<div class="route-empty"><span aria-hidden="true">↗</span><h3>Начните с одной встречи</h3><p>Нажмите закладку рядом с событием. Здесь появится ваш список с датами, временем и ссылками на регистрацию.</p><button class="button button-blue" id="continue-route" type="button">Выбрать встречу</button></div>'}</div>`;
     dialog.setAttribute('aria-labelledby','dialog-title');
+    dialog.scrollTop=0;
   }
   function showRoute(){openDialog('route','МОЙ ВЫБОР / SCIENCEON');renderRoute();}
-  function showPoster(src,title){openDialog('poster','АФИШИ / SCIENCEON');$('#dialog-body').innerHTML=`<div class="poster-dialog"><img src="${safeUrl(src)}" alt="${esc(title)}"><p><a href="${safeUrl(src)}" target="_blank" rel="noopener noreferrer">Открыть оригинал ↗</a></p></div>`;dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label',title);}
+  function showPoster(src,title){openDialog('poster','АФИШИ / SCIENCEON');$('#dialog-body').innerHTML=`<div class="poster-dialog"><img src="${safeUrl(src)}" alt="${esc(title)}"><p><a href="${safeUrl(src)}" target="_blank" rel="noopener noreferrer">Открыть оригинал ↗</a></p></div>`;dialog.removeAttribute('aria-labelledby');dialog.setAttribute('aria-label',title);dialog.scrollTop=0;}
   function renderPeople(){
     $('#speakers-grid').innerHTML=data.speakers.map(p=>{const appearances=events.filter(e=>(e.speakers||[]).includes(p.id));const dates=[...new Set(appearances.map(e=>e.day))];return `<article class="speaker-card reveal" id="speaker-${esc(p.id)}"><button type="button" data-person="${esc(p.id)}" aria-label="Открыть профиль: ${esc(p.name)}"><div class="speaker-photo" style="--photo-position:${esc(p.photoPosition||'center')}">${photo(p)}</div><h3>${esc(p.name)}</h3><p class="speaker-role">${esc(p.role)}</p><p class="speaker-events">${dates.join(', ')} октября · ${appearances.length} ${plural(appearances.length,'встреча','встречи','встреч')} ↗</p></button></article>`;}).join('');
   }
@@ -135,8 +153,9 @@
     if(target.dataset.event){showEvent(target.dataset.event);return;}
     if(target.dataset.person){showPerson(target.dataset.person);return;}
     if(target.dataset.save){toggleSave(target.dataset.save);return;}
-    if(target.dataset.day){selectedDay=target.dataset.day;renderEvents();return;}
+    if(target.dataset.day){selectedDay=target.dataset.day;resetFilters();return;}
     if(target.dataset.topic){selectedTopic=target.dataset.topic;renderEvents();return;}
+    if(target.dataset.clearFilter){if(target.dataset.clearFilter==='topic')selectedTopic='all';if(target.dataset.clearFilter==='query')$('#event-search').value='';if(target.dataset.clearFilter==='saved')onlySaved=false;renderEvents();return;}
     if(target.dataset.interest){selectedDay='all';selectedTopic=target.dataset.interest;onlySaved=false;$('#event-search').value='';renderEvents();$('#program').scrollIntoView({behavior:reduced?'auto':'smooth'});return;}
     if(target.dataset.poster){showPoster(target.dataset.poster,target.dataset.posterTitle);return;}
     if(target.classList.contains('dialog-close')){closeDialog();return;}
