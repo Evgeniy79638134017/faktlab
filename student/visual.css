@@ -1,0 +1,83 @@
+/* Scoped illustration styling. Brand tokens are inherited from the installer. */
+.iv-scene{
+  position:relative;
+  isolation:isolate;
+  width:100%;
+  max-width:500px;
+  min-width:0;
+  aspect-ratio:24/19;
+  margin-inline:auto;
+  color:#18294e;
+  pointer-events:none;
+}
+.iv-scene::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:13% 5% 8%;
+  border-radius:50%;
+  background:
+    radial-gradient(ellipse at 68% 35%,color-mix(in srgb,var(--mint,#69e0ce) 17%,transparent),transparent 58%),
+    radial-gradient(ellipse at 35% 64%,color-mix(in srgb,var(--accent,#4160ff) 10%,transparent),transparent 63%);
+}
+.iv-scene .iv-art{
+  display:block;
+  width:100%;
+  height:auto;
+  overflow:visible;
+}
+.iv-scene text{
+  font-family:"Onest Variable","Inter Tight Variable",sans-serif;
+  letter-spacing:-.025em;
+  text-rendering:geometricPrecision;
+}
+.iv-scene .iv-label{fill:#18294e;font-weight:550}
+.iv-scene .iv-fine{fill:#6680a4;font-weight:500;letter-spacing:.015em}
+.iv-scene .iv-float-main{
+  transform-box:fill-box;
+  transform-origin:50% 70%;
+  animation:iv-float 7.4s ease-in-out infinite;
+}
+.iv-scene .iv-core-drift{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:iv-core 6.8s ease-in-out infinite;
+}
+.iv-scene .iv-drift-soft{
+  transform-box:fill-box;
+  transform-origin:50% 60%;
+  animation:iv-drift 7.8s ease-in-out -2.1s infinite;
+}
+.iv-scene .iv-download-drift{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:iv-download 5.8s ease-in-out -1s infinite;
+}
+.iv-scene .iv-glint{animation:iv-glint 6.6s ease-in-out -1.4s infinite}
+@keyframes iv-float{
+  0%,100%{transform:translateY(2px) rotate(-.35deg)}
+  50%{transform:translateY(-5px) rotate(.4deg)}
+}
+@keyframes iv-core{
+  0%,100%{transform:translateY(2px) rotate(-1.5deg)}
+  50%{transform:translateY(-4px) rotate(1.5deg)}
+}
+@keyframes iv-drift{
+  0%,100%{transform:translateY(-2px) rotate(-.8deg)}
+  50%{transform:translateY(5px) rotate(.8deg)}
+}
+@keyframes iv-download{
+  0%,100%{transform:translateY(-2px)}
+  50%{transform:translateY(5px)}
+}
+@keyframes iv-glint{0%,100%{opacity:.65}50%{opacity:1}}
+@media(max-width:600px){
+  .iv-scene{max-width:420px}
+}
+@media(prefers-reduced-motion:reduce){
+  .iv-scene .iv-float-main,
+  .iv-scene .iv-core-drift,
+  .iv-scene .iv-drift-soft,
+  .iv-scene .iv-download-drift,
+  .iv-scene .iv-glint{animation:none!important;transform:none!important}
+}
