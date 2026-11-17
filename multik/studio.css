@@ -218,9 +218,6 @@ h1 em{display:block;color:var(--accent);font-weight:inherit;font-style:normal;wh
 .club-projects li { background: #202f25; border: 1px solid #415b47; }
 .club-workflow strong { color: #e4f5b1; }
 .club-workflow span, .club-projects span { color: #dfebdc; font-size: 14px; line-height: 1.45; }
-.club-proof { padding: 14px 0 14px 13px; margin-top: 19px; border-left: 3px solid var(--lime); }
-.club-proof h3 { font-size: 18px; margin-bottom: 5px; }
-.club-proof p { max-width: 78ch; color: #e0ebdf; }
 .club-join {
   display: flex;
   justify-content: space-between;
@@ -253,7 +250,6 @@ h1 em{display:block;color:var(--accent);font-weight:inherit;font-style:normal;wh
   .club-workflow,.club-projects{margin-top:18px}
   .club-workflow ol,.club-projects ul{grid-template-columns:1fr;gap:6px}
   .club-workflow li,.club-projects li{padding:8px 10px;gap:2px}
-  .club-proof{margin-top:14px;padding-block:8px}
   .club-join .button{width:100%}
 }
 @media(max-width:350px){.container{width:calc(100% - 26px)}.step{grid-template-columns:24px 1fr;gap:6px;padding-inline:9px}.reel figcaption span{display:none}.board-kicker{font-size:8px}.board-top{font-size:8px}.starter{grid-template-columns:70px minmax(0,1fr)}.starter-download{font-size:13px}}
