@@ -92,3 +92,22 @@ videos.forEach(video => video.addEventListener('ended', () => {
     videoStatus.textContent = 'Сравнение завершилось';
   }
 }));
+
+const office = document.querySelector('#club-office-video');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (office && !reducedMotion.matches && 'IntersectionObserver' in window) {
+  let hasStarted = false;
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting || entry.intersectionRatio < 0.5) {
+      office.pause();
+      return;
+    }
+    if (hasStarted) return;
+    hasStarted = true;
+    office.play().catch(() => {
+      // The browser controls remain available if autoplay is blocked.
+    });
+  }, { threshold: [0, 0.5] });
+  observer.observe(office);
+}
