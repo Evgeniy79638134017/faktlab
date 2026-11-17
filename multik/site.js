@@ -95,6 +95,14 @@ videos.forEach(video => video.addEventListener('ended', () => {
 
 const office = document.querySelector('#club-office-video');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const starterPreview = document.querySelector('.starter-play');
+
+if (starterPreview) {
+  const starterClip = starterPreview.querySelector('video');
+  starterPreview.addEventListener('toggle', () => {
+    if (!starterPreview.open) starterClip.pause();
+  });
+}
 
 if (office && !reducedMotion.matches && 'IntersectionObserver' in window) {
   let hasStarted = false;
