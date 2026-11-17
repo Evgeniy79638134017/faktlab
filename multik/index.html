@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efefec">
+  <meta name="description" content="Бесплатная инструкция ИИщенко LAB: пять шагов и готовые промпты для своего мультфильма. Сюжет и кадры в ChatGPT, анимация в Kling через Syntx.">
+  <meta property="og:title" content="Снимите свой первый ИИ-мультик">
+  <meta property="og:description" content="Пять шагов от идеи до готового ролика. С промптами, которые можно скопировать.">
+  <meta property="og:type" content="website">
+  <title>Снимите свой первый ИИ-мультик · ИИщенко LAB</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="studio.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#steps">К инструкции</a>
+  <header class="mast container">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"></span>ИИщенко <b>LAB</b></span>
+    <a class="edition" href="#club">ИИщенко CLUB <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="hero container" aria-labelledby="intro">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> БЕСПЛАТНАЯ ИНСТРУКЦИЯ</p>
+        <h1 id="intro">Снимите свой первый <em>ИИ-мультик</em></h1>
+        <p class="lead">Придумайте историю и создайте кадры в ChatGPT. Оживите их в Kling и соберите короткий ролик. Все шаги и промпты уже здесь.</p>
+        <a class="button button-lime" href="#steps">Начать с идеи <span aria-hidden="true">↓</span></a>
+        <p class="hero-note">5 шагов · от сценария до MP4</p>
+      </div>
+      <section class="board" id="studio" aria-labelledby="studio-title">
+        <div class="board-top"><span class="board-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>ПРИМЕР ИЗ ИИЩЕНКО CLUB</span></div>
+        <div class="board-head">
+          <div><p class="board-kicker">ОДИН СЮЖЕТ · ТРИ СТИЛЯ</p><h2 id="studio-title">Две кофейни</h2></div>
+          <button class="play" type="button" id="play-styles" aria-describedby="clip-note"><span class="play-icon" aria-hidden="true"></span><span id="play-label">Сравнить</span></button>
+        </div>
+        <div class="reels" id="coffee-reels">
+          <figure class="reel">
+            <video src="assets/coffee-autumn.mp4" poster="assets/coffee-autumn.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни в осеннем стиле"></video>
+            <figcaption><span>01</span> Осень</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="assets/coffee-paper.mp4" poster="assets/coffee-paper.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни, рисунок на бумаге"></video>
+            <figcaption><span>02</span> На бумаге</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="assets/coffee-light.mp4" poster="assets/coffee-light.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни в стиле Копья"></video>
+            <figcaption><span>03</span> «Копья»</figcaption>
+          </figure>
+        </div>
+        <p class="clip-note" id="clip-note">Один фрагмент в трёх версиях. 6 секунд, без звука.</p>
+        <p class="sr" id="video-status" role="status"></p>
+      </section>
+    </section>
+
+    <aside class="workbench container" aria-label="Как собирали мультфильм про двойника">
+      <div class="work-intro"><p class="eyebrow"><span></span> В РАБОТЕ · ИИ-ДВОЙНИК</p><p>Как выглядит проект до монтажа</p></div>
+      <div class="artifact"><span class="artifact-icon" aria-hidden="true">≡</span><div><b>Сценарий</b><span>Двойник идёт на занятия вместо героя</span></div></div>
+      <div class="artifact"><div class="thumbs"><img src="assets/double-01.webp" alt="" width="720" height="1280"><img src="assets/double-02.webp" alt="" width="480" height="854"></div><div><b>Раскадровка</b><span>Герои и первые кадры сцен</span></div></div>
+      <div class="artifact"><span class="artifact-icon action-icon" aria-hidden="true">▷</span><div><b>Промпт для Kling</b><span>Рука вставляет штекер, вспыхивает искра</span></div></div>
+      <details class="materials">
+        <summary>Посмотреть заготовки <span aria-hidden="true" class="plus"></span></summary>
+        <div class="material-grid">
+          <figure><img src="assets/double-01.webp" alt="Герой подключает своего двойника кабелем" width="720" height="1280"><figcaption>01 / Подключение</figcaption></figure>
+          <figure><img src="assets/double-02.webp" alt="Двойник поднимается по лестнице у учебного корпуса" width="480" height="852"><figcaption>02 / По дороге на занятия</figcaption></figure>
+          <div class="material-copy"><p><b>Что в сценарии?</b> Герой запускает двойника. Тот надевает такую же красную куртку и отправляется на занятия вместо него.</p><p><b>Что проверяем в движении?</b> В первой сцене штекер входит в разъём до вспышки. Во второй двойник ставит ногу на ступеньку и переносит на неё вес.</p></div>
+        </div>
+      </details>
+    </aside>
+
+    <section class="guide container" id="steps" aria-labelledby="guide-title">
+      <div class="guide-head">
+        <p class="eyebrow"><span></span> ОТ ИДЕИ ДО ВИДЕО</p>
+        <h2 id="guide-title">Ваш первый мультик<br>за пять шагов</h2>
+        <p>Возьмите свою идею или попробуйте нашу: герой поручает двойнику обычное дело, а тот постепенно занимает его место. Для первой пробы хватит 4–6 коротких сцен.</p>
+      </div>
+      <ol class="steps">
+        <li class="step" id="story">
+          <div class="step-no" aria-hidden="true">01</div>
+          <div class="step-body">
+            <span class="tool">ТЕКСТОВЫЙ ЧАТ</span>
+            <h3>Придумайте историю</h3>
+            <p>Откройте ChatGPT или другой текстовый чат. Скопируйте промпт и замените пример в квадратных скобках на свою идею.</p>
+            <details class="prompt">
+              <summary>Промпт для сценария <span aria-hidden="true" class="plus"></span></summary>
+              <div class="prompt-inner">
+                <pre><code id="prompt-story">Напиши сценарий вертикального мультфильма на 20–30 секунд. Идея: [студент просит двойника сходить за него на занятия, а тот постепенно занимает его место]. Разбей историю на 4–6 сцен. Дай каждой сцене номер, длительность, описание первого кадра, одно главное действие и его видимое последствие. Начни сразу с действия, закончи поворотом, который понятен без объяснений. Старайся, чтобы зритель понял историю даже без звука. Предложи короткую реплику только там, где без неё теряется смысл.</code></pre>
+                <button type="button" class="copy" data-copy="prompt-story">Скопировать</button>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="step" id="character">
+          <div class="step-no" aria-hidden="true">02</div>
+          <div class="step-body">
+            <span class="tool">CHATGPT · ИЗОБРАЖЕНИЯ</span>
+            <h3>Нарисуйте героя</h3>
+            <p>Выберите внешность и стиль. Попросите ChatGPT создать изображение героя прямо в диалоге. Сохраните удачную картинку: она будет образцом для всех сцен. В другом чате без генерации картинок этот же промпт можно перенести в генератор изображений.</p>
+            <details class="prompt">
+              <summary>Промпт для героя <span aria-hidden="true" class="plus"></span></summary>
+              <div class="prompt-inner">
+                <pre><code id="prompt-character">Создай изображение героя из моего сценария. Стиль: [рисованный 2D-мультфильм, тёплые цвета]. Внешность: [тёмные волосы, красная куртка, синие джинсы]. Покажи героя в полный рост в ракурсе три четверти. Лицо хорошо видно, поза естественная, фон простой. Формат 9:16, без надписей. Если в сюжете есть двойник, сделай его отдельным изображением с тем же лицом. Отличительная деталь: [голубая искра у плеча].</code></pre>
+                <button type="button" class="copy" data-copy="prompt-character">Скопировать</button>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="step" id="frames">
+          <div class="step-no" aria-hidden="true">03</div>
+          <div class="step-body">
+            <span class="tool">CHATGPT · ИЗОБРАЖЕНИЯ</span>
+            <h3>Соберите кадры</h3>
+            <p>Приложите образец героя и создайте по отдельной картинке на сцену. Это первый кадр будущего клипа: поставьте героя в позу перед началом движения. Скачайте картинки в порядке сцен: 01, 02, 03.</p>
+            <details class="prompt">
+              <summary>Промпт для первого кадра сцены <span aria-hidden="true" class="plus"></span></summary>
+              <div class="prompt-inner">
+                <pre><code id="prompt-frame">Создай первый кадр для сцены [номер и описание из сценария]. Возьми внешность героя с приложенной картинки: сохрани лицо, причёску, одежду и стиль рисунка. Покажи момент прямо перед действием. [Пример: рука держит штекер рядом с разъёмом, оба видны крупно.] Важное действие должно читаться на экране телефона. Вертикальный кадр 9:16, одна сцена, без текста и логотипов.</code></pre>
+                <button type="button" class="copy" data-copy="prompt-frame">Скопировать</button>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="step step-motion" id="motion">
+          <div class="step-no" aria-hidden="true">04</div>
+          <div class="step-body">
+            <span class="tool">SYNTX · KLING</span>
+            <h3>Оживите изображения</h3>
+            <p>В Syntx откройте раздел «Видео» и выберите Kling. Загрузите PNG или JPG как начальный кадр. Вставьте промпт движения. Если можно выбрать формат и длительность, начните с 9:16 и 5 секунд.</p>
+            <details class="prompt">
+              <summary>Промпт движения для Kling <span aria-hidden="true" class="plus"></span></summary>
+              <div class="prompt-inner">
+                <pre><code id="prompt-motion">Оживи загруженный кадр. Сохрани внешность героя, одежду, фон и стиль рисунка. Камера неподвижна. В начале [парень подносит штекер к разъёму двойника]. Затем [штекер входит в разъём, кабель плавно изгибается]. После контакта [на плече двойника вспыхивает голубая искра, он поднимает взгляд]. Всё в одном плане, без скачков позы и новых предметов. Вертикальное видео 9:16, без текста.</code></pre>
+                <button type="button" class="copy" data-copy="prompt-motion">Скопировать</button>
+              </div>
+            </details>
+            <p class="tip"><strong>Замените действия в скобках своими.</strong> Посмотрите первый клип на телефоне без звука. Если жест трудно понять или рука проходит сквозь предмет, исправьте первый кадр или упростите действие. Потом повторите для остальных сцен.</p>
+            <div class="motion-actions">
+              <a class="button button-lime" href="https://syntx.ai/welcome/5XiyMGaU" target="_blank" rel="sponsored noopener">Открыть Syntx <span aria-hidden="true">↗</span></a>
+              <small>Партнёрская ссылка Евгения Ищенко. Стоимость генерации проверьте в Syntx перед запуском.</small>
+            </div>
+          </div>
+        </li>
+        <li class="step" id="edit">
+          <div class="step-no" aria-hidden="true">05</div>
+          <div class="step-body">
+            <span class="tool">ЛЮБОЙ ВИДЕОРЕДАКТОР</span>
+            <h3>Смонтируйте ролик</h3>
+            <p>Скачайте клипы, разложите их по порядку в редакторе и уберите паузы. Если нужны голос, звуки или субтитры, добавьте их здесь. Экспортируйте ролик в MP4, 1080 × 1920. Пересмотрите на телефоне: понятна ли история и легко ли читать подписи?</p>
+            <details class="prompt">
+              <summary>Промпт для плана монтажа <span aria-hidden="true" class="plus"></span></summary>
+              <div class="prompt-inner">
+                <pre><code id="prompt-edit">Помоги собрать короткий вертикальный мультфильм. Вот мои готовые клипы, их длительность и что в них происходит: [вставьте список]. Предложи порядок и места склеек. Подскажи, где убрать паузу, где оставить время на реакцию героя и какой звук поможет понять действие. Если без подписи сцена непонятна, предложи одну короткую фразу. Используй только то, что уже есть в клипах.</code></pre>
+                <button type="button" class="copy" data-copy="prompt-edit">Скопировать</button>
+              </div>
+            </details>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="club container" id="club" aria-labelledby="club-title">
+      <div class="club-inner">
+        <p class="eyebrow"><span></span> ИИЩЕНКО CLUB</p>
+        <h2 id="club-title">Хотите поручить эту работу ИИ-агенту?</h2>
+        <p>В клубе помогаем запустить своего агента в Codex от OpenAI. Ему можно поручить сценарий, раскадровку, промпты для Kling и сборку ролика. Работаем вместе: участники показывают свои проекты и разбирают, что получилось.</p>
+        <p>В библиотеке клуба около 250 навыков. Есть материалы по созданию сайтов, работе с документами и CRM, бизнесу и семейной истории.</p>
+        <a class="button button-lime" href="https://club.faktlab.ru/" target="_blank" rel="noopener">Смотреть, как устроен клуб <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer container"><span>Евгений Ищенко · ИИщенко LAB</span><a href="#intro">К началу ↑</a></footer>
+  <div class="sr" id="copy-status" role="status" aria-live="polite"></div>
+</body>
+</html>
