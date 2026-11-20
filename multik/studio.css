@@ -38,6 +38,25 @@ h1 em{display:block;color:var(--accent);font-weight:inherit;font-style:normal;wh
 .button-lime{background:var(--lime);color:var(--ink);border-color:#afcc5a}
 .button-lime:hover{background:#d9f290}
 .hero-note{font-size:13px;color:var(--muted);margin-top:11px}
+.eagle-preview .reels{grid-template-columns:repeat(2,minmax(0,1fr))}
+.eagle-preview .reel img{width:100%;height:auto;aspect-ratio:9 / 16;display:block;border-radius:6px}
+.eagle-preview figcaption{color:#e1efdc;font-weight:650}
+.preview-link{display:inline-flex;align-items:center;min-height:44px;margin-inline:17px;color:#e4f5b1;font-size:15px;text-underline-offset:.23em}
+.other-styles{margin-block:28px;max-width:570px}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-top:22px}
+.hero .hero-actions .button{margin:0}
+.hero-text-link{display:inline-flex;align-items:center;min-height:44px;color:#315836;font-size:15px;font-weight:720;text-underline-offset:.23em}
+.review-list{margin:9px 0 3px;padding-left:20px;color:var(--muted)}
+.review-list li{margin-block:5px}
+.prompt-library{border-top:1px solid var(--line);padding-top:28px;margin-top:30px}
+.library-heading{max-width:660px}
+.library-heading h2{font-size:clamp(30px,4.3vw,48px);margin-bottom:9px}
+.library-heading p{color:var(--muted)}
+.library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:16px;align-items:start}
+.library-grid .prompt{margin:0}
+.library-grid .prompt-inner{min-width:0}
+.prompt-result{margin:0 0 8px;font-size:14px;color:#3d5540}
+#own-idea,#prompt-fix{scroll-margin-top:14px}
 .board{background:radial-gradient(75% 74% at 99% 24%,#293b2a 0%,transparent 100%),var(--dark);border:1px solid #344337;border-radius:20px;color:#f3f8ee;box-shadow:0 14px 36px -20px #12271ca3;min-width:0;overflow:hidden}
 .board-top{display:flex;align-items:center;gap:12px;justify-content:space-between;font-size:9px;color:#bad0bf;line-height:1.3;padding:12px 17px;border-bottom:1px solid #455748}
 .board-dots{display:flex;gap:5px;align-items:center}
@@ -218,6 +237,18 @@ h1 em{display:block;color:var(--accent);font-weight:inherit;font-style:normal;wh
 .club-projects li { background: #202f25; border: 1px solid #415b47; }
 .club-workflow strong { color: #e4f5b1; }
 .club-workflow span, .club-projects span { color: #dfebdc; font-size: 14px; line-height: 1.45; }
+.agent-roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.agent-roles>div,.eagle-example{min-width:0;padding:16px;border:1px solid #536f53;border-radius:10px;background:#2b422e}
+.club-workflow h4{margin:0 0 6px;color:#e4f5b1;font-size:17px;line-height:1.3}
+.club-workflow p{margin:0;color:#dfebdc;font-size:15px;line-height:1.55}
+.eagle-example{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;align-items:center;margin-top:12px}
+.eagle-example img{width:100%;height:auto;aspect-ratio:9 / 16;border-radius:6px}
+.eagle-example a{display:inline-flex;align-items:center;min-height:44px;color:#e4f5b1;font-size:15px;font-weight:720;text-underline-offset:.23em}
+@media(max-width:620px){
+  .library-grid,.agent-roles{grid-template-columns:1fr}
+  .hero-actions .button{width:100%;justify-content:center}
+  .eagle-example{grid-template-columns:56px minmax(0,1fr);gap:10px;padding:13px;align-items:start}
+}
 .club-marketing {
   margin-top: 24px;
   padding: clamp(16px, 2.3vw, 26px);

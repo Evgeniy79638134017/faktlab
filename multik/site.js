@@ -3,6 +3,16 @@ document.documentElement.classList.add('js');
 const status = document.querySelector('#copy-status');
 let statusTimer;
 
+function revealPrompt(hash) {
+  const prompt = document.getElementById(hash.slice(1));
+  if (prompt instanceof HTMLDetailsElement) prompt.open = true;
+}
+
+document.querySelectorAll('[data-reveal]').forEach(link => {
+  link.addEventListener('click', () => revealPrompt(link.hash));
+});
+revealPrompt(location.hash);
+
 function selectPrompt(node) {
   const selection = window.getSelection();
   const range = document.createRange();

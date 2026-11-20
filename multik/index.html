@@ -10,8 +10,8 @@
   <meta property="og:type" content="website">
   <title>Снимите свой первый ИИ-мультик · ИИщенко LAB</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="studio.css">
-  <script src="site.js" defer></script>
+  <link rel="stylesheet" href="studio.css?v=20261120-guide">
+  <script src="site.js?v=20261120-guide" defer></script>
   <script src="analytics.js" defer></script>
 </head>
 <body>
@@ -25,54 +25,35 @@
       <div class="hero-copy">
         <p class="eyebrow"><span></span> БЕСПЛАТНАЯ ИНСТРУКЦИЯ</p>
         <h1 id="intro">Снимите свой первый <em>ИИ-мультик</em></h1>
-        <p class="lead">Возьмите готовый кадр, оживите его в Kling и скачайте первый ролик. Хотите свою историю? На странице есть промпты для ChatGPT и Claude.</p>
-        <a class="button button-lime" href="#steps">Сделать первый ролик <span aria-hidden="true">↓</span></a>
-        <p class="hero-note">3 шага · ориентир 20 минут на одну попытку</p>
+        <p class="lead">Пришли после «Орла среди кур»? Начните с одной сцены. Скачайте готовый кадр, оживите его по промпту и получите вертикальный MP4 на 5 секунд.</p>
+        <div class="hero-actions">
+          <a class="button button-lime" href="#story">Начать с готового кадра</a>
+          <a class="hero-text-link" href="#own-idea" data-reveal>Начать со своей идеи</a>
+        </div>
+        <p class="hero-note">Инструкция и промпты бесплатные. Стоимость генерации видна перед запуском.</p>
       </div>
-      <section class="board" id="studio" aria-labelledby="studio-title">
-        <div class="board-top"><span class="board-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>ПРИМЕР ИЗ ИИЩЕНКО CLUB</span></div>
+      <section class="board eagle-preview" aria-labelledby="eagle-preview-title">
         <div class="board-head">
-          <div><p class="board-kicker">ОДИН СЮЖЕТ · ТРИ СТИЛЯ</p><h2 id="studio-title">Две кофейни</h2></div>
-          <button class="play" type="button" id="play-styles" aria-describedby="clip-note"><span class="play-icon" aria-hidden="true"></span><span id="play-label">Сравнить</span></button>
+          <div><p class="board-kicker">ОДНА ИСТОРИЯ · ДВА СТИЛЯ</p><h2 id="eagle-preview-title">Орёл среди кур</h2></div>
         </div>
-        <div class="reels" id="coffee-reels">
+        <div class="reels">
           <figure class="reel">
-            <video src="assets/coffee-autumn.mp4" poster="assets/coffee-autumn.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни в осеннем стиле"></video>
-            <figcaption><span>01</span> Осень</figcaption>
+            <img src="assets/eagle-paper.webp" width="216" height="384" alt="«Орёл среди кур» в стиле «Бумажная Япония»" decoding="async">
+            <figcaption>Бумажная Япония</figcaption>
           </figure>
           <figure class="reel">
-            <video src="assets/coffee-paper.mp4" poster="assets/coffee-paper.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни, рисунок на бумаге"></video>
-            <figcaption><span>02</span> На бумаге</figcaption>
-          </figure>
-          <figure class="reel">
-            <video src="assets/coffee-light.mp4" poster="assets/coffee-light.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни в стиле Копья"></video>
-            <figcaption><span>03</span> «Копья»</figcaption>
+            <img src="assets/eagle-clay.webp" width="216" height="384" alt="«Орёл среди кур» в стиле глиняных миниатюр" decoding="async">
+            <figcaption>Глиняные миниатюры</figcaption>
           </figure>
         </div>
-        <p class="clip-note" id="clip-note">Один фрагмент в трёх версиях. 6 секунд, без звука.</p>
-        <p class="sr" id="video-status" role="status"></p>
+        <a class="preview-link" href="#eagle-example">Как мы собрали эти версии</a>
       </section>
     </section>
 
-    <aside class="workbench container" aria-label="Как собирали мультфильм про двойника">
-      <div class="work-intro"><p class="eyebrow"><span></span> В РАБОТЕ · ИИ-ДВОЙНИК</p><p>Как выглядит проект до монтажа</p></div>
-      <div class="artifact"><span class="artifact-icon" aria-hidden="true">≡</span><div><b>Сценарий</b><span>Двойник идёт на занятия вместо героя</span></div></div>
-      <div class="artifact"><div class="thumbs"><img src="assets/double-01.webp" alt="" width="720" height="1280"><img src="assets/double-02.webp" alt="" width="480" height="854"></div><div><b>Раскадровка</b><span>Герои и первые кадры сцен</span></div></div>
-      <div class="artifact"><span class="artifact-icon action-icon" aria-hidden="true">▷</span><div><b>Промпт для Kling</b><span>Рука вставляет штекер, вспыхивает искра</span></div></div>
-      <details class="materials">
-        <summary>Посмотреть заготовки <span aria-hidden="true" class="plus"></span></summary>
-        <div class="material-grid">
-          <figure><img src="assets/double-01.webp" alt="Герой подключает своего двойника кабелем" width="720" height="1280"><figcaption>01 / Подключение</figcaption></figure>
-          <figure><img src="assets/double-02.webp" alt="Двойник поднимается по лестнице у учебного корпуса" width="480" height="852"><figcaption>02 / По дороге на занятия</figcaption></figure>
-          <div class="material-copy"><p><b>Что в сценарии?</b> Герой запускает двойника. Тот надевает такую же красную куртку и отправляется на занятия вместо него.</p><p><b>Что проверяем в движении?</b> В первой сцене штекер входит в разъём до вспышки. Во второй двойник ставит ногу на ступеньку и переносит на неё вес.</p></div>
-        </div>
-      </details>
-    </aside>
-
     <section class="guide container" id="steps" aria-labelledby="guide-title">
       <div class="guide-head">
-        <h2 id="guide-title">Первый ролик примерно за 20&nbsp;минут</h2>
-        <p>Начните с одной вертикальной сцены на 5 секунд. Пройдите три шага на готовом примере или возьмите свою идею. Время рассчитано на одну удачную генерацию. Вход, оплата и очередь могут занять дольше.</p>
+        <h2 id="guide-title">Сделайте первую сцену за три шага</h2>
+        <p>Подготовьте кадр 9:16, запустите одно движение и скачайте MP4. На одну удачную попытку мы закладываем около 20 минут. Вход и очередь могут занять больше времени.</p>
       </div>
       <ol class="steps">
         <li class="step" id="story">
@@ -99,7 +80,7 @@
                 <button type="button" class="copy" data-copy="prompt-frame">Скопировать</button>
               </div>
             </details>
-            <details class="prompt">
+            <details class="prompt" id="own-idea">
               <summary>Придумать свою сцену в ChatGPT или Claude <span aria-hidden="true" class="plus"></span></summary>
               <div class="prompt-inner">
                 <pre><code id="prompt-concept">Помоги снять первый вертикальный ИИ-мультфильм на 5 секунд. Моя идея: [напишите свою идею или оставьте пример: человек включает своего двойника, и тот оживает]. За один ответ дай 1) сюжет в одном предложении, 2) готовый промпт для создания начального кадра в ChatGPT, 3) отдельный промпт для движения в Kling до 400 знаков и 4) одну короткую подпись к публикации. Один план, одно главное действие и видимая реакция. Никаких смен камеры и реплик. В промпте для картинки опиши позу перед началом действия, укажи 9:16 и попроси создать изображение сразу. В промпте для видео сохрани внешность и фон. Сначала дай готовый вариант, без уточняющих вопросов.</code></pre>
@@ -137,7 +118,13 @@
           <div class="step-body">
             <span class="tool">СКАЧИВАНИЕ · 3 МИНУТЫ</span>
             <h3>Сохраните ролик и посмотрите на телефоне</h3>
-            <p>Нажмите «Скачать» на готовом клипе. Если действие понятно без звука, лица узнаваемы и кадр вертикальный, MP4 можно выложить как короткую пробу. Если сцена выглядит странно, сократите промпт до одного жеста: «Короткая искра, двойник поднимает взгляд». Сверьте цену перед повтором.</p>
+            <p>Нажмите «Скачать» на готовом клипе и один раз посмотрите его без звука. Если что-то смущает, запишите одну конкретную правку и проверьте стоимость нового дубля.</p>
+            <ul class="review-list">
+              <li>С первой секунды видно, кто и что делает.</li>
+              <li>Герой остаётся узнаваемым, руки и предметы сохраняют форму.</li>
+              <li>Движение доходит до видимого результата, например до контакта или реакции.</li>
+            </ul>
+            <a class="hero-text-link" href="#prompt-fix" data-reveal>Открыть промпт для исправления сцены</a>
           </div>
         </li>
       </ol>
@@ -163,12 +150,94 @@
       </details>
     </section>
 
+    <section class="prompt-library container" id="prompts" aria-labelledby="prompts-title">
+      <div class="library-heading">
+        <h2 id="prompts-title">Промпты для следующего ролика</h2>
+        <p>Откройте нужный промпт, скопируйте его и замените поля в квадратных скобках. Если промпт просит приложить кадр или клип, добавьте его в тот же чат.</p>
+      </div>
+      <div class="library-grid">
+        <details class="prompt">
+          <summary>Сохранить героя в разных сценах <span aria-hidden="true" class="plus"></span></summary>
+          <div class="prompt-inner">
+            <p class="prompt-result">На выходе — описание героя и четыре согласованных запроса на кадры.</p>
+            <pre><code id="prompt-character">Помоги подготовить вертикальный мультфильм. Моя идея — [одна фраза]. Эталон героя приложу или опишу [здесь]. Выпиши 5 признаков, которые должны совпадать в каждой сцене. Укажи силуэт, лицо, цвет, одежду или отметины и материал. Затем предложи 4 сцены. Для каждой дай начальный кадр 9:16 и отдельный запрос на одно движение с видимой реакцией. Повтори описание героя дословно в каждом запросе на кадр. Если нужен образец описания, возьми глиняного орлёнка с коричневыми перьями и жёлтым клювом.</code></pre>
+            <button type="button" class="copy" data-copy="prompt-character">Скопировать</button>
+          </div>
+        </details>
+        <details class="prompt" id="prompt-fix">
+          <summary>Исправить один неудачный дубль <span aria-hidden="true" class="plus"></span></summary>
+          <div class="prompt-inner">
+            <p class="prompt-result">На выходе — короткий запрос для повторной генерации и один критерий проверки.</p>
+            <pre><code id="prompt-repair">Вот начальный кадр [приложите] и проблема в дубле [опишите с таймкодом]. Напиши короткий новый промпт для «Картинка в видео». Сохрани героя, фон, освещение и положение камеры. Покажи подготовку, само движение и его видимый результат. Исправляй только указанную проблему. Например, на второй секунде лапы орла скользят. Орёл сгибает лапы, отталкивается от земли, один раз взмахивает крыльями и мягко возвращается на землю. Отдельно укажи, по какому признаку я пойму, что правка сработала.</code></pre>
+            <button type="button" class="copy" data-copy="prompt-repair">Скопировать</button>
+          </div>
+        </details>
+        <details class="prompt">
+          <summary>Свести голос, сцены и титры <span aria-hidden="true" class="plus"></span></summary>
+          <div class="prompt-inner">
+            <p class="prompt-result">На выходе — монтажный план с таймкодами.</p>
+            <pre><code id="prompt-voice-map">Составь монтажный план для вертикального ролика по моим материалам. Озвучка с таймкодами — [текст и время фраз]. Мои клипы — [название, длительность, что видно]. В таблице укажи время в ролике, фразу, клип и диапазон, короткий титр и критерий проверки на телефоне. Привяжи каждое действие к реплике. Предложи сокращения только в паузах и повторах. Оставь достаточно времени на чтение титров и финального призыва. Если для точной склейки не хватает данных, отметь место, которое нужно проверить вручную.</code></pre>
+            <button type="button" class="copy" data-copy="prompt-voice-map">Скопировать</button>
+          </div>
+        </details>
+        <details class="prompt">
+          <summary>Написать призыв и сообщение со ссылкой <span aria-hidden="true" class="plus"></span></summary>
+          <div class="prompt-inner">
+            <p class="prompt-result">На выходе — три согласованных текста для ролика, подписи и лички.</p>
+            <pre><code id="prompt-cta">Вот моя тема [тема], кому это нужно [зритель] и что я реально отдаю [материал и ссылка]. Кодовое слово [слово], дополнительное поле [например, город]. Напиши одну короткую фразу для финала ролика, последнюю строку подписи к Reels и сообщение в личку со ссылкой. Действие во всех текстах должно совпадать. Сообщение сразу отдаёт обещанный материал. Опирайся на обещание, которое я могу выполнить. В конце опиши один тест с другого аккаунта, чтобы проверить ответ на комментарий и открытие ссылки.</code></pre>
+            <button type="button" class="copy" data-copy="prompt-cta">Скопировать</button>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <div class="other-styles container">
+      <section class="board" id="studio" aria-labelledby="studio-title">
+        <div class="board-top"><span class="board-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>ПРИМЕР ИЗ ИИЩЕНКО CLUB</span></div>
+        <div class="board-head">
+          <div><p class="board-kicker">ОДИН СЮЖЕТ · ТРИ СТИЛЯ</p><h2 id="studio-title">Две кофейни</h2></div>
+          <button class="play" type="button" id="play-styles" aria-describedby="clip-note"><span class="play-icon" aria-hidden="true"></span><span id="play-label">Сравнить</span></button>
+        </div>
+        <div class="reels" id="coffee-reels">
+          <figure class="reel">
+            <video src="assets/coffee-autumn.mp4" poster="assets/coffee-autumn.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни в осеннем стиле"></video>
+            <figcaption><span>01</span> Осень</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="assets/coffee-paper.mp4" poster="assets/coffee-paper.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни, рисунок на бумаге"></video>
+            <figcaption><span>02</span> На бумаге</figcaption>
+          </figure>
+          <figure class="reel">
+            <video src="assets/coffee-light.mp4" poster="assets/coffee-light.webp" width="288" height="512" preload="none" playsinline muted aria-label="Две кофейни в стиле Копья"></video>
+            <figcaption><span>03</span> «Копья»</figcaption>
+          </figure>
+        </div>
+        <p class="clip-note" id="clip-note">Один фрагмент в трёх версиях. 6 секунд, без звука.</p>
+        <p class="sr" id="video-status" role="status"></p>
+      </section>
+    </div>
+
+    <aside class="workbench container" aria-label="Как собирали мультфильм про двойника">
+      <div class="work-intro"><p class="eyebrow"><span></span> В РАБОТЕ · ИИ-ДВОЙНИК</p><p>Как выглядит проект до монтажа</p></div>
+      <div class="artifact"><span class="artifact-icon" aria-hidden="true">≡</span><div><b>Сценарий</b><span>Двойник идёт на занятия вместо героя</span></div></div>
+      <div class="artifact"><div class="thumbs"><img src="assets/double-01.webp" alt="" width="720" height="1280"><img src="assets/double-02.webp" alt="" width="480" height="854"></div><div><b>Раскадровка</b><span>Герои и первые кадры сцен</span></div></div>
+      <div class="artifact"><span class="artifact-icon action-icon" aria-hidden="true">▷</span><div><b>Промпт для Kling</b><span>Рука вставляет штекер, вспыхивает искра</span></div></div>
+      <details class="materials">
+        <summary>Посмотреть заготовки <span aria-hidden="true" class="plus"></span></summary>
+        <div class="material-grid">
+          <figure><img src="assets/double-01.webp" alt="Герой подключает своего двойника кабелем" width="720" height="1280"><figcaption>01 / Подключение</figcaption></figure>
+          <figure><img src="assets/double-02.webp" alt="Двойник поднимается по лестнице у учебного корпуса" width="480" height="852"><figcaption>02 / По дороге на занятия</figcaption></figure>
+          <div class="material-copy"><p><b>Что в сценарии?</b> Герой запускает двойника. Тот надевает такую же красную куртку и отправляется на занятия вместо него.</p><p><b>Что проверяем в движении?</b> В первой сцене штекер входит в разъём до вспышки. Во второй двойник ставит ногу на ступеньку и переносит на неё вес.</p></div>
+        </div>
+      </details>
+    </aside>
+
     <section class="club container" id="club" aria-labelledby="club-title">
       <div class="club-inner">
         <div class="club-heading">
           <p class="eyebrow"><span></span> ИИЩЕНКО CLUB</p>
-          <h2 id="club-title">Снимайте яркие ролики со своим ИИ‑агентом</h2>
-          <p>В ИИщенко CLUB вы запускаете личного агента в Codex от OpenAI. Он ведёт проект от идеи до готового ролика и объясняет, зачем нужен каждый шаг. Вы выбираете тему и решаете, когда ролик готов к выпуску.</p>
+          <h2 id="club-title">Что меняется, когда ролик ведёт агент</h2>
+          <p>Для одной сцены можно взять готовый промпт и пройти три шага выше. Когда сцен становится больше, приходится следить за внешностью героя, версиями файлов, склейками и титрами. В ИИщенко CLUB личный агент в Codex помогает вести эту работу в одном проекте.</p>
         </div>
 
         <div class="club-media">
@@ -192,18 +261,31 @@
           </div>
         </div>
 
-        <div class="club-workflow">
-          <h3>Как агент ведёт работу над роликом</h3>
-          <ol>
-            <li><strong>Подбирает вирусные ролики</strong><span>Ищет удачные примеры по вашей теме и разбирает, какие приёмы можно взять для своего сюжета.</span></li>
-            <li><strong>Готовит вашу версию</strong><span>Предлагает сюжет, разрабатывает героев, раскадровку и задания для генерации сцен.</span></li>
-            <li><strong>Собирает и проверяет ролик</strong><span>Собирает черновой монтаж. Проверяет движение в кадре, темп и переходы. Показывает, что стоит поправить.</span></li>
-          </ol>
-        </div>
+        <section class="club-workflow" aria-labelledby="agent-work-title">
+          <h3 id="agent-work-title">Как устроена работа</h3>
+          <div class="agent-roles">
+            <div>
+              <h4>Что берёте на себя вы</h4>
+              <p>Даёте тему, примеры и материалы. Выбираете стиль, утверждаете голос и финальную версию. Решения о расходах и публикации остаются за вами.</p>
+            </div>
+            <div>
+              <h4>Что берёт на себя агент</h4>
+              <p>Ведёт раскадровку, промпты и правки в одном проекте. Собирает доступные сцены под голос, проверяет ход действия и титры на узком экране. Сохраняет готовый MP4 и подпись, чтобы было с чего продолжить.</p>
+            </div>
+          </div>
+          <div class="eagle-example" id="eagle-example">
+            <img src="assets/eagle-clay.webp" width="216" height="384" loading="lazy" decoding="async" alt="Глиняная обложка мультфильма «Орёл среди кур»">
+            <div>
+              <h4>Как мы сделали «Орла среди кур»</h4>
+              <p>Собрали одну историю в двух стилях — «Бумажная Япония» и глиняные миниатюры. Евгений записал голос и попросил поправить первый взмах. Агент собрал монтаж под запись, сверил фазы взмаха и проверил титры на узком экране. На выходе получили два MP4, сравнение и подпись для Reels.</p>
+              <a href="https://www.instagram.com/reels/Df9igt1HMHz/" target="_blank" rel="noopener">Посмотреть глиняную версию</a>
+            </div>
+          </div>
+        </section>
 
         <section class="club-marketing" aria-labelledby="marketing-title">
           <h3 id="marketing-title">От просмотра к заявке или покупке</h3>
-          <p>В клубе собираем воронку под ваш сервис или продукт. Ещё до съёмки решаем, что предложить зрителю и куда он попадёт после ролика.</p>
+          <p>В «Орле» зритель пишет в комментарии «мультфильмы» и свой город. Для этого в ChatPlace настроен ответ в личку со ссылкой на эту инструкцию. Для своего ролика заранее решите, что человек получит по вашей ссылке.</p>
           <ol class="marketing-path" aria-label="Пример воронки">
             <li><strong>Ролик</strong><span>Показываем знакомую зрителю задачу и вызываем интерес.</span></li>
             <li><strong>Переход по ссылке</strong><span>Ведём на полезную инструкцию, в бот или на сайт.</span></li>
