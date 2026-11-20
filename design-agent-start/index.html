@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f2f6f3">
+  <title>дизайнеру · запуск агента «Бери Дизайн»</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --canvas: #f2f6f3;
+      --paper: #fff;
+      --ink: #153329;
+      --muted: #4c6359;
+      --brand: #0b624d;
+      --active: #e1f0e8;
+      --border: #d4e1d9;
+      --note: #f7f8ee;
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--canvas);
+      color: var(--ink);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    [hidden] { display: none !important; }
+    a { color: var(--brand); text-underline-offset: 0.22em; }
+    :focus-visible { outline: 3px solid #ae6819; outline-offset: 4px; }
+    .frame { width: min(1136px, calc(100% - 64px)); margin-inline: auto; }
+    .masthead { border-bottom: 1px solid var(--border); }
+    .masthead .frame {
+      min-height: 67px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .86rem;
+    }
+    .brand { font-weight: 760; letter-spacing: .01em; }
+    .masthead span:last-child { color: var(--muted); }
+    main { padding-block: 60px 48px; }
+    .hero { max-width: 720px; margin-bottom: 37px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(2.08rem, 5vw, 3.45rem);
+      line-height: 1.08;
+      letter-spacing: -.049em;
+      margin-bottom: 17px;
+      text-wrap: balance;
+    }
+    .hero p { color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.13rem); max-width: 59ch; margin-bottom: 0; }
+    .layout { display: grid; grid-template-columns: 235px minmax(0, 1fr); align-items: start; gap: 25px; }
+    nav { position: sticky; top: 16px; border-top: 1px solid var(--border); }
+    nav ol { margin: 0; padding: 6px 0 0; list-style: none; display: grid; gap: 2px; }
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 48px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+    nav a:hover { background: #eaf1ec; }
+    nav a[aria-current="step"] { background: var(--active); color: #164f3e; font-weight: 700; }
+    .number { display: inline-grid; place-items: center; flex: 0 0 27px; width: 27px; height: 27px; border: 1px solid var(--border); border-radius: 50%; font-size: .81rem; background: var(--paper); }
+    .step {
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--brand);
+      border-radius: 15px;
+      background: var(--paper);
+      padding: clamp(21px, 4vw, 40px);
+      scroll-margin-top: 16px;
+      margin-bottom: 18px;
+    }
+    .step h2 { font-size: clamp(1.55rem, 3vw, 2.13rem); line-height: 1.16; letter-spacing: -.036em; margin-bottom: 17px; outline-offset: 7px; }
+    .step h3 { font-size: 1.12rem; line-height: 1.35; margin-bottom: 7px; }
+    .step p, .instructions { max-width: 65ch; }
+    .instructions { padding-left: 1.55em; margin: 0 0 18px; }
+    .instructions li { padding-left: .2em; margin-bottom: 10px; }
+    .instructions li::marker { color: var(--brand); font-weight: 680; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 17px;
+      min-height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font: inherit;
+      font-weight: 670;
+      color: var(--brand);
+      background: var(--paper);
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--active); }
+    .btn.primary { color: #fff; background: var(--brand); border-color: var(--brand); }
+    .btn.primary:hover { background: #064938; }
+    .step-note { margin: 20px 0 0; padding: 12px 14px; border-left: 3px solid #a8b27a; border-radius: 4px; background: var(--note); color: #3c4f40; font-size: .94rem; }
+    .archive { display: flex; align-items: center; flex-wrap: wrap; gap: 11px 15px; margin: 18px 0 27px; }
+    .archive code { color: var(--muted); font-size: .89rem; }
+    code { overflow-wrap: anywhere; }
+    .launch-request { border: 1px solid var(--border); border-radius: 10px; background: #f8fbf9; padding: 15px 17px; max-width: 65ch; }
+    .launch-request p { margin-bottom: 0; }
+    .copy { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+    .copy small { color: var(--muted); }
+    aside > p:last-child { margin-bottom: 0; }
+    details { border-top: 1px solid var(--border); margin-top: 22px; padding-top: 14px; }
+    summary { margin-bottom: 8px; cursor: pointer; font-weight: 650; }
+    details p { margin-bottom: 0; color: var(--muted); }
+    @media (max-width: 760px) {
+      .frame { width: calc(100% - 36px); }
+      main { padding-block: 34px 28px; }
+      .hero { margin-bottom: 25px; }
+      .layout { display: block; }
+      nav { position: static; margin-bottom: 14px; }
+      nav ol { grid-template-columns: 1fr 1fr; gap: 2px 6px; }
+      nav a { padding-inline: 5px; gap: 6px; font-size: .82rem; min-height: 47px; }
+      .number { flex-basis: 22px; width: 22px; height: 22px; font-size: .73rem; }
+    }
+    @media (max-width: 425px) {
+      .actions > .btn, .archive .btn { width: 100%; }
+      .archive { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="frame"><span class="brand">Бери Дизайн</span><span>ИИщенко LAB</span></div>
+  </header>
+  <main class="frame">
+    <header class="hero">
+      <h1>Запустим агента бюро</h1>
+      <p>Откройте эту страницу на рабочем компьютере. В конце вы скачаете агент бюро и откроете с ним первый чат в Codex.</p>
+    </header>
+    <div class="layout">
+      <nav aria-label="Шаги запуска">
+        <ol>
+          <li><a href="#nachalo"><span class="number">1</span> С чего начать</a></li>
+          <li><a href="#ustanovka"><span class="number">2</span> Установка</a></li>
+          <li><a href="#codex"><span class="number">3</span> Вход в Codex</a></li>
+          <li><a href="#agent"><span class="number">4</span> Архив и запуск</a></li>
+        </ol>
+      </nav>
+      <div>
+        <section class="step" id="nachalo" aria-labelledby="title-nachalo">
+          <h2 id="title-nachalo" tabindex="-1">С чего начать</h2>
+          <p>Проверьте, открывается ли на компьютере настольное приложение ChatGPT и можете ли вы выбрать в нём Codex.</p>
+          <div class="actions">
+            <a class="btn primary" href="#ustanovka">Нужно установить приложение</a>
+            <a class="btn" href="#agent">Codex уже открыт</a>
+          </div>
+          <details>
+            <summary>ChatGPT установлен, но я не вижу Codex</summary>
+            <p>Откройте шаг <a href="#codex">«Вход в Codex»</a>. Там показано, в каком меню искать режим.</p>
+          </details>
+        </section>
+
+        <section class="step" id="ustanovka" aria-labelledby="title-ustanovka">
+          <h2 id="title-ustanovka" tabindex="-1">Установите ChatGPT на компьютер</h2>
+          <ol class="instructions">
+            <li>На <a href="https://chatgpt.com/download/" target="_blank" rel="noopener noreferrer">странице скачивания ChatGPT</a> выберите версию для своей операционной системы.</li>
+            <li>Запустите установщик и откройте приложение ChatGPT.</li>
+          </ol>
+          <p class="step-note">Можно проверить вход в аккаунт на <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">chatgpt.com</a>. Для работы с папкой агента дальше понадобится настольное приложение.</p>
+          <div class="actions"><a class="btn primary" href="#codex">Приложение открыто</a></div>
+        </section>
+
+        <section class="step" id="codex" aria-labelledby="title-codex">
+          <h2 id="title-codex" tabindex="-1">Войдите в приложение и откройте Codex</h2>
+          <ol class="instructions">
+            <li>Войдите в настольное приложение со своим аккаунтом ChatGPT.</li>
+            <li>В меню выбора режима нажмите <strong>Codex</strong>.</li>
+          </ol>
+          <p class="step-note">Если Codex отсутствует в меню, проверьте, что открыли настольное приложение и установили его актуальную версию.</p>
+          <div class="actions">
+            <a class="btn primary" href="#agent">Перейти к архиву</a>
+            <a class="btn" href="#ustanovka">Вернуться к установке</a>
+          </div>
+          <details>
+            <summary>Не получается войти в Codex</summary>
+            <p>Скачайте архив на <a href="#agent">следующем шаге</a>. После распаковки откройте <code>Начать.html</code> в браузере. Первое упражнение с проверкой ответа доступно без входа в Codex.</p>
+          </details>
+        </section>
+
+        <section class="step" id="agent" aria-labelledby="title-agent">
+          <h2 id="title-agent" tabindex="-1">Скачайте и запустите агента</h2>
+          <p>В архиве собраны рабочие приёмы дизайнеров бюро и упражнения. Агент уточнит, чем вы занимаетесь, и предложит начать с задачи, которую можно проверить на практике.</p>
+          <div class="archive">
+            <button class="btn primary" id="download-agent" type="button" disabled>Скачать агента</button>
+            <span id="download-status" role="status">Откройте полную ссылку из сообщения, чтобы скачать архив.</span>
+          </div>
+          <h3>Что сделать после скачивания</h3>
+          <ol class="instructions">
+            <li>Найдите ZIP в «Загрузках». В Windows нажмите правой кнопкой на архив и выберите «Извлечь всё». На Mac дважды нажмите на ZIP.</li>
+            <li>В Codex откройте локальную папку из архива, в которой виден файл <code>AGENTS.md</code>. Можно создать отдельный проект и добавить эту папку через меню проекта.</li>
+            <li>Создайте чат внутри этого проекта. Если приложение предлагает выбрать, где запустить чат, выберите «Этот компьютер».</li>
+            <li>Скопируйте и отправьте агенту первое сообщение.</li>
+          </ol>
+          <div class="launch-request">
+            <p id="start-prompt">Начни обучение. Прочитай MANIFEST.md и состояние, затем помоги мне выбрать первую рабочую задачу.</p>
+            <div class="copy">
+              <button class="btn" id="copy-prompt" hidden type="button">Скопировать сообщение</button>
+              <small id="copy-result" role="status"></small>
+            </div>
+          </div>
+          <p class="step-note">Старт получился, если агент прочитал файлы комплекта и уточняет, с какой задачи начать. Если он просит прислать <code>MANIFEST.md</code>, проверьте, ту ли папку вы открыли. Для первого упражнения подойдёт обезличенный пример.</p>
+          <p class="step-note">Если Codex пока недоступен, откройте <code>Начать.html</code> в распакованной папке. Там есть упражнение на сверку чертежа, которое можно пройти в браузере.</p>
+          <details>
+            <summary>Архив не скачивается или папка не открывается</summary>
+            <p>Проверьте «Загрузки» браузера. Если файла там нет, откройте страницу ещё раз и повторите скачивание. Если папка не открывается в Codex, проверьте, что архив распакован и внутри выбранной папки есть <code>AGENTS.md</code>. Если это не помогло, напишите, на каком шаге возникла ошибка.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script>
+    const stepLinks = Array.from(document.querySelectorAll('nav a'));
+    const steps = Array.from(document.querySelectorAll('.step'));
+
+    function showStep(moveFocus) {
+      const active = steps.find(step => step.id === stepFromAddress()) || steps[0];
+      steps.forEach(step => { step.hidden = step !== active; });
+      stepLinks.forEach(link => {
+        if (link.dataset.step === active.id) link.setAttribute('aria-current', 'step');
+        else link.removeAttribute('aria-current');
+      });
+      if (moveFocus) {
+        active.querySelector('h2').focus({preventScroll: true});
+        active.scrollIntoView({block: 'start'});
+      }
+    }
+
+    const stepFromAddress = () => new URL(location.href).searchParams.get('step');
+    const access = new URLSearchParams(location.hash.slice(1)).get('key') || '';
+    const hasKey = /^[A-Za-z0-9_-]{43}$/.test(access);
+    for (const link of document.querySelectorAll('a[href^="#"]')) {
+      const id = link.hash.slice(1);
+      const url = new URL(location.href);
+      url.searchParams.set('step', id);
+      link.href = url.href;
+      link.dataset.step = id;
+      link.addEventListener('click', event => {
+        if (event.button !== 0 || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+        event.preventDefault();
+        history.pushState(null, '', link.href);
+        showStep(true);
+      });
+    }
+    window.addEventListener('popstate', () => showStep(true));
+    showStep(Boolean(stepFromAddress()));
+
+    const download = document.getElementById('download-agent');
+    const status = document.getElementById('download-status');
+    if (hasKey && globalThis.crypto?.subtle) {
+      download.disabled = false;
+      status.textContent = 'Архив готов к скачиванию.';
+    } else if (hasKey) {
+      status.textContent = 'Откройте ссылку в актуальной версии браузера.';
+    }
+    download.addEventListener('click', async () => {
+      download.disabled = true;
+      status.textContent = 'Открываем архив…';
+      try {
+        const response = await fetch('./payload.bin', {credentials:'omit', referrerPolicy:'no-referrer'});
+        if (!response.ok) throw Error('download');
+        const payload = new Uint8Array(await response.arrayBuffer());
+        const base64 = access.replace(/-/g,'+').replace(/_/g,'/') + '=';
+        const raw = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+        const key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']);
+        let archive;
+        try {
+          archive = await crypto.subtle.decrypt({name:'AES-GCM', iv:payload.slice(0,12)}, key, payload.slice(12));
+        } catch { throw Error('key'); }
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(new Blob([archive], {type:'application/zip'}));
+        link.download = 'Beri_Design_Agent.zip';
+        document.body.append(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href), 30_000);
+        status.textContent = 'Скачивание началось. Найдите ZIP в «Загрузках».';
+      } catch (error) {
+        status.textContent = error.message === 'key' ?
+          'Эта ссылка не открыла архив. Откройте полную ссылку из сообщения.' :
+          'Не удалось скачать файл. Проверьте связь и повторите скачивание.';
+      } finally { download.disabled = false; }
+    });
+
+    const copyButton = document.getElementById('copy-prompt');
+    const promptText = document.getElementById('start-prompt');
+    const copyResult = document.getElementById('copy-result');
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(promptText.textContent.trim());
+        copyResult.textContent = 'Сообщение скопировано';
+      } catch {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(promptText);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyResult.textContent = 'Текст выделен. Скопируйте его вручную.';
+      }
+    });
+  </script>
+</body>
+</html>
